@@ -1,27 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import aboutEllie from "@/assets/about-ellie.jpg";
-import heroBoardAsset from "@/assets/real/hero-grand-board.jpg.asset.json";
-import menuBoxAsset from "@/assets/real/grazing-cones.jpg.asset.json";
-import menuSmallAsset from "@/assets/real/round-board.jpg.asset.json";
-import menuLargeAsset from "@/assets/real/floral-board.jpg.asset.json";
-import menuTableAsset from "@/assets/real/grazing-table.jpg.asset.json";
-import galleryRusticAsset from "@/assets/real/rustic-board.jpg.asset.json";
-import galleryFruitAsset from "@/assets/real/fruit-platter.jpg.asset.json";
-import galleryVeggieAsset from "@/assets/real/veggie-platter.jpg.asset.json";
-import galleryPastaAsset from "@/assets/real/pasta-spread.jpg.asset.json";
-import galleryTable2Asset from "@/assets/real/grazing-table-2.jpg.asset.json";
+import uploadedBafAsset from "@/assets/uploads/BAF6B960-EDAB-48AD-BE5D-5C9C1BBC8C71.jpeg.asset.json";
+import uploaded0601Asset from "@/assets/uploads/IMG_0601.jpeg.asset.json";
+import uploaded0603Asset from "@/assets/uploads/IMG_0603.jpeg.asset.json";
+import uploaded7228Asset from "@/assets/uploads/IMG_7228.jpeg.asset.json";
+import uploaded8214Asset from "@/assets/uploads/IMG_8214.jpeg.asset.json";
+import uploaded8410Asset from "@/assets/uploads/IMG_8410.jpeg.asset.json";
+import uploaded8884Asset from "@/assets/uploads/IMG_8884.jpeg.asset.json";
+import uploaded9867Asset from "@/assets/uploads/IMG_9867.jpeg.asset.json";
+import uploaded9869Asset from "@/assets/uploads/IMG_9869.jpeg.asset.json";
+import uploaded9911Asset from "@/assets/uploads/IMG_9911.jpeg.asset.json";
 
-const heroBoard = heroBoardAsset.url;
-const menuBox = menuBoxAsset.url;
-const menuSmall = menuSmallAsset.url;
-const menuLarge = menuLargeAsset.url;
-const menuTable = menuTableAsset.url;
-const galleryRustic = galleryRusticAsset.url;
-const galleryFruit = galleryFruitAsset.url;
-const galleryVeggie = galleryVeggieAsset.url;
-const galleryPasta = galleryPastaAsset.url;
-const galleryTable2 = galleryTable2Asset.url;
+const uploadedBaf = uploadedBafAsset.url;
+const uploaded0601 = uploaded0601Asset.url;
+const uploaded0603 = uploaded0603Asset.url;
+const uploaded7228 = uploaded7228Asset.url;
+const uploaded8214 = uploaded8214Asset.url;
+const uploaded8410 = uploaded8410Asset.url;
+const uploaded8884 = uploaded8884Asset.url;
+const uploaded9867 = uploaded9867Asset.url;
+const uploaded9869 = uploaded9869Asset.url;
+const uploaded9911 = uploaded9911Asset.url;
+
+const heroBoard = uploaded8410;
+const menuBox = uploaded8214;
+const menuSmall = uploaded7228;
+const menuLarge = uploaded8884;
+const menuTable = uploaded9869;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -80,16 +86,16 @@ const MENU = [
 ];
 
 const GALLERY = [
-  { src: galleryRustic, alt: "Rustic charcuterie board with grapes, olives and prosciutto" },
-  { src: galleryFruit, alt: "Fresh fruit platter with pineapple centerpiece" },
-  { src: galleryVeggie, alt: "Vibrant crudité platter with hummus" },
-  { src: galleryPasta, alt: "Italian pasta salad styled for a celebration" },
-  { src: galleryTable2, alt: "Grazing table with tortellini skewers and floral arrangements" },
-  { src: menuLarge, alt: "Floral charcuterie board with edible pansies" },
-  { src: heroBoard, alt: "Grand grazing board with abundant cheeses and meats" },
-  { src: menuTable, alt: "Full event grazing table with florals" },
-  { src: menuSmall, alt: "Round charcuterie tray with brie and salami" },
-  { src: menuBox, alt: "Individual grazing cones for a birthday" },
+  { src: uploadedBaf, alt: "Uploaded grazing board photo from Ellie" },
+  { src: uploaded0601, alt: "Uploaded vegetable platter photo from Ellie" },
+  { src: uploaded0603, alt: "Uploaded fruit platter photo from Ellie" },
+  { src: uploaded7228, alt: "Uploaded round charcuterie tray photo from Ellie" },
+  { src: uploaded8214, alt: "Uploaded individual grazing cups photo from Ellie" },
+  { src: uploaded8410, alt: "Uploaded grand charcuterie board photo from Ellie" },
+  { src: uploaded8884, alt: "Uploaded floral charcuterie board photo from Ellie" },
+  { src: uploaded9867, alt: "Uploaded grazing table detail photo from Ellie" },
+  { src: uploaded9869, alt: "Uploaded full grazing table photo from Ellie" },
+  { src: uploaded9911, alt: "Uploaded celebration food spread photo from Ellie" },
 ];
 
 const STEPS = [
