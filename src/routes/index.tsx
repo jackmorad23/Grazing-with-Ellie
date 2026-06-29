@@ -389,20 +389,26 @@ function Menu() {
           accent="occasion"
           description="From a quiet night in to a celebration that fills the room — there's a board for the moment you're planning."
         />
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {MENU.map((item) => (
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-6">
+          {MENU.map((item, idx) => (
             <article
               key={item.name}
-              className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/15 hover:ring-gold/60"
+              className={`group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/15 hover:ring-gold/60 ${
+                idx < 3 ? "lg:col-span-2" : "lg:col-span-3"
+              }`}
             >
-              <div className={`aspect-[4/5] overflow-hidden ${item.imgFit === "contain" ? "bg-cream-dark/60" : ""}`}>
+              <div
+                className={`overflow-hidden ${idx < 3 ? "aspect-[4/5]" : "aspect-[5/4]"} ${
+                  item.imgFit === "contain" ? "bg-cream-dark/60" : ""
+                }`}
+              >
                 <img
                   src={item.img}
                   alt={item.name}
                   width={900}
                   height={1100}
                   loading="lazy"
-                  className={`h-full w-full transition-transform duration-700 group-hover:scale-105 ${item.imgFit === "contain" ? "object-contain" : "object-cover"}`}
+                  className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105`}
                 />
               </div>
               <div className="flex flex-1 flex-col p-6">
