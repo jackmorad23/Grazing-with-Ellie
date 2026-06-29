@@ -319,10 +319,7 @@ function Hero() {
               />
             </div>
           </div>
-          <div className="absolute -bottom-6 -left-6 hidden rotate-[-4deg] rounded-2xl bg-background px-5 py-4 shadow-xl ring-1 ring-border sm:block">
-            <p className="font-script text-3xl leading-none text-primary">est. with love</p>
-            <p className="eyebrow mt-1 text-muted-foreground">handcrafted locally</p>
-          </div>
+          <TagLine top="est. with love" bottom="handcrafted locally" />
         </div>
       </div>
     </section>
