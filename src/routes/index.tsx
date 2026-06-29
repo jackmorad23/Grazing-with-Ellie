@@ -129,6 +129,43 @@ const STEPS = [
   { n: "03", title: "Pick Up or Delivery", text: "Collect your board at the agreed time, or let us deliver and style it on-site for your event." },
 ];
 
+const TESTIMONIALS = [
+  {
+    quote: "Ellie's board was the centerpiece of our bridal shower — every guest asked who made it. Stunning and delicious.",
+    name: "Sarah M.",
+    event: "Bridal Shower",
+  },
+  {
+    quote: "The grazing table she styled for our engagement party was beyond what I imagined. So much care in every detail.",
+    name: "Jenna & Mike",
+    event: "Engagement Party",
+  },
+  {
+    quote: "Beautiful, generous, and so thoughtfully composed. The individual cups were a hit at our birthday brunch.",
+    name: "Priya K.",
+    event: "Birthday Brunch",
+  },
+];
+
+const FAQS = [
+  {
+    q: "How far in advance should I order?",
+    a: "I recommend 1–2 weeks for boards and 3–4 weeks for grazing tables, especially during the holiday season. Smaller boards can often be accommodated with shorter notice — just ask.",
+  },
+  {
+    q: "Do you accommodate dietary needs?",
+    a: "Absolutely. Vegetarian, gluten-free, nut-free and dairy-conscious boards are all available — share the details in your inquiry.",
+  },
+  {
+    q: "Delivery or pickup?",
+    a: "Both. Local pickup is always available; delivery and on-site styling for grazing tables can be arranged for an additional fee based on location.",
+  },
+  {
+    q: "Can you match a theme or colour palette?",
+    a: "Yes — this is my favourite part. Share your colours, florals or theme and I'll style the board to match.",
+  },
+];
+
 function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -137,7 +174,9 @@ function Home() {
       <About />
       <Menu />
       <Gallery />
+      <Testimonials />
       <HowItWorks />
+      <FAQ />
       <Contact />
       <Footer />
     </div>
@@ -350,20 +389,26 @@ function Menu() {
           accent="occasion"
           description="From a quiet night in to a celebration that fills the room — there's a board for the moment you're planning."
         />
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {MENU.map((item) => (
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-6">
+          {MENU.map((item, idx) => (
             <article
               key={item.name}
-              className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/15 hover:ring-gold/60"
+              className={`group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/15 hover:ring-gold/60 ${
+                idx < 3 ? "lg:col-span-2" : "lg:col-span-3"
+              }`}
             >
-              <div className={`aspect-[4/5] overflow-hidden ${item.imgFit === "contain" ? "bg-cream-dark/60" : ""}`}>
+              <div
+                className={`overflow-hidden ${idx < 3 ? "aspect-[4/5]" : "aspect-[5/4]"} ${
+                  item.imgFit === "contain" ? "bg-cream-dark/60" : ""
+                }`}
+              >
                 <img
                   src={item.img}
                   alt={item.name}
                   width={900}
                   height={1100}
                   loading="lazy"
-                  className={`h-full w-full transition-transform duration-700 group-hover:scale-105 ${item.imgFit === "contain" ? "object-contain" : "object-cover"}`}
+                  className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105`}
                 />
               </div>
               <div className="flex flex-1 flex-col p-6">
@@ -683,5 +728,64 @@ function Footer() {
         © {new Date().getFullYear()} Grazing with Ellie. Handcrafted with love.
       </p>
     </footer>
+  );
+}
+
+function Testimonials() {
+  return (
+    <section className="relative bg-cream-dark/40 py-24 sm:py-28">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Kind words"
+          title="Loved by"
+          accent="clients & guests"
+          description="A few notes from the gatherings, weddings and celebrations I've had the joy of styling."
+        />
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {TESTIMONIALS.map((t) => (
+            <figure
+              key={t.name}
+              className="flex h-full flex-col rounded-2xl bg-card p-8 shadow-sm ring-2 ring-gold/30 transition-shadow hover:shadow-lg"
+            >
+              <p className="font-script text-5xl leading-none text-gold">"</p>
+              <blockquote className="mt-2 flex-1 font-serif-display text-lg italic leading-relaxed text-charcoal/85">
+                {t.quote}
+              </blockquote>
+              <figcaption className="mt-6 border-t border-border/60 pt-4">
+                <p className="font-serif-display text-base text-charcoal">{t.name}</p>
+                <p className="eyebrow mt-1 text-muted-foreground">{t.event}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQ() {
+  return (
+    <section className="py-24 sm:py-28">
+      <div className="mx-auto max-w-4xl px-6">
+        <SectionHeader
+          eyebrow="Good to know"
+          title="Frequently asked"
+          accent="questions"
+        />
+        <div className="mt-12 divide-y divide-border/70 rounded-2xl bg-card ring-2 ring-gold/30">
+          {FAQS.map((f) => (
+            <details key={f.q} className="group px-6 py-5 sm:px-8">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-serif-display text-lg text-charcoal">
+                {f.q}
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-gold/50 text-gold transition-transform group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
