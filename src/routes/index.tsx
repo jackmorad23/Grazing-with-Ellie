@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
-import aboutEllie from "@/assets/about-ellie.jpg";
+import ellieAsset from "@/assets/uploads/ellie.jpeg.asset.json";
 import uploadedBafAsset from "@/assets/uploads/BAF6B960-EDAB-48AD-BE5D-5C9C1BBC8C71.jpeg.asset.json";
 import uploaded0601Asset from "@/assets/uploads/IMG_0601.jpeg.asset.json";
 import uploaded0603Asset from "@/assets/uploads/IMG_0603.jpeg.asset.json";
@@ -277,8 +277,8 @@ function About() {
         <div className="relative">
           <div className="overflow-hidden rounded-[1.5rem] shadow-xl ring-1 ring-border">
             <img
-              src={aboutEllie}
-              alt="Hands styling cheese and prosciutto on a wooden board"
+              src={ellieAsset.url}
+              alt="Ellie, founder of Ellie's Eats, behind a grand grazing table"
               width={1100}
               height={1300}
               loading="lazy"
