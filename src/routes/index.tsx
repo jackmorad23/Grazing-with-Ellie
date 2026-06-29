@@ -580,7 +580,7 @@ function Contact() {
   return (
     <section id="contact" className="py-24 sm:py-32">
       <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[1fr_1.2fr]">
-        <div>
+        <div className="relative">
           <SectionHeader
             align="left"
             eyebrow="Inquire"
@@ -610,6 +610,7 @@ function Contact() {
               <dd className="mt-1 font-serif-display text-xl text-charcoal">Local pickup & delivery</dd>
             </div>
           </dl>
+          <TagLine position="bottom-left" top="excited to hear" bottom="from you" className="!bottom-0 !left-0 lg:hidden" />
         </div>
 
         <form onSubmit={onSubmit} noValidate className="rounded-2xl bg-card p-8 shadow-sm ring-1 ring-border sm:p-10">
