@@ -916,13 +916,11 @@ function Testimonials() {
             </div>
             <TagLine position="bottom-left" top="on-site styling" bottom="every detail considered" />
           </div>
-          <div>
-            <p className="font-serif-display text-2xl italic leading-relaxed text-charcoal/80 sm:text-3xl">
-              "From hospital appreciation weeks to backyard birthdays — every board is built with the same care, color and
-              abundance."
-            </p>
-            <p className="mt-4 font-serif-display text-lg text-charcoal/70">— Ellie Morad, Owner, Grazing With Ellie</p>
-          </div>
+          <p className="font-serif-display text-2xl italic leading-relaxed text-charcoal/80 sm:text-3xl">
+            "From hospital appreciation weeks to backyard birthdays — every board is built with the same care, color and
+            abundance."
+          </p>
+          <p"- Ellie Morad, Owner, Grazing with Ellie"</p>
         </div>
         <div className="mt-16 grid gap-6 md:grid-cols-3">
           {TESTIMONIALS.map((t) => (
