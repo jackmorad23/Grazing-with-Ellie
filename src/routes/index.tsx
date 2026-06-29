@@ -277,6 +277,7 @@ function Home() {
 }
 
 function Nav() {
+  const open = useLightbox();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -298,7 +299,12 @@ function Nav() {
           <img
             src={logoAsset.url}
             alt="Grazing with Ellie logo"
-            className="h-12 w-12 rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              open({ src: logoAsset.url, alt: "Grazing with Ellie logo" });
+            }}
+            className="h-12 w-12 cursor-zoom-in rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
           />
           <span className="font-script text-2xl leading-none text-primary sm:text-3xl">Grazing with Ellie</span>
         </a>
