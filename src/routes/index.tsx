@@ -117,6 +117,7 @@ const MENU = [
 ];
 
 const GALLERY = [
+  { src: uploaded8410, alt: "Generous grazing table spread with shrimp, cheeses, charcuterie and fresh fruit" },
   { src: gal9847.url, alt: "Gold-framed fruit platter with macarons and florals" },
   { src: gal9839.url, alt: "Crudité board with cabbage hummus bowl" },
   { src: gal9899.url, alt: "Rainbow carrot crudité board with herb dip" },
