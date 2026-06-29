@@ -24,7 +24,7 @@ const uploaded9869 = uploaded9869Asset.url;
 const uploaded9911 = uploaded9911Asset.url;
 
 const heroBoard = uploaded8410;
-const menuBox = uploaded8214;
+const menuCup = uploaded8214;
 const menuSmall = uploaded7228;
 const menuLarge = uploaded8884;
 const menuTable = uploaded9869;
@@ -60,9 +60,9 @@ const NAV = [
 
 const MENU = [
   {
-    name: "Individual Grazing Box",
+    name: "Individual Charcuterie Cups",
     serves: "Serves 1",
-    img: menuBox,
+    img: menuCup,
     desc: "Personal grazing cups styled with cured meats, cheese, fresh fruit, olives, crackers and rosemary — perfect party favours, birthdays and bridal showers. Fully customizable with themed toppers.",
   },
   {
@@ -99,7 +99,7 @@ const GALLERY = [
 ];
 
 const STEPS = [
-  { n: "01", title: "Choose Your Board", text: "Browse the offerings and pick the size that suits your moment — from a grazing box to a full table." },
+  { n: "01", title: "Choose Your Board", text: "Browse the offerings and pick the size that suits your moment — from individual cups to a full table." },
   { n: "02", title: "Customize", text: "Share the details — dietary notes, favourite flavours, colour palette and styling cues. We build it around you." },
   { n: "03", title: "Pick Up or Delivery", text: "Collect your board at the agreed time, or let us deliver and style it on-site for your event." },
 ];
