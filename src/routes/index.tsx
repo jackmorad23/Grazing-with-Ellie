@@ -275,18 +275,13 @@ function About() {
           />
           <div className="mt-6 space-y-5 text-base leading-relaxed text-charcoal/80">
             <p>
-              Grazing with Ellie began at a kitchen island, with a wooden board, a
-              wedge of brie and an obsession for arranging things just so. What
-              started as boards for friends and family quickly turned into a
-              love letter to the art of the gathering.
+              Hi, I'm Ellie! I'm a full-time teacher with a passion for bringing people together through food. My love for creating charcuterie boards started by making them for family gatherings, holidays, and friends' celebrations. Before I knew it, what began as a creative hobby turned into a business I truly love.
             </p>
             <p>
-              Every board is handcrafted by me, using thoughtfully sourced
-              cheeses, cured meats and seasonal produce. Nothing is mass-made
-              and no two boards are ever quite the same — that's the point.
+              Every board I create is unique because I love customizing each one to match the occasion, theme, and personality of my clients. Whether it's an intimate date night, a bridal shower, a birthday, or a large event, my goal is always the same: to create something beautiful that makes people feel special and leaves a lasting impression.
             </p>
-            <p className="font-serif-display text-xl italic text-primary">
-              "Good food, made slowly, shared generously."
+            <p>
+              Seeing people smile and enjoy the experience is my favorite part, and that's what inspires every board I make. It's not just about the food — it's about creating a memorable centerpiece that brings people together.
             </p>
           </div>
         </div>
