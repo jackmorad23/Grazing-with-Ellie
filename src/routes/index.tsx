@@ -398,6 +398,7 @@ function About() {
               />
             </div>
           </div>
+          <TagLine position="bottom-right" top="teacher by day" bottom="grazer by heart" />
           <div className="absolute -right-4 -top-4 hidden h-24 w-24 rounded-full bg-gold/40 blur-2xl md:block" />
         </div>
         <div>
@@ -493,7 +494,7 @@ function Gallery() {
           {GALLERY.map((img, i) => (
             <div
               key={i}
-              className={`overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:shadow-lg hover:ring-gold/60 ${
+              className={`relative overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:shadow-lg hover:ring-gold/60 ${
                 i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-square"
               }`}
             >
@@ -503,6 +504,8 @@ function Gallery() {
                 loading="lazy"
                 className="h-full w-full rounded-md object-cover transition-transform duration-700 hover:scale-105"
               />
+              {i === 0 && <TagLine position="bottom-right" top="beautiful boards" bottom="unforgettable moments" />}
+              {i === 4 && <TagLine position="bottom-left" top="sweet moments" bottom="shared with joy" />}
             </div>
           ))}
         </div>
