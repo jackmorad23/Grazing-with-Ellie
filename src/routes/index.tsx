@@ -86,6 +86,10 @@ const GALLERY = [
   { src: galleryPasta, alt: "Italian pasta salad styled for a celebration" },
   { src: galleryTable2, alt: "Grazing table with tortellini skewers and floral arrangements" },
   { src: menuLarge, alt: "Floral charcuterie board with edible pansies" },
+  { src: heroBoard, alt: "Grand grazing board with abundant cheeses and meats" },
+  { src: menuTable, alt: "Full event grazing table with florals" },
+  { src: menuSmall, alt: "Round charcuterie tray with brie and salami" },
+  { src: menuBox, alt: "Individual grazing cones for a birthday" },
 ];
 
 const STEPS = [
