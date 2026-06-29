@@ -730,3 +730,62 @@ function Footer() {
     </footer>
   );
 }
+
+function Testimonials() {
+  return (
+    <section className="relative bg-cream-dark/40 py-24 sm:py-28">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          eyebrow="Kind words"
+          title="Loved by"
+          accent="clients & guests"
+          description="A few notes from the gatherings, weddings and celebrations I've had the joy of styling."
+        />
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          {TESTIMONIALS.map((t) => (
+            <figure
+              key={t.name}
+              className="flex h-full flex-col rounded-2xl bg-card p-8 shadow-sm ring-2 ring-gold/30 transition-shadow hover:shadow-lg"
+            >
+              <p className="font-script text-5xl leading-none text-gold">"</p>
+              <blockquote className="mt-2 flex-1 font-serif-display text-lg italic leading-relaxed text-charcoal/85">
+                {t.quote}
+              </blockquote>
+              <figcaption className="mt-6 border-t border-border/60 pt-4">
+                <p className="font-serif-display text-base text-charcoal">{t.name}</p>
+                <p className="eyebrow mt-1 text-muted-foreground">{t.event}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQ() {
+  return (
+    <section className="py-24 sm:py-28">
+      <div className="mx-auto max-w-4xl px-6">
+        <SectionHeader
+          eyebrow="Good to know"
+          title="Frequently asked"
+          accent="questions"
+        />
+        <div className="mt-12 divide-y divide-border/70 rounded-2xl bg-card ring-2 ring-gold/30">
+          {FAQS.map((f) => (
+            <details key={f.q} className="group px-6 py-5 sm:px-8">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-serif-display text-lg text-charcoal">
+                {f.q}
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-gold/50 text-gold transition-transform group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
