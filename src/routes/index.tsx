@@ -12,6 +12,16 @@ import uploaded9867Asset from "@/assets/uploads/IMG_9867.jpeg.asset.json";
 import uploaded9869Asset from "@/assets/uploads/IMG_9869.jpeg.asset.json";
 import uploaded9911Asset from "@/assets/uploads/IMG_9911.jpeg.asset.json";
 import largeBoardAsset from "@/assets/uploads/large-board.jpeg.asset.json";
+import gal9847 from "@/assets/gallery/IMG_9847.jpeg.asset.json";
+import gal9839 from "@/assets/gallery/IMG_9839.jpeg.asset.json";
+import gal9899 from "@/assets/gallery/IMG_9899.jpeg.asset.json";
+import gal9869b from "@/assets/gallery/IMG_9869-2.jpeg.asset.json";
+import gal9865 from "@/assets/gallery/IMG_9865.jpeg.asset.json";
+import gal8433 from "@/assets/gallery/IMG_8433.jpeg.asset.json";
+import gal8379 from "@/assets/gallery/IMG_8379.jpeg.asset.json";
+import gal8388 from "@/assets/gallery/IMG_8388.jpeg.asset.json";
+import gal6678 from "@/assets/gallery/IMG_6678.jpeg.asset.json";
+import gal0524 from "@/assets/gallery/IMG_0524.jpeg.asset.json";
 
 const uploadedBaf = uploadedBafAsset.url;
 const uploaded0601 = uploaded0601Asset.url;
@@ -101,11 +111,16 @@ const MENU = [
 ];
 
 const GALLERY = [
-  { src: uploadedBaf, alt: "Uploaded grazing board photo from Ellie" },
-  { src: uploaded0601, alt: "Uploaded vegetable platter photo from Ellie" },
-  { src: uploaded0603, alt: "Uploaded fruit platter photo from Ellie" },
-  { src: uploaded9867, alt: "Uploaded grazing table detail photo from Ellie" },
-  { src: uploaded9911, alt: "Uploaded celebration food spread photo from Ellie" },
+  { src: gal9847.url, alt: "Gold-framed fruit platter with macarons and florals" },
+  { src: gal9839.url, alt: "Crudité board with cabbage hummus bowl" },
+  { src: gal9899.url, alt: "Rainbow carrot crudité board with herb dip" },
+  { src: gal9869b.url, alt: "Full grazing table with tortellini skewers and charcuterie" },
+  { src: gal9865.url, alt: "Dessert spread with chocolate-dipped strawberries and macarons" },
+  { src: gal8433.url, alt: "Smoked salmon crostini with capers and microgreens" },
+  { src: gal8379.url, alt: "Mini croissant chicken-salad sliders with edible florals" },
+  { src: gal8388.url, alt: "Cucumber and dill cream cheese tea sandwiches" },
+  { src: gal6678.url, alt: "Abundant cheese and charcuterie spread with fruit and olives" },
+  { src: gal0524.url, alt: "Whimsical veggie crudité box with bell pepper character" },
 ];
 
 const STEPS = [
@@ -234,7 +249,8 @@ function Hero() {
         </div>
         <div className="relative">
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
-          <div className="overflow-hidden rounded-[2rem] shadow-2xl shadow-burgundy/20 ring-1 ring-border">
+          <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-2xl shadow-burgundy/20 ring-2 ring-gold/40">
+            <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
             <img
               src={heroBoard}
               alt="A beautifully styled charcuterie board with cheeses, meats, figs and grapes"
@@ -242,6 +258,7 @@ function Hero() {
               height={1280}
               className="h-full w-full object-cover"
             />
+            </div>
           </div>
           <div className="absolute -bottom-6 -left-6 hidden rotate-[-4deg] rounded-2xl bg-background px-5 py-4 shadow-xl ring-1 ring-border sm:block">
             <p className="font-script text-3xl leading-none text-primary">est. with love</p>
@@ -285,7 +302,8 @@ function About() {
     <section id="about" className="relative py-24 sm:py-32">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2">
         <div className="relative">
-          <div className="overflow-hidden rounded-[1.5rem] shadow-xl ring-1 ring-border">
+          <div className="overflow-hidden rounded-[1.5rem] bg-card p-2 shadow-xl ring-2 ring-gold/40">
+            <div className="overflow-hidden rounded-[1.15rem] ring-1 ring-border">
             <img
               src={ellieAsset.url}
               alt="Ellie, founder of Ellie's Eats, behind a grand grazing table"
@@ -294,6 +312,7 @@ function About() {
               loading="lazy"
               className="h-full w-full object-cover"
             />
+            </div>
           </div>
           <div className="absolute -right-4 -top-4 hidden h-24 w-24 rounded-full bg-gold/40 blur-2xl md:block" />
         </div>
@@ -335,7 +354,7 @@ function Menu() {
           {MENU.map((item) => (
             <article
               key={item.name}
-              className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-border transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/10"
+              className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/15 hover:ring-gold/60"
             >
               <div className={`aspect-[4/5] overflow-hidden ${item.imgFit === "contain" ? "bg-cream-dark/60" : ""}`}>
                 <img
@@ -386,7 +405,7 @@ function Gallery() {
           {GALLERY.map((img, i) => (
             <div
               key={i}
-              className={`overflow-hidden rounded-xl bg-cream-dark ring-1 ring-border ${
+              className={`overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:shadow-lg hover:ring-gold/60 ${
                 i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-square"
               }`}
             >
@@ -394,7 +413,7 @@ function Gallery() {
                 src={img.src}
                 alt={img.alt}
                 loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                className="h-full w-full rounded-md object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
           ))}
