@@ -973,13 +973,10 @@ function Testimonials() {
             <div className="absolute -inset-3 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
             <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-xl ring-2 ring-gold/40">
               <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
-                <img
+                <Zoomable
                   src={ellieEventAsset.url}
                   alt="Ellie styling a grazing table at a Vierra Communities event"
-                  width={1200}
-                  height={1600}
-                  loading="lazy"
-                  className="h-full w-full object-cover"
+                  imgClassName="h-full w-full object-cover"
                 />
               </div>
             </div>
