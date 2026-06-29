@@ -584,13 +584,11 @@ function Menu() {
                   item.imgFit === "contain" ? "bg-cream-dark/60" : ""
                 }`}
               >
-                <img
+                <Zoomable
                   src={item.img}
                   alt={item.name}
-                  width={900}
-                  height={1100}
-                  loading="lazy"
-                  className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105`}
+                  className="h-full w-full"
+                  imgClassName="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 {idx === 4 && (
                   <TagLine
