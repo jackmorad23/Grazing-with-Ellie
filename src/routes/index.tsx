@@ -660,6 +660,26 @@ function Contact() {
         message,
       });
       if (error) throw error;
+      // Also open the user's email client with a pre-filled message so
+      // Ellie gets a real email immediately while the sender domain is
+      // being set up. Once a verified domain is wired in, this can be
+      // removed in favor of automatic background sends.
+      const subject = `New inquiry from ${name}`;
+      const bodyLines = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        phone ? `Phone: ${phone}` : null,
+        date ? `Event date: ${date}` : null,
+        guests ? `Guests: ${guests}` : null,
+        board ? `Board type: ${board}` : null,
+        "",
+        "Message:",
+        message,
+      ].filter(Boolean) as string[];
+      const mailto = `mailto:grazingwithellie@gmail.com?subject=${encodeURIComponent(
+        subject,
+      )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+      window.open(mailto, "_blank");
       setSubmitted(true);
       form.reset();
     } catch (err) {
