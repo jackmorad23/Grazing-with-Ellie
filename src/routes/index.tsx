@@ -25,6 +25,7 @@ import gal8379 from "@/assets/gallery/IMG_8379.jpeg.asset.json";
 import gal8388 from "@/assets/gallery/IMG_8388.jpeg.asset.json";
 import gal6678 from "@/assets/gallery/IMG_6678.jpeg.asset.json";
 import gal0524 from "@/assets/gallery/IMG_0524.jpeg.asset.json";
+import ellieVideoAsset from "@/assets/ellie-grazing.mp4.asset.json";
 import { supabase } from "@/integrations/supabase/client";
 
 const uploadedBaf = uploadedBafAsset.url;
@@ -192,6 +193,7 @@ function Home() {
       <About />
       <Menu />
       <Gallery />
+      <VideoShowcase />
       <Testimonials />
       <HowItWorks />
       <FAQ />
