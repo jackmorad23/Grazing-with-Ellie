@@ -150,11 +150,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "We ended CNA Week with a special surprise for our incredible CNAs!
-
-Our Administrator treated our incredible CNA team to a beautiful charcuterie spread from Grazing with Ellie as a thank you for their hard work, compassion, and dedication.
-
-To make the gesture even more meaningful, Ellie, who is also a school teacher, had her students create heartfelt thank-you cards for our CNAs. Their thoughtful messages brought smiles to our team and served as a wonderful reminder of the impact caregivers have every day.",
+      "We ended CNA Week with a special surprise for our incredible CNAs! Our Administrator treated our incredible CNA team to a beautiful charcuterie spread from Grazing with Ellie as a thank you for their hard work, compassion, and dedication. To make the gesture even more meaningful, Ellie, who is also a school teacher, had her students create heartfelt thank-you cards for our CNAs. Their thoughtful messages brought smiles to our team and served as a wonderful reminder of the impact caregivers have every day.",
     name: "Vierra Falls Church Health & Rehab",
     event: "CNA Week",
   },
