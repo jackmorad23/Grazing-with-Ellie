@@ -9,6 +9,7 @@ import uploaded0601Asset from "@/assets/uploads/IMG_0601.jpeg.asset.json";
 import uploaded0603Asset from "@/assets/uploads/IMG_0603.jpeg.asset.json";
 import uploaded7228Asset from "@/assets/uploads/IMG_7228.jpeg.asset.json";
 import uploaded8214Asset from "@/assets/uploads/IMG_8214.jpeg.asset.json";
+import uploaded8417Asset from "@/assets/uploads/IMG_8417.jpeg.asset.json";
 import uploaded8410Asset from "@/assets/uploads/IMG_8410.jpeg.asset.json";
 import uploaded8884Asset from "@/assets/uploads/IMG_8884.jpeg.asset.json";
 import uploaded9867Asset from "@/assets/uploads/IMG_9867.jpeg.asset.json";
@@ -33,13 +34,14 @@ const uploaded0603 = uploaded0603Asset.url;
 const uploaded7228 = uploaded7228Asset.url;
 const uploaded8214 = uploaded8214Asset.url;
 const uploaded8410 = uploaded8410Asset.url;
+const uploaded8417 = uploaded8417Asset.url;
 const uploaded8884 = uploaded8884Asset.url;
 const uploaded9867 = uploaded9867Asset.url;
 const uploaded9869 = uploaded9869Asset.url;
 const uploaded9911 = uploaded9911Asset.url;
 const largeBoard = largeBoardAsset.url;
 
-const heroBoard = uploaded8410;
+const heroBoard = uploaded8417;
 const menuCup = uploaded8214;
 const menuSmall = uploaded8884;
 const menuMedium = uploaded7228;
@@ -115,6 +117,7 @@ const MENU = [
 ];
 
 const GALLERY = [
+  { src: uploaded8410, alt: "Generous grazing table spread with shrimp, cheeses, charcuterie and fresh fruit" },
   { src: gal9847.url, alt: "Gold-framed fruit platter with macarons and florals" },
   { src: gal9839.url, alt: "Crudité board with cabbage hummus bowl" },
   { src: gal9899.url, alt: "Rainbow carrot crudité board with herb dip" },
