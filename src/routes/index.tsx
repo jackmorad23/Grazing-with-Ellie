@@ -590,7 +590,7 @@ function HowItWorks() {
         <SectionHeader eyebrow="How it works" title="Three simple steps to your" accent="board" />
         <div className="mt-16 grid gap-8 md:grid-cols-3">
           {STEPS.map((s, i) => {
-            const imgs = [uploaded8884, uploaded0601, uploaded9911];
+            const imgs = [uploaded8884, uploaded0601, ellieDeliveryAsset.url];
             return (
               <div
                 key={s.n}
