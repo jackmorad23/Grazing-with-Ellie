@@ -525,13 +525,10 @@ function About() {
         <div className="relative">
           <div className="overflow-hidden rounded-[1.5rem] bg-card p-2 shadow-xl ring-2 ring-gold/40">
             <div className="overflow-hidden rounded-[1.15rem] ring-1 ring-border">
-              <img
+              <Zoomable
                 src={ellieAsset.url}
-                alt="Ellie, founder of Ellie's Eats, behind a grand grazing table"
-                width={1100}
-                height={1300}
-                loading="lazy"
-                className="h-full w-full object-cover"
+                alt="Ellie, founder of Grazing with Ellie, behind a grand grazing table"
+                imgClassName="h-full w-full object-cover"
               />
             </div>
           </div>
