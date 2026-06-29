@@ -443,7 +443,7 @@ function Menu() {
               }`}
             >
               <div
-                className={`overflow-hidden ${idx < 3 ? "aspect-[4/5]" : "aspect-[5/4]"} ${
+                className={`relative overflow-hidden ${idx < 3 ? "aspect-[4/5]" : "aspect-[5/4]"} ${
                   item.imgFit === "contain" ? "bg-cream-dark/60" : ""
                 }`}
               >
