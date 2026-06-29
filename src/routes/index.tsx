@@ -277,8 +277,8 @@ function About() {
         <div className="relative">
           <div className="overflow-hidden rounded-[1.5rem] shadow-xl ring-1 ring-border">
             <img
-              src={aboutEllie}
-              alt="Hands styling cheese and prosciutto on a wooden board"
+              src={ellieAsset.url}
+              alt="Ellie, founder of Ellie's Eats, behind a grand grazing table"
               width={1100}
               height={1300}
               loading="lazy"
