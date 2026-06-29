@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import ellieAsset from "@/assets/uploads/ellie.jpeg.asset.json";
+import ellieDeliveryAsset from "@/assets/uploads/ellie-delivery.jpeg.asset.json";
+import ellieEventAsset from "@/assets/uploads/ellie-event.jpeg.asset.json";
 import logoAsset from "@/assets/uploads/ellie-logo.png.asset.json";
 import uploadedBafAsset from "@/assets/uploads/BAF6B960-EDAB-48AD-BE5D-5C9C1BBC8C71.jpeg.asset.json";
 import uploaded0601Asset from "@/assets/uploads/IMG_0601.jpeg.asset.json";
@@ -23,6 +25,7 @@ import gal8379 from "@/assets/gallery/IMG_8379.jpeg.asset.json";
 import gal8388 from "@/assets/gallery/IMG_8388.jpeg.asset.json";
 import gal6678 from "@/assets/gallery/IMG_6678.jpeg.asset.json";
 import gal0524 from "@/assets/gallery/IMG_0524.jpeg.asset.json";
+import { supabase } from "@/integrations/supabase/client";
 
 const uploadedBaf = uploadedBafAsset.url;
 const uploaded0601 = uploaded0601Asset.url;
