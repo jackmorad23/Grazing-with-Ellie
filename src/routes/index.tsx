@@ -277,9 +277,9 @@ function Home() {
 }
 
 function Nav() {
-  const open = useLightbox();
+  const openLightbox = useLightbox();
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -302,7 +302,7 @@ function Nav() {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              open({ src: logoAsset.url, alt: "Grazing with Ellie logo" });
+              openLightbox({ src: logoAsset.url, alt: "Grazing with Ellie logo" });
             }}
             className="h-12 w-12 cursor-zoom-in rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
           />
@@ -327,20 +327,20 @@ function Nav() {
         </a>
         <button
           aria-label="Toggle menu"
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => setMenuOpen((o) => !o)}
           className="grid h-10 w-10 place-items-center rounded-full border border-border text-foreground md:hidden"
         >
           <span className="block h-px w-5 bg-current relative before:absolute before:-top-1.5 before:left-0 before:h-px before:w-5 before:bg-current after:absolute after:top-1.5 after:left-0 after:h-px after:w-5 after:bg-current" />
         </button>
       </div>
-      {open && (
+      {menuOpen && (
         <div className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
             {NAV.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                onClick={() => setOpen(false)}
+                onClick={() => setMenuOpen(false)}
                 className="eyebrow border-b border-border/40 py-3 text-foreground/80"
               >
                 {item.label}
