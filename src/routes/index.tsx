@@ -565,20 +565,12 @@ function Gallery() {
                 loading="lazy"
                 className="h-full w-full rounded-md object-cover transition-transform duration-700 hover:scale-105"
               />
-              {i === 0 && <TagLine position="bottom-right" top="beautiful boards" bottom="unforgettable moments" />}
-              {i === 4 && <TagLine position="bottom-left" top="sweet moments" bottom="shared with joy" />}
             </div>
           ))}
         </div>
-        <div className="mt-12 text-center">
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="eyebrow inline-flex items-center gap-2 text-primary hover:text-primary/80"
-          >
-            See more on Instagram <span aria-hidden>→</span>
-          </a>
+        <div className="mt-14 flex flex-col items-center gap-3 text-center">
+          <p className="font-serif-display text-lg italic text-charcoal/70">More moments, fresh weekly</p>
+          <InstagramButton label="See more on Instagram" />
         </div>
       </div>
     </section>
@@ -587,23 +579,38 @@ function Gallery() {
 
 function HowItWorks() {
   return (
-    <section id="how" className="relative bg-charcoal py-24 text-cream sm:py-32">
+    <section id="how" className="relative overflow-hidden py-24 sm:py-32">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-cream-dark/50 via-background to-cream-dark/30" />
+      <div className="absolute -left-20 top-20 -z-10 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
+      <div className="absolute -right-20 bottom-10 -z-10 h-80 w-80 rounded-full bg-burgundy/10 blur-3xl" />
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow text-gold">How it works</p>
-          <h2 className="mt-4 font-serif-display text-4xl text-cream sm:text-5xl">
-            Three simple steps to your
-            <span className="font-script text-gold"> board</span>
-          </h2>
-        </div>
-        <div className="mt-16 grid gap-10 md:grid-cols-3">
-          {STEPS.map((s) => (
-            <div key={s.n} className="text-center">
-              <p className="font-script text-6xl leading-none text-gold">{s.n}</p>
-              <h3 className="mt-4 font-serif-display text-2xl text-cream">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-cream/70">{s.text}</p>
-            </div>
-          ))}
+        <SectionHeader eyebrow="How it works" title="Three simple steps to your" accent="board" />
+        <div className="mt-16 grid gap-8 md:grid-cols-3">
+          {STEPS.map((s, i) => {
+            const imgs = [uploaded8884, uploaded0601, uploaded9911];
+            return (
+              <div
+                key={s.n}
+                className="group relative flex flex-col overflow-hidden rounded-3xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/10 hover:ring-gold/60"
+              >
+                <div className="relative aspect-[5/4] overflow-hidden">
+                  <img
+                    src={imgs[i]}
+                    alt={s.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute left-4 top-4 grid h-14 w-14 place-items-center rounded-full bg-background/95 font-script text-3xl text-primary shadow-md ring-1 ring-gold/40">
+                    {s.n}
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col p-7 text-center">
+                  <h3 className="font-serif-display text-2xl text-charcoal">{s.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
