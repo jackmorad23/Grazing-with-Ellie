@@ -226,9 +226,7 @@ function Nav() {
             alt="Grazing with Ellie logo"
             className="h-12 w-12 rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
           />
-          <span className="font-script text-2xl leading-none text-primary sm:text-3xl">
-            Grazing with Ellie
-          </span>
+          <span className="font-script text-2xl leading-none text-primary sm:text-3xl">Grazing with Ellie</span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           {NAV.map((item) => (
@@ -360,7 +358,16 @@ function TagLine({
 
 function InstagramIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden
+    >
       <rect x="3" y="3" width="18" height="18" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
@@ -474,7 +481,7 @@ function About() {
             <p>
               Seeing people smile and enjoy the experience is my favorite part, and that's what inspires every board I
               make. It's not just about the food — it's about creating a memorable centerpiece that brings people
-              together.
+              together one bite at a time.
             </p>
           </div>
         </div>
@@ -684,9 +691,7 @@ function Contact() {
       form.reset();
     } catch (err) {
       console.error("Inquiry submission failed", err);
-      setSubmitError(
-        "Something went wrong sending your inquiry. Please email grazingwithellie@gmail.com directly.",
-      );
+      setSubmitError("Something went wrong sending your inquiry. Please email grazingwithellie@gmail.com directly.");
     } finally {
       setSubmitting(false);
     }
@@ -912,8 +917,8 @@ function Testimonials() {
             <TagLine position="bottom-left" top="on-site styling" bottom="every detail considered" />
           </div>
           <p className="font-serif-display text-2xl italic leading-relaxed text-charcoal/80 sm:text-3xl">
-            "From hospital appreciation weeks to backyard birthdays — every board is built
-            with the same care, color and abundance."
+            "From hospital appreciation weeks to backyard birthdays — every board is built with the same care, color and
+            abundance."
           </p>
         </div>
         <div className="mt-16 grid gap-6 md:grid-cols-3">
