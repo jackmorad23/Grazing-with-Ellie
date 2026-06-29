@@ -129,6 +129,43 @@ const STEPS = [
   { n: "03", title: "Pick Up or Delivery", text: "Collect your board at the agreed time, or let us deliver and style it on-site for your event." },
 ];
 
+const TESTIMONIALS = [
+  {
+    quote: "Ellie's board was the centerpiece of our bridal shower — every guest asked who made it. Stunning and delicious.",
+    name: "Sarah M.",
+    event: "Bridal Shower",
+  },
+  {
+    quote: "The grazing table she styled for our engagement party was beyond what I imagined. So much care in every detail.",
+    name: "Jenna & Mike",
+    event: "Engagement Party",
+  },
+  {
+    quote: "Beautiful, generous, and so thoughtfully composed. The individual cups were a hit at our birthday brunch.",
+    name: "Priya K.",
+    event: "Birthday Brunch",
+  },
+];
+
+const FAQS = [
+  {
+    q: "How far in advance should I order?",
+    a: "I recommend 1–2 weeks for boards and 3–4 weeks for grazing tables, especially during the holiday season. Smaller boards can often be accommodated with shorter notice — just ask.",
+  },
+  {
+    q: "Do you accommodate dietary needs?",
+    a: "Absolutely. Vegetarian, gluten-free, nut-free and dairy-conscious boards are all available — share the details in your inquiry.",
+  },
+  {
+    q: "Delivery or pickup?",
+    a: "Both. Local pickup is always available; delivery and on-site styling for grazing tables can be arranged for an additional fee based on location.",
+  },
+  {
+    q: "Can you match a theme or colour palette?",
+    a: "Yes — this is my favourite part. Share your colours, florals or theme and I'll style the board to match.",
+  },
+];
+
 function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -137,7 +174,9 @@ function Home() {
       <About />
       <Menu />
       <Gallery />
+      <Testimonials />
       <HowItWorks />
+      <FAQ />
       <Contact />
       <Footer />
     </div>
