@@ -367,7 +367,7 @@ function Hero() {
             with Ellie
           </h1>
           <p className="mx-auto mt-6 max-w-md font-serif-display text-2xl italic text-charcoal/70 sm:text-3xl lg:mx-0">
-            One bite at a time.
+            ONE BITE AT A TIME.
           </p>
           <p className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-muted-foreground lg:mx-0">
             Boutique charcuterie and grazing boards, lovingly composed for your celebrations, intimate gatherings and
@@ -400,7 +400,7 @@ function Hero() {
               />
             </div>
           </div>
-          <TagLine top="one bite" bottom="at a time" />
+          <TagLine top="ONE BITE" bottom="AT A TIME" />
         </div>
       </div>
     </section>
@@ -487,7 +487,7 @@ function InstagramBanner() {
           <h2 className="font-serif-display text-3xl text-charcoal sm:text-4xl">
             See every board on <span className="font-script text-primary">Instagram</span>
           </h2>
-          <p className="font-serif-display text-lg italic text-charcoal/70">One bite at a time.</p>
+          <p className="font-serif-display text-lg italic text-charcoal/70">ONE BITE AT A TIME.</p>
           <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
             Fresh inspiration, behind-the-scenes styling and the latest grazing tables — straight from the prep board.
           </p>
@@ -557,7 +557,7 @@ function About() {
             <p>
               Seeing people smile and enjoy the experience is my favorite part, and that's what inspires every board I
               make. It's not just about the food — it's about creating a memorable centerpiece that brings people
-              together one bite at a time.
+              together ONE BITE AT A TIME.
             </p>
           </div>
         </div>
@@ -641,7 +641,7 @@ function Gallery() {
           eyebrow="Gallery"
           title="A taste of"
           accent="past boards"
-          description="A little peek at boards from recent gatherings, gifts and grazing tables — one bite at a time."
+          description="A little peek at boards from recent gatherings, gifts and grazing tables — ONE BITE AT A TIME."
         />
         <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
           {GALLERY.map((img, i) => (
@@ -680,7 +680,7 @@ function HowItWorks() {
           eyebrow="How it works"
           title="Three simple steps to your"
           accent="board"
-          description="From first message to the final bite — thoughtfully styled, one bite at a time."
+          description="From first message to the final bite — thoughtfully styled, ONE BITE AT A TIME."
         />
         <div className="mt-16 grid gap-8 md:grid-cols-3">
           {STEPS.map((s, i) => {
