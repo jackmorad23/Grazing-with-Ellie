@@ -483,6 +483,7 @@ function InstagramBanner() {
           <h2 className="font-serif-display text-3xl text-charcoal sm:text-4xl">
             See every board on <span className="font-script text-primary">Instagram</span>
           </h2>
+          <p className="font-serif-display text-lg italic text-charcoal/70">One bite at a time.</p>
           <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
             Fresh inspiration, behind-the-scenes styling and the latest grazing tables — straight from the prep board.
           </p>
@@ -663,7 +664,12 @@ function HowItWorks() {
       <div className="absolute -left-20 top-20 -z-10 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
       <div className="absolute -right-20 bottom-10 -z-10 h-80 w-80 rounded-full bg-burgundy/10 blur-3xl" />
       <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader eyebrow="How it works" title="Three simple steps to your" accent="board" />
+        <SectionHeader
+          eyebrow="How it works"
+          title="Three simple steps to your"
+          accent="board"
+          description="From first message to the final bite — thoughtfully styled, one bite at a time."
+        />
         <div className="mt-16 grid gap-8 md:grid-cols-3">
           {STEPS.map((s, i) => {
             const imgs = [uploaded8884, uploaded0601, ellieDeliveryAsset.url];
