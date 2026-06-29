@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createContext, useCallback, useContext, useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
 import ellieAsset from "@/assets/uploads/ellie.jpeg.asset.json";
 import ellieDeliveryAsset from "@/assets/uploads/ellie-delivery.jpeg.asset.json";
 import ellieEventAsset from "@/assets/uploads/ellie-event.jpeg.asset.json";
@@ -65,7 +65,12 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const INSTAGRAM_URL = "https://www.instagram.com/grazingwithellie/";
+const INSTAGRAM_URL = "https://instagram.com/grazingwithellie/";
+
+function openInstagramLink(event: MouseEvent<HTMLAnchorElement>) {
+  event.preventDefault();
+  window.open(INSTAGRAM_URL, "_blank", "noopener,noreferrer");
+}
 
 type LightboxImage = { src: string; alt: string };
 const LightboxContext = createContext<(img: LightboxImage) => void>(() => {});
@@ -484,7 +489,13 @@ function InstagramButton({
     ghost: "text-primary hover:text-primary/80",
   }[variant];
   return (
-    <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={`${base} ${styles} ${className}`}>
+    <a
+      href={INSTAGRAM_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={openInstagramLink}
+      className={`${base} ${styles} ${className}`}
+    >
       <InstagramIcon />
       {label}
     </a>
@@ -821,7 +832,13 @@ function Contact() {
             <div>
               <dt className="eyebrow text-gold">Instagram</dt>
               <dd className="mt-1 font-serif-display text-xl text-charcoal">
-                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hover:text-primary">
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={openInstagramLink}
+                  className="hover:text-primary"
+                >
                   @grazingwithellie
                 </a>
               </dd>
@@ -981,7 +998,13 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hover:text-primary">
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={openInstagramLink}
+                className="hover:text-primary"
+              >
                 @grazingwithellie
               </a>
             </li>
