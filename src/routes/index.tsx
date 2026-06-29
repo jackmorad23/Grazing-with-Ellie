@@ -623,9 +623,12 @@ function HowItWorks() {
 function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitError(null);
     const form = e.currentTarget;
     const data = new FormData(form);
     const nextErrors: Record<string, string> = {};
@@ -637,31 +640,35 @@ function Contact() {
       nextErrors.email = "Please share a valid email.";
     if (message.length < 5 || message.length > 1000) nextErrors.message = "Tell us a little about your event.";
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length === 0) {
-      const phone = (data.get("phone") as string)?.trim() ?? "";
-      const date = (data.get("date") as string)?.trim() ?? "";
-      const guests = (data.get("guests") as string)?.trim() ?? "";
-      const board = (data.get("board") as string)?.trim() ?? "";
-      const subject = `New inquiry from ${name}`;
-      const body = [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        phone && `Phone: ${phone}`,
-        date && `Event Date: ${date}`,
-        guests && `Guest Count: ${guests}`,
-        board && `Board Type: ${board}`,
-        "",
-        "Message:",
+    if (Object.keys(nextErrors).length > 0) return;
+
+    const phone = (data.get("phone") as string)?.trim() || null;
+    const date = (data.get("date") as string)?.trim() || null;
+    const guestsRaw = (data.get("guests") as string)?.trim() ?? "";
+    const guests = guestsRaw ? Number(guestsRaw) : null;
+    const board = (data.get("board") as string)?.trim() || null;
+
+    setSubmitting(true);
+    try {
+      const { error } = await supabase.from("inquiries").insert({
+        name,
+        email,
+        phone,
+        event_date: date,
+        guest_count: Number.isFinite(guests) ? guests : null,
+        board_type: board,
         message,
-      ]
-        .filter(Boolean)
-        .join("\n");
-      const mailto = `mailto:grazingwithellie@gmail.com?subject=${encodeURIComponent(
-        subject,
-      )}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailto;
+      });
+      if (error) throw error;
       setSubmitted(true);
       form.reset();
+    } catch (err) {
+      console.error("Inquiry submission failed", err);
+      setSubmitError(
+        "Something went wrong sending your inquiry. Please email grazingwithellie@gmail.com directly.",
+      );
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -703,7 +710,12 @@ function Contact() {
         <form onSubmit={onSubmit} noValidate className="rounded-2xl bg-card p-8 shadow-sm ring-1 ring-border sm:p-10">
           {submitted && (
             <div className="mb-6 rounded-md border border-olive/40 bg-olive/10 px-4 py-3 text-sm text-charcoal">
-              Thank you — your inquiry is in. I'll be in touch soon.
+              Thank you — your inquiry is in. Ellie will be in touch within 48 hours.
+            </div>
+          )}
+          {submitError && (
+            <div className="mb-6 rounded-md border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+              {submitError}
             </div>
           )}
           <div className="grid gap-5 sm:grid-cols-2">
@@ -755,9 +767,10 @@ function Contact() {
 
           <button
             type="submit"
-            className="mt-8 w-full rounded-full bg-primary px-7 py-4 text-[0.72rem] font-medium uppercase tracking-[0.28em] text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
+            disabled={submitting}
+            className="mt-8 w-full rounded-full bg-primary px-7 py-4 text-[0.72rem] font-medium uppercase tracking-[0.28em] text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
           >
-            Send Inquiry
+            {submitting ? "Sending…" : "Send Inquiry"}
           </button>
         </form>
       </div>
