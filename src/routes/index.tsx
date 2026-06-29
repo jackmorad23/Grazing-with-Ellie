@@ -355,6 +355,60 @@ function TagLine({
   );
 }
 
+function InstagramIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function InstagramButton({
+  variant = "solid",
+  label = "Follow on Instagram",
+  className = "",
+}: {
+  variant?: "solid" | "outline" | "ghost";
+  label?: string;
+  className?: string;
+}) {
+  const base =
+    "inline-flex items-center gap-2.5 rounded-full px-6 py-3.5 text-[0.72rem] font-medium uppercase tracking-[0.28em] transition-all";
+  const styles = {
+    solid: "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 hover:shadow-md",
+    outline: "border border-foreground/30 text-foreground hover:border-primary hover:text-primary",
+    ghost: "text-primary hover:text-primary/80",
+  }[variant];
+  return (
+    <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={`${base} ${styles} ${className}`}>
+      <InstagramIcon />
+      {label}
+    </a>
+  );
+}
+
+function InstagramBanner() {
+  return (
+    <section className="py-16 sm:py-20">
+      <div className="mx-auto max-w-5xl px-6">
+        <div className="flex flex-col items-center gap-6 rounded-3xl bg-gradient-to-br from-cream-dark/60 via-background to-gold/20 px-8 py-12 text-center shadow-sm ring-2 ring-gold/30 sm:py-14">
+          <InstagramIcon className="h-10 w-10 text-primary" />
+          <p className="eyebrow text-primary/80">@grazingwithellie</p>
+          <h2 className="font-serif-display text-3xl text-charcoal sm:text-4xl">
+            See every board on <span className="font-script text-primary">Instagram</span>
+          </h2>
+          <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+            Fresh inspiration, behind-the-scenes styling and the latest grazing tables — straight from the prep board.
+          </p>
+          <InstagramButton label="Follow @grazingwithellie" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function SectionHeader({
   eyebrow,
   title,
