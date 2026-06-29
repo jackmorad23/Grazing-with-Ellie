@@ -635,6 +635,28 @@ function Contact() {
     if (message.length < 5 || message.length > 1000) nextErrors.message = "Tell us a little about your event.";
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length === 0) {
+      const phone = (data.get("phone") as string)?.trim() ?? "";
+      const date = (data.get("date") as string)?.trim() ?? "";
+      const guests = (data.get("guests") as string)?.trim() ?? "";
+      const board = (data.get("board") as string)?.trim() ?? "";
+      const subject = `New inquiry from ${name}`;
+      const body = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        phone && `Phone: ${phone}`,
+        date && `Event Date: ${date}`,
+        guests && `Guest Count: ${guests}`,
+        board && `Board Type: ${board}`,
+        "",
+        "Message:",
+        message,
+      ]
+        .filter(Boolean)
+        .join("\n");
+      const mailto = `mailto:grazingwithellie@gmail.com?subject=${encodeURIComponent(
+        subject,
+      )}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
       setSubmitted(true);
       form.reset();
     }
