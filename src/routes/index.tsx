@@ -1,16 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
-import heroBoard from "@/assets/hero-board.jpg";
 import aboutEllie from "@/assets/about-ellie.jpg";
-import menuBox from "@/assets/menu-box.jpg";
-import menuSmall from "@/assets/menu-small.jpg";
-import menuLarge from "@/assets/menu-large.jpg";
-import menuTable from "@/assets/menu-table.jpg";
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-3.jpg";
-import gallery4 from "@/assets/gallery-4.jpg";
-import gallery5 from "@/assets/gallery-5.jpg";
+import heroBoardAsset from "@/assets/real/hero-grand-board.jpg.asset.json";
+import menuBoxAsset from "@/assets/real/grazing-cones.jpg.asset.json";
+import menuSmallAsset from "@/assets/real/round-board.jpg.asset.json";
+import menuLargeAsset from "@/assets/real/floral-board.jpg.asset.json";
+import menuTableAsset from "@/assets/real/grazing-table.jpg.asset.json";
+import galleryRusticAsset from "@/assets/real/rustic-board.jpg.asset.json";
+import galleryFruitAsset from "@/assets/real/fruit-platter.jpg.asset.json";
+import galleryVeggieAsset from "@/assets/real/veggie-platter.jpg.asset.json";
+import galleryPastaAsset from "@/assets/real/pasta-spread.jpg.asset.json";
+import galleryTable2Asset from "@/assets/real/grazing-table-2.jpg.asset.json";
+
+const heroBoard = heroBoardAsset.url;
+const menuBox = menuBoxAsset.url;
+const menuSmall = menuSmallAsset.url;
+const menuLarge = menuLargeAsset.url;
+const menuTable = menuTableAsset.url;
+const galleryRustic = galleryRusticAsset.url;
+const galleryFruit = galleryFruitAsset.url;
+const galleryVeggie = galleryVeggieAsset.url;
+const galleryPasta = galleryPastaAsset.url;
+const galleryTable2 = galleryTable2Asset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,35 +57,35 @@ const MENU = [
     name: "Individual Grazing Box",
     serves: "Serves 1",
     img: menuBox,
-    desc: "A personal little box of artisan cheeses, cured meats, seasonal fruit, nuts and a handful of crackers. Perfect for picnics, gifts and a treat-yourself afternoon.",
+    desc: "Personal grazing cups styled with cured meats, cheese, fresh fruit, olives, crackers and rosemary — perfect party favours, birthdays and bridal showers. Fully customizable with themed toppers.",
   },
   {
     name: "Small Board",
     serves: "Serves 4–6",
     img: menuSmall,
-    desc: "A thoughtfully composed round board with three cheeses, two cured meats, fresh and dried fruit, olives, honeycomb and house preserves.",
+    desc: "A thoughtfully composed round platter with assorted cheeses, cured meats, fresh and dried fruit, olives, nuts and crackers. Date nights, small gatherings, hostess gifts.",
   },
   {
     name: "Large Board",
     serves: "Serves 8–12",
     img: menuLarge,
-    desc: "Our signature board — abundant, layered and beautifully styled. Five cheeses, three meats, seasonal fruit, nuts, jams and rustic bread.",
+    desc: "An abundant, beautifully styled board with multiple artisan cheeses, salami roses, prosciutto, seasonal berries, dried fruit and edible flowers. The signature centerpiece.",
   },
   {
     name: "Grazing Table",
     serves: "Serves 20+",
     img: menuTable,
-    desc: "A showstopping table-length grazing display, styled in your space with florals, candles and overflowing seasonal abundance.",
+    desc: "A showstopping table-length display styled in your venue — tortellini skewers, shrimp, sandwiches, charcuterie, fresh florals and seasonal abundance.",
   },
 ];
 
 const GALLERY = [
-  { src: gallery1, alt: "Brie with honey and figs" },
-  { src: gallery3, alt: "Festive holiday board" },
-  { src: gallery2, alt: "Heart-shaped charcuterie board" },
-  { src: gallery4, alt: "Individual grazing cups" },
-  { src: gallery5, alt: "Bridal shower grazing table" },
-  { src: menuLarge, alt: "Large grazing board" },
+  { src: galleryRustic, alt: "Rustic charcuterie board with grapes, olives and prosciutto" },
+  { src: galleryFruit, alt: "Fresh fruit platter with pineapple centerpiece" },
+  { src: galleryVeggie, alt: "Vibrant crudité platter with hummus" },
+  { src: galleryPasta, alt: "Italian pasta salad styled for a celebration" },
+  { src: galleryTable2, alt: "Grazing table with tortellini skewers and floral arrangements" },
+  { src: menuLarge, alt: "Floral charcuterie board with edible pansies" },
 ];
 
 const STEPS = [
