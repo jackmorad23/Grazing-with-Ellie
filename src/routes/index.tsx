@@ -124,19 +124,33 @@ const GALLERY = [
 ];
 
 const STEPS = [
-  { n: "01", title: "Choose Your Board", text: "Browse the offerings and pick the size that suits your moment — from individual cups to a full table." },
-  { n: "02", title: "Customize", text: "Share the details — dietary notes, favourite flavours, colour palette and styling cues. We build it around you." },
-  { n: "03", title: "Pick Up or Delivery", text: "Collect your board at the agreed time, or let us deliver and style it on-site for your event." },
+  {
+    n: "01",
+    title: "Choose Your Board",
+    text: "Browse the offerings and pick the size that suits your moment — from individual cups to a full table.",
+  },
+  {
+    n: "02",
+    title: "Customize",
+    text: "Share the details — dietary notes, favourite flavours, colour palette and styling cues. We build it around you.",
+  },
+  {
+    n: "03",
+    title: "Pick Up or Delivery",
+    text: "Collect your board at the agreed time, or let us deliver and style it on-site for your event.",
+  },
 ];
 
 const TESTIMONIALS = [
   {
-    quote: "Ellie's board was the centerpiece of our bridal shower — every guest asked who made it. Stunning and delicious.",
-    name: "Sarah M.",
-    event: "Bridal Shower",
+    quote:
+      "Ellie put together a grazing board and veggie platter for our CNA Week celebration and it absolutely stole the show. Everything was fresh, beautifully arranged, and somehow tasted even better than it looked. Our whole staff couldn't stop talking about it. Ellie was easy to work with, professional, and clearly pours her heart into every board. We'll be ordering again for our next event!",
+    name: "Kristina Toms, Administrator, Gainesville Health and Rehab",
+    event: "CNA Week",
   },
   {
-    quote: "The grazing table she styled for our engagement party was beyond what I imagined. So much care in every detail.",
+    quote:
+      "The grazing table she styled for our engagement party was beyond what I imagined. So much care in every detail.",
     name: "Jenna & Mike",
     event: "Engagement Party",
   },
@@ -197,9 +211,7 @@ function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/90 backdrop-blur-md border-b border-border/60 py-3"
-          : "bg-transparent py-5"
+        scrolled ? "bg-background/90 backdrop-blur-md border-b border-border/60 py-3" : "bg-transparent py-5"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
@@ -268,8 +280,8 @@ function Hero() {
             One bite at a time.
           </p>
           <p className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-muted-foreground lg:mx-0">
-            Boutique charcuterie and grazing boards, lovingly composed for your
-            celebrations, intimate gatherings and just-because moments.
+            Boutique charcuterie and grazing boards, lovingly composed for your celebrations, intimate gatherings and
+            just-because moments.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
             <a
@@ -290,13 +302,13 @@ function Hero() {
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
           <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-2xl shadow-burgundy/20 ring-2 ring-gold/40">
             <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
-            <img
-              src={heroBoard}
-              alt="A beautifully styled charcuterie board with cheeses, meats, figs and grapes"
-              width={1600}
-              height={1280}
-              className="h-full w-full object-cover"
-            />
+              <img
+                src={heroBoard}
+                alt="A beautifully styled charcuterie board with cheeses, meats, figs and grapes"
+                width={1600}
+                height={1280}
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
           <div className="absolute -bottom-6 -left-6 hidden rotate-[-4deg] rounded-2xl bg-background px-5 py-4 shadow-xl ring-1 ring-border sm:block">
@@ -329,9 +341,7 @@ function SectionHeader({
         {title}
         {accent && <span className="font-script text-primary"> {accent}</span>}
       </h2>
-      {description && (
-        <p className="mt-5 text-base leading-relaxed text-muted-foreground">{description}</p>
-      )}
+      {description && <p className="mt-5 text-base leading-relaxed text-muted-foreground">{description}</p>}
     </div>
   );
 }
@@ -343,34 +353,36 @@ function About() {
         <div className="relative">
           <div className="overflow-hidden rounded-[1.5rem] bg-card p-2 shadow-xl ring-2 ring-gold/40">
             <div className="overflow-hidden rounded-[1.15rem] ring-1 ring-border">
-            <img
-              src={ellieAsset.url}
-              alt="Ellie, founder of Ellie's Eats, behind a grand grazing table"
-              width={1100}
-              height={1300}
-              loading="lazy"
-              className="h-full w-full object-cover"
-            />
+              <img
+                src={ellieAsset.url}
+                alt="Ellie, founder of Ellie's Eats, behind a grand grazing table"
+                width={1100}
+                height={1300}
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
           <div className="absolute -right-4 -top-4 hidden h-24 w-24 rounded-full bg-gold/40 blur-2xl md:block" />
         </div>
         <div>
-          <SectionHeader
-            align="left"
-            eyebrow="Meet Ellie"
-            title="A little story"
-            accent="behind the boards"
-          />
+          <SectionHeader align="left" eyebrow="Meet Ellie" title="A little story" accent="behind the boards" />
           <div className="mt-6 space-y-5 text-base leading-relaxed text-charcoal/80">
             <p>
-              Hi, I'm Ellie! I'm a full-time teacher with a passion for bringing people together through food. My love for creating charcuterie boards started by making them for family gatherings, holidays, and friends' celebrations. Before I knew it, what began as a creative hobby turned into a business I truly love.
+              Hi, I'm Ellie! I'm a full-time teacher with a passion for bringing people together through food. My love
+              for creating charcuterie boards started by making them for family gatherings, holidays, and friends'
+              celebrations. Before I knew it, what began as a creative hobby turned into a business I truly love.
             </p>
             <p>
-              Every board I create is unique because I love customizing each one to match the occasion, theme, and personality of my clients. Whether it's an intimate date night, a bridal shower, a birthday, or a large event, my goal is always the same: to create something beautiful that makes people feel special and leaves a lasting impression.
+              Every board I create is unique because I love customizing each one to match the occasion, theme, and
+              personality of my clients. Whether it's an intimate date night, a bridal shower, a birthday, or a large
+              event, my goal is always the same: to create something beautiful that makes people feel special and leaves
+              a lasting impression.
             </p>
             <p>
-              Seeing people smile and enjoy the experience is my favorite part, and that's what inspires every board I make. It's not just about the food — it's about creating a memorable centerpiece that brings people together.
+              Seeing people smile and enjoy the experience is my favorite part, and that's what inspires every board I
+              make. It's not just about the food — it's about creating a memorable centerpiece that brings people
+              together.
             </p>
           </div>
         </div>
@@ -414,12 +426,8 @@ function Menu() {
               <div className="flex flex-1 flex-col p-6">
                 <p className="eyebrow text-gold">{item.serves}</p>
                 <h3 className="mt-2 font-serif-display text-2xl text-charcoal">{item.name}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {item.desc}
-                </p>
-                <p className="mt-5 eyebrow text-primary">
-                  {item.price ? item.price : "Reach out for pricing"}
-                </p>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
+                <p className="mt-5 eyebrow text-primary">{item.price ? item.price : "Reach out for pricing"}</p>
               </div>
             </article>
           ))}
@@ -518,8 +526,7 @@ function Contact() {
     if (name.length < 2 || name.length > 100) nextErrors.name = "Please share your name.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 255)
       nextErrors.email = "Please share a valid email.";
-    if (message.length < 5 || message.length > 1000)
-      nextErrors.message = "Tell us a little about your event.";
+    if (message.length < 5 || message.length > 1000) nextErrors.message = "Tell us a little about your event.";
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length === 0) {
       setSubmitted(true);
@@ -550,30 +557,19 @@ function Contact() {
             <div>
               <dt className="eyebrow text-gold">Instagram</dt>
               <dd className="mt-1 font-serif-display text-xl text-charcoal">
-                <a
-                  href={INSTAGRAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary"
-                >
+                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hover:text-primary">
                   @grazingwithellie
                 </a>
               </dd>
             </div>
             <div>
               <dt className="eyebrow text-gold">Service Area</dt>
-              <dd className="mt-1 font-serif-display text-xl text-charcoal">
-                Local pickup & delivery
-              </dd>
+              <dd className="mt-1 font-serif-display text-xl text-charcoal">Local pickup & delivery</dd>
             </div>
           </dl>
         </div>
 
-        <form
-          onSubmit={onSubmit}
-          noValidate
-          className="rounded-2xl bg-card p-8 shadow-sm ring-1 ring-border sm:p-10"
-        >
+        <form onSubmit={onSubmit} noValidate className="rounded-2xl bg-card p-8 shadow-sm ring-1 ring-border sm:p-10">
           {submitted && (
             <div className="mb-6 rounded-md border border-olive/40 bg-olive/10 px-4 py-3 text-sm text-charcoal">
               Thank you — your inquiry is in. I'll be in touch soon.
@@ -581,14 +577,7 @@ function Contact() {
           )}
           <div className="grid gap-5 sm:grid-cols-2">
             <Field label="Name" name="name" error={errors.name} required maxLength={100} />
-            <Field
-              label="Email"
-              name="email"
-              type="email"
-              error={errors.email}
-              required
-              maxLength={255}
-            />
+            <Field label="Email" name="email" type="email" error={errors.email} required maxLength={255} />
             <Field label="Phone" name="phone" type="tel" maxLength={30} />
             <Field label="Event Date" name="date" type="date" />
             <Field label="Guest Count" name="guests" type="number" />
@@ -630,9 +619,7 @@ function Contact() {
               }`}
               placeholder="Tell me about your event, vibe, dietary notes…"
             />
-            {errors.message && (
-              <p className="text-xs text-destructive">{errors.message}</p>
-            )}
+            {errors.message && <p className="text-xs text-destructive">{errors.message}</p>}
           </div>
 
           <button
@@ -711,12 +698,7 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary"
-              >
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="hover:text-primary">
                 @grazingwithellie
               </a>
             </li>
@@ -767,11 +749,7 @@ function FAQ() {
   return (
     <section className="py-24 sm:py-28">
       <div className="mx-auto max-w-4xl px-6">
-        <SectionHeader
-          eyebrow="Good to know"
-          title="Frequently asked"
-          accent="questions"
-        />
+        <SectionHeader eyebrow="Good to know" title="Frequently asked" accent="questions" />
         <div className="mt-12 divide-y divide-border/70 rounded-2xl bg-card ring-2 ring-gold/30">
           {FAQS.map((f) => (
             <details key={f.q} className="group px-6 py-5 sm:px-8">
