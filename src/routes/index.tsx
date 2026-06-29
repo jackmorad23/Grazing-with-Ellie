@@ -34,13 +34,14 @@ const uploaded0603 = uploaded0603Asset.url;
 const uploaded7228 = uploaded7228Asset.url;
 const uploaded8214 = uploaded8214Asset.url;
 const uploaded8410 = uploaded8410Asset.url;
+const uploaded8417 = uploaded8417Asset.url;
 const uploaded8884 = uploaded8884Asset.url;
 const uploaded9867 = uploaded9867Asset.url;
 const uploaded9869 = uploaded9869Asset.url;
 const uploaded9911 = uploaded9911Asset.url;
 const largeBoard = largeBoardAsset.url;
 
-const heroBoard = uploaded8410;
+const heroBoard = uploaded8417;
 const menuCup = uploaded8214;
 const menuSmall = uploaded8884;
 const menuMedium = uploaded7228;
