@@ -69,6 +69,78 @@ export const Route = createFileRoute("/")({
 
 const INSTAGRAM_URL = "https://instagram.com/grazingwithellie";
 
+type LightboxImage = { src: string; alt: string };
+const LightboxContext = createContext<(img: LightboxImage) => void>(() => {});
+const useLightbox = () => useContext(LightboxContext);
+
+function LightboxProvider({ children }: { children: ReactNode }) {
+  const [current, setCurrent] = useState<LightboxImage | null>(null);
+  const open = useCallback((img: LightboxImage) => setCurrent(img), []);
+  const close = useCallback(() => setCurrent(null), []);
+  useEffect(() => {
+    if (!current) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [current, close]);
+  return (
+    <LightboxContext.Provider value={open}>
+      {children}
+      {current && (
+        <div
+          onClick={close}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm animate-in fade-in"
+        >
+          <button
+            onClick={close}
+            aria-label="Close"
+            className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white/90 text-charcoal shadow-lg hover:bg-white"
+          >
+            ✕
+          </button>
+          <img
+            src={current.src}
+            alt={current.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[92vh] max-w-[95vw] rounded-lg object-contain shadow-2xl"
+          />
+        </div>
+      )}
+    </LightboxContext.Provider>
+  );
+}
+
+function Zoomable({
+  src,
+  alt,
+  className,
+  imgClassName,
+  children,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  imgClassName?: string;
+  children?: ReactNode;
+}) {
+  const open = useLightbox();
+  return (
+    <button
+      type="button"
+      onClick={() => open({ src, alt })}
+      aria-label={`Expand image: ${alt}`}
+      className={`group/zoom block w-full cursor-zoom-in text-left ${className ?? ""}`}
+    >
+      <img src={src} alt={alt} loading="lazy" className={imgClassName} />
+      {children}
+    </button>
+  );
+}
+
 const NAV = [
   { label: "About", href: "#about" },
   { label: "Offerings", href: "#menu" },
