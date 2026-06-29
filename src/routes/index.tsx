@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type FormEvent, type ReactNode } from "react";
 import ellieAsset from "@/assets/uploads/ellie.jpeg.asset.json";
 import ellieDeliveryAsset from "@/assets/uploads/ellie-delivery.jpeg.asset.json";
 import ellieEventAsset from "@/assets/uploads/ellie-event.jpeg.asset.json";
@@ -10,7 +10,6 @@ import uploaded0603Asset from "@/assets/uploads/IMG_0603.jpeg.asset.json";
 import uploaded7228Asset from "@/assets/uploads/IMG_7228.jpeg.asset.json";
 import uploaded8214Asset from "@/assets/uploads/IMG_8214.jpeg.asset.json";
 import uploaded8417Asset from "@/assets/uploads/IMG_8417.jpeg.asset.json";
-import uploaded8410Asset from "@/assets/uploads/IMG_8410.jpeg.asset.json";
 import uploaded8884Asset from "@/assets/uploads/IMG_8884.jpeg.asset.json";
 import uploaded9867Asset from "@/assets/uploads/IMG_9867.jpeg.asset.json";
 import uploaded9869Asset from "@/assets/uploads/IMG_9869.jpeg.asset.json";
@@ -33,7 +32,6 @@ const uploaded0601 = uploaded0601Asset.url;
 const uploaded0603 = uploaded0603Asset.url;
 const uploaded7228 = uploaded7228Asset.url;
 const uploaded8214 = uploaded8214Asset.url;
-const uploaded8410 = uploaded8410Asset.url;
 const uploaded8417 = uploaded8417Asset.url;
 const uploaded8884 = uploaded8884Asset.url;
 const uploaded9867 = uploaded9867Asset.url;
@@ -68,6 +66,78 @@ export const Route = createFileRoute("/")({
 });
 
 const INSTAGRAM_URL = "https://instagram.com/grazingwithellie";
+
+type LightboxImage = { src: string; alt: string };
+const LightboxContext = createContext<(img: LightboxImage) => void>(() => {});
+const useLightbox = () => useContext(LightboxContext);
+
+function LightboxProvider({ children }: { children: ReactNode }) {
+  const [current, setCurrent] = useState<LightboxImage | null>(null);
+  const open = useCallback((img: LightboxImage) => setCurrent(img), []);
+  const close = useCallback(() => setCurrent(null), []);
+  useEffect(() => {
+    if (!current) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [current, close]);
+  return (
+    <LightboxContext.Provider value={open}>
+      {children}
+      {current && (
+        <div
+          onClick={close}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm animate-in fade-in"
+        >
+          <button
+            onClick={close}
+            aria-label="Close"
+            className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white/90 text-charcoal shadow-lg hover:bg-white"
+          >
+            ✕
+          </button>
+          <img
+            src={current.src}
+            alt={current.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[92vh] max-w-[95vw] rounded-lg object-contain shadow-2xl"
+          />
+        </div>
+      )}
+    </LightboxContext.Provider>
+  );
+}
+
+function Zoomable({
+  src,
+  alt,
+  className,
+  imgClassName,
+  children,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  imgClassName?: string;
+  children?: ReactNode;
+}) {
+  const open = useLightbox();
+  return (
+    <button
+      type="button"
+      onClick={() => open({ src, alt })}
+      aria-label={`Expand image: ${alt}`}
+      className={`group/zoom block w-full cursor-zoom-in text-left ${className ?? ""}`}
+    >
+      <img src={src} alt={alt} loading="lazy" className={imgClassName} />
+      {children}
+    </button>
+  );
+}
 
 const NAV = [
   { label: "About", href: "#about" },
@@ -117,7 +187,6 @@ const MENU = [
 ];
 
 const GALLERY = [
-  { src: uploaded8410, alt: "Generous grazing table spread with shrimp, cheeses, charcuterie and fresh fruit" },
   { src: gal9847.url, alt: "Gold-framed fruit platter with macarons and florals" },
   { src: gal9839.url, alt: "Crudité board with cabbage hummus bowl" },
   { src: gal9899.url, alt: "Rainbow carrot crudité board with herb dip" },
@@ -189,19 +258,21 @@ const FAQS = [
 
 function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Nav />
-      <Hero />
-      <About />
-      <Menu />
-      <Gallery />
-      <Testimonials />
-      <HowItWorks />
-      <FAQ />
-      <InstagramBanner />
-      <Contact />
-      <Footer />
-    </div>
+    <LightboxProvider>
+      <div className="min-h-screen bg-background text-foreground">
+        <Nav />
+        <Hero />
+        <About />
+        <Menu />
+        <Gallery />
+        <Testimonials />
+        <HowItWorks />
+        <FAQ />
+        <InstagramBanner />
+        <Contact />
+        <Footer />
+      </div>
+    </LightboxProvider>
   );
 }
 
@@ -316,16 +387,14 @@ function Hero() {
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
           <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-2xl shadow-burgundy/20 ring-2 ring-gold/40">
             <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
-              <img
+              <Zoomable
                 src={heroBoard}
                 alt="A beautifully styled charcuterie board with cheeses, meats, figs and grapes"
-                width={1600}
-                height={1280}
-                className="h-full w-full object-cover"
+                imgClassName="h-full w-full object-cover"
               />
             </div>
           </div>
-          <TagLine top="est. with love" bottom="handcrafted locally" />
+          <TagLine top="one bite" bottom="at a time" />
         </div>
       </div>
     </section>
@@ -412,6 +481,7 @@ function InstagramBanner() {
           <h2 className="font-serif-display text-3xl text-charcoal sm:text-4xl">
             See every board on <span className="font-script text-primary">Instagram</span>
           </h2>
+          <p className="font-serif-display text-lg italic text-charcoal/70">One bite at a time.</p>
           <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
             Fresh inspiration, behind-the-scenes styling and the latest grazing tables — straight from the prep board.
           </p>
@@ -454,13 +524,10 @@ function About() {
         <div className="relative">
           <div className="overflow-hidden rounded-[1.5rem] bg-card p-2 shadow-xl ring-2 ring-gold/40">
             <div className="overflow-hidden rounded-[1.15rem] ring-1 ring-border">
-              <img
+              <Zoomable
                 src={ellieAsset.url}
-                alt="Ellie, founder of Ellie's Eats, behind a grand grazing table"
-                width={1100}
-                height={1300}
-                loading="lazy"
-                className="h-full w-full object-cover"
+                alt="Ellie, founder of Grazing with Ellie, behind a grand grazing table"
+                imgClassName="h-full w-full object-cover"
               />
             </div>
           </div>
@@ -516,13 +583,11 @@ function Menu() {
                   item.imgFit === "contain" ? "bg-cream-dark/60" : ""
                 }`}
               >
-                <img
+                <Zoomable
                   src={item.img}
                   alt={item.name}
-                  width={900}
-                  height={1100}
-                  loading="lazy"
-                  className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105`}
+                  className="h-full w-full"
+                  imgClassName="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 {idx === 4 && (
                   <TagLine
@@ -562,7 +627,7 @@ function Gallery() {
           eyebrow="Gallery"
           title="A taste of"
           accent="past boards"
-          description="A little peek at boards from recent gatherings, gifts and grazing tables."
+          description="A little peek at boards from recent gatherings, gifts and grazing tables — one bite at a time."
         />
         <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
           {GALLERY.map((img, i) => (
@@ -572,11 +637,11 @@ function Gallery() {
                 i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-square"
               }`}
             >
-              <img
+              <Zoomable
                 src={img.src}
                 alt={img.alt}
-                loading="lazy"
-                className="h-full w-full rounded-md object-cover transition-transform duration-700 hover:scale-105"
+                className="h-full w-full"
+                imgClassName="h-full w-full rounded-md object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
           ))}
@@ -597,7 +662,12 @@ function HowItWorks() {
       <div className="absolute -left-20 top-20 -z-10 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
       <div className="absolute -right-20 bottom-10 -z-10 h-80 w-80 rounded-full bg-burgundy/10 blur-3xl" />
       <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader eyebrow="How it works" title="Three simple steps to your" accent="board" />
+        <SectionHeader
+          eyebrow="How it works"
+          title="Three simple steps to your"
+          accent="board"
+          description="From first message to the final bite — thoughtfully styled, one bite at a time."
+        />
         <div className="mt-16 grid gap-8 md:grid-cols-3">
           {STEPS.map((s, i) => {
             const imgs = [uploaded8884, uploaded0601, ellieDeliveryAsset.url];
@@ -607,11 +677,11 @@ function HowItWorks() {
                 className="group relative flex flex-col overflow-hidden rounded-3xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/10 hover:ring-gold/60"
               >
                 <div className="relative aspect-[5/4] overflow-hidden">
-                  <img
+                  <Zoomable
                     src={imgs[i]}
                     alt={s.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="h-full w-full"
+                    imgClassName="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute left-4 top-4 grid h-14 w-14 place-items-center rounded-full bg-background/95 font-script text-3xl text-primary shadow-md ring-1 ring-gold/40">
                     {s.n}
@@ -907,13 +977,10 @@ function Testimonials() {
             <div className="absolute -inset-3 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
             <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-xl ring-2 ring-gold/40">
               <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
-                <img
+                <Zoomable
                   src={ellieEventAsset.url}
                   alt="Ellie styling a grazing table at a Vierra Communities event"
-                  width={1200}
-                  height={1600}
-                  loading="lazy"
-                  className="h-full w-full object-cover"
+                  imgClassName="h-full w-full object-cover"
                 />
               </div>
             </div>
