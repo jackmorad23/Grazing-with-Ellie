@@ -628,7 +628,7 @@ function Gallery() {
           eyebrow="Gallery"
           title="A taste of"
           accent="past boards"
-          description="A little peek at boards from recent gatherings, gifts and grazing tables."
+          description="A little peek at boards from recent gatherings, gifts and grazing tables — one bite at a time."
         />
         <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
           {GALLERY.map((img, i) => (
@@ -638,11 +638,11 @@ function Gallery() {
                 i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-square"
               }`}
             >
-              <img
+              <Zoomable
                 src={img.src}
                 alt={img.alt}
-                loading="lazy"
-                className="h-full w-full rounded-md object-cover transition-transform duration-700 hover:scale-105"
+                className="h-full w-full"
+                imgClassName="h-full w-full rounded-md object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
           ))}
