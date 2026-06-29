@@ -26,6 +26,7 @@ import gal8388 from "@/assets/gallery/IMG_8388.jpeg.asset.json";
 import gal6678 from "@/assets/gallery/IMG_6678.jpeg.asset.json";
 import gal0524 from "@/assets/gallery/IMG_0524.jpeg.asset.json";
 import ellieVideoAsset from "@/assets/ellie-grazing.mp4.asset.json";
+import ellieVideo2Asset from "@/assets/ellie-grazing-2.mp4.asset.json";
 import { supabase } from "@/integrations/supabase/client";
 
 const uploadedBaf = uploadedBafAsset.url;
@@ -592,23 +593,36 @@ function Gallery() {
 function VideoShowcase() {
   return (
     <section className="py-20 sm:py-28">
-      <div className="mx-auto max-w-5xl px-6">
+      <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="In motion"
           title="See a board"
           accent="come to life"
           description="A behind-the-scenes look at the color, texture and care that goes into every Grazing With Ellie creation."
         />
-        <div className="mt-12 overflow-hidden rounded-3xl bg-card p-2 shadow-xl ring-2 ring-gold/40">
-          <video
-            src={ellieVideoAsset.url}
-            className="h-full w-full rounded-2xl object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            controls
-          />
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-xl ring-2 ring-gold/40">
+            <video
+              src={ellieVideoAsset.url}
+              className="h-full w-full rounded-2xl object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+            />
+          </div>
+          <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-xl ring-2 ring-gold/40">
+            <video
+              src={ellieVideo2Asset.url}
+              className="h-full w-full rounded-2xl object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+            />
+          </div>
         </div>
       </div>
     </section>
