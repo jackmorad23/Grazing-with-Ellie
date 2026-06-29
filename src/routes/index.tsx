@@ -100,12 +100,26 @@ function LightboxProvider({ children }: { children: ReactNode }) {
           >
             ✕
           </button>
-          <img
-            src={current.src}
-            alt={current.alt}
-            onClick={(e) => e.stopPropagation()}
-            className="max-h-[92vh] max-w-[95vw] rounded-lg object-contain shadow-2xl"
-          />
+          {current.src === logoAsset.url ? (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="flex aspect-square max-h-[92vh] max-w-[95vw] items-center justify-center rounded-full bg-white shadow-2xl"
+              style={{ width: "min(92vh, 95vw)" }}
+            >
+              <img
+                src={current.src}
+                alt={current.alt}
+                className="h-[85%] w-[85%] object-contain"
+              />
+            </div>
+          ) : (
+            <img
+              src={current.src}
+              alt={current.alt}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[92vh] max-w-[95vw] rounded-lg object-contain shadow-2xl"
+            />
+          )}
         </div>
       )}
     </LightboxContext.Provider>
