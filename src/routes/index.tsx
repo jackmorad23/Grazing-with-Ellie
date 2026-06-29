@@ -329,6 +329,33 @@ function Hero() {
   );
 }
 
+function TagLine({
+  top,
+  bottom,
+  position = "bottom-left",
+  className = "",
+}: {
+  top: string;
+  bottom: string;
+  position?: "bottom-left" | "bottom-right" | "top-left" | "top-right";
+  className?: string;
+}) {
+  const posClasses = {
+    "bottom-left": "-bottom-5 -left-5 rotate-[-3deg]",
+    "bottom-right": "-bottom-5 -right-5 rotate-[3deg]",
+    "top-left": "-top-5 -left-5 rotate-[-3deg]",
+    "top-right": "-top-5 -right-5 rotate-[3deg]",
+  };
+  return (
+    <div
+      className={`absolute hidden rounded-2xl bg-background px-5 py-4 shadow-xl ring-1 ring-border sm:block ${posClasses[position]} ${className}`}
+    >
+      <p className="font-script text-2xl leading-none text-primary">{top}</p>
+      <p className="eyebrow mt-1 text-muted-foreground">{bottom}</p>
+    </div>
+  );
+}
+
 function SectionHeader({
   eyebrow,
   title,
