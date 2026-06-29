@@ -145,7 +145,7 @@ const TESTIMONIALS = [
   {
     quote:
       "Ellie put together a grazing board and veggie platter for our CNA Week celebration and it absolutely stole the show. Everything was fresh, beautifully arranged, and somehow tasted even better than it looked. Our whole staff couldn't stop talking about it. Ellie was easy to work with, professional, and clearly pours her heart into every board. We'll be ordering again for our next event!",
-    name: "Kristina Toms, Administrator, Gainesville Health and Rehab",
+    name: "Kristina Toms, GHRC",
     event: "CNA Week",
   },
   {
