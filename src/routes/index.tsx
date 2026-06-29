@@ -11,6 +11,7 @@ import uploaded8884Asset from "@/assets/uploads/IMG_8884.jpeg.asset.json";
 import uploaded9867Asset from "@/assets/uploads/IMG_9867.jpeg.asset.json";
 import uploaded9869Asset from "@/assets/uploads/IMG_9869.jpeg.asset.json";
 import uploaded9911Asset from "@/assets/uploads/IMG_9911.jpeg.asset.json";
+import largeBoardAsset from "@/assets/uploads/large-board.jpeg.asset.json";
 
 const uploadedBaf = uploadedBafAsset.url;
 const uploaded0601 = uploaded0601Asset.url;
@@ -22,11 +23,13 @@ const uploaded8884 = uploaded8884Asset.url;
 const uploaded9867 = uploaded9867Asset.url;
 const uploaded9869 = uploaded9869Asset.url;
 const uploaded9911 = uploaded9911Asset.url;
+const largeBoard = largeBoardAsset.url;
 
 const heroBoard = uploaded8410;
 const menuCup = uploaded8214;
-const menuSmall = uploaded7228;
-const menuLarge = uploaded8884;
+const menuSmall = uploaded8884;
+const menuMedium = uploaded7228;
+const menuLarge = largeBoard;
 const menuTable = uploaded9869;
 
 export const Route = createFileRoute("/")({
@@ -70,6 +73,12 @@ const MENU = [
     serves: "Serves 4–6",
     img: menuSmall,
     desc: "A thoughtfully composed round platter with assorted cheeses, cured meats, fresh and dried fruit, olives, nuts and crackers. Date nights, small gatherings, hostess gifts.",
+  },
+  {
+    name: "Medium Board",
+    serves: "Serves 6–8",
+    img: menuMedium,
+    desc: "A generous round board layered with artisan cheeses, cured meats, seasonal fruit, olives, nuts and crackers — the perfect middle-ground for dinner parties and get-togethers.",
   },
   {
     name: "Large Board",
