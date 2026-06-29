@@ -66,30 +66,36 @@ const MENU = [
     name: "Individual Charcuterie Cups",
     serves: "Serves 1",
     img: menuCup,
+    price: null,
     desc: "Personal grazing cups styled with cured meats, cheese, fresh fruit, olives, crackers and rosemary — perfect party favours, birthdays and bridal showers. Fully customizable with themed toppers.",
   },
   {
     name: "Small Board",
-    serves: "Serves 4–6",
+    serves: "Serves 6–8",
     img: menuSmall,
+    price: "$160",
     desc: "A thoughtfully composed round platter with assorted cheeses, cured meats, fresh and dried fruit, olives, nuts and crackers. Date nights, small gatherings, hostess gifts.",
   },
   {
     name: "Medium Board",
-    serves: "Serves 6–8",
+    serves: "Serves 10–12",
     img: menuMedium,
+    price: "$250",
     desc: "A generous round board layered with artisan cheeses, cured meats, seasonal fruit, olives, nuts and crackers — the perfect middle-ground for dinner parties and get-togethers.",
   },
   {
     name: "Large Board",
-    serves: "Serves 8–12",
+    serves: "Serves 15–18",
     img: menuLarge,
+    price: "$360",
+    imgFit: "contain" as const,
     desc: "An abundant, beautifully styled board with multiple artisan cheeses, salami roses, prosciutto, seasonal berries, dried fruit and edible flowers. The signature centerpiece.",
   },
   {
     name: "Grazing Table",
     serves: "Serves 20+",
     img: menuTable,
+    price: null,
     desc: "A showstopping table-length display styled in your venue — tortellini skewers, shrimp, sandwiches, charcuterie, fresh florals and seasonal abundance.",
   },
 ];
@@ -98,12 +104,7 @@ const GALLERY = [
   { src: uploadedBaf, alt: "Uploaded grazing board photo from Ellie" },
   { src: uploaded0601, alt: "Uploaded vegetable platter photo from Ellie" },
   { src: uploaded0603, alt: "Uploaded fruit platter photo from Ellie" },
-  { src: uploaded7228, alt: "Uploaded round charcuterie tray photo from Ellie" },
-  { src: uploaded8214, alt: "Uploaded individual grazing cups photo from Ellie" },
-  { src: uploaded8410, alt: "Uploaded grand charcuterie board photo from Ellie" },
-  { src: uploaded8884, alt: "Uploaded floral charcuterie board photo from Ellie" },
   { src: uploaded9867, alt: "Uploaded grazing table detail photo from Ellie" },
-  { src: uploaded9869, alt: "Uploaded full grazing table photo from Ellie" },
   { src: uploaded9911, alt: "Uploaded celebration food spread photo from Ellie" },
 ];
 
@@ -336,14 +337,14 @@ function Menu() {
               key={item.name}
               className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-border transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/10"
             >
-              <div className="aspect-[4/5] overflow-hidden">
+              <div className={`aspect-[4/5] overflow-hidden ${item.imgFit === "contain" ? "bg-cream-dark/60" : ""}`}>
                 <img
                   src={item.img}
                   alt={item.name}
                   width={900}
                   height={1100}
                   loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className={`h-full w-full transition-transform duration-700 group-hover:scale-105 ${item.imgFit === "contain" ? "object-contain" : "object-cover"}`}
                 />
               </div>
               <div className="flex flex-1 flex-col p-6">
@@ -352,7 +353,9 @@ function Menu() {
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {item.desc}
                 </p>
-                <p className="mt-5 eyebrow text-primary">Reach out for pricing</p>
+                <p className="mt-5 eyebrow text-primary">
+                  {item.price ? item.price : "Reach out for pricing"}
+                </p>
               </div>
             </article>
           ))}
@@ -475,8 +478,8 @@ function Contact() {
             <div>
               <dt className="eyebrow text-gold">Email</dt>
               <dd className="mt-1 font-serif-display text-xl text-charcoal">
-                <a href="mailto:hello@grazingwithellie.com" className="hover:text-primary">
-                  hello@grazingwithellie.com
+                <a href="mailto:grazingwithellie@gmail.com" className="hover:text-primary">
+                  grazingwithellie@gmail.com
                 </a>
               </dd>
             </div>
@@ -639,8 +642,8 @@ function Footer() {
           <p className="eyebrow text-gold">Stay in touch</p>
           <ul className="mt-3 space-y-2 text-sm text-charcoal/80">
             <li>
-              <a href="mailto:hello@grazingwithellie.com" className="hover:text-primary">
-                hello@grazingwithellie.com
+              <a href="mailto:grazingwithellie@gmail.com" className="hover:text-primary">
+                grazingwithellie@gmail.com
               </a>
             </li>
             <li>
