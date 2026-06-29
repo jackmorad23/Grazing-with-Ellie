@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import ellieAsset from "@/assets/uploads/ellie.jpeg.asset.json";
+import ellieDeliveryAsset from "@/assets/uploads/ellie-delivery.jpeg.asset.json";
+import ellieEventAsset from "@/assets/uploads/ellie-event.jpeg.asset.json";
 import logoAsset from "@/assets/uploads/ellie-logo.png.asset.json";
 import uploadedBafAsset from "@/assets/uploads/BAF6B960-EDAB-48AD-BE5D-5C9C1BBC8C71.jpeg.asset.json";
 import uploaded0601Asset from "@/assets/uploads/IMG_0601.jpeg.asset.json";
@@ -23,6 +25,7 @@ import gal8379 from "@/assets/gallery/IMG_8379.jpeg.asset.json";
 import gal8388 from "@/assets/gallery/IMG_8388.jpeg.asset.json";
 import gal6678 from "@/assets/gallery/IMG_6678.jpeg.asset.json";
 import gal0524 from "@/assets/gallery/IMG_0524.jpeg.asset.json";
+import { supabase } from "@/integrations/supabase/client";
 
 const uploadedBaf = uploadedBafAsset.url;
 const uploaded0601 = uploaded0601Asset.url;
@@ -587,7 +590,7 @@ function HowItWorks() {
         <SectionHeader eyebrow="How it works" title="Three simple steps to your" accent="board" />
         <div className="mt-16 grid gap-8 md:grid-cols-3">
           {STEPS.map((s, i) => {
-            const imgs = [uploaded8884, uploaded0601, uploaded9911];
+            const imgs = [uploaded8884, uploaded0601, ellieDeliveryAsset.url];
             return (
               <div
                 key={s.n}
@@ -620,9 +623,12 @@ function HowItWorks() {
 function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitError(null);
     const form = e.currentTarget;
     const data = new FormData(form);
     const nextErrors: Record<string, string> = {};
@@ -634,31 +640,35 @@ function Contact() {
       nextErrors.email = "Please share a valid email.";
     if (message.length < 5 || message.length > 1000) nextErrors.message = "Tell us a little about your event.";
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length === 0) {
-      const phone = (data.get("phone") as string)?.trim() ?? "";
-      const date = (data.get("date") as string)?.trim() ?? "";
-      const guests = (data.get("guests") as string)?.trim() ?? "";
-      const board = (data.get("board") as string)?.trim() ?? "";
-      const subject = `New inquiry from ${name}`;
-      const body = [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        phone && `Phone: ${phone}`,
-        date && `Event Date: ${date}`,
-        guests && `Guest Count: ${guests}`,
-        board && `Board Type: ${board}`,
-        "",
-        "Message:",
+    if (Object.keys(nextErrors).length > 0) return;
+
+    const phone = (data.get("phone") as string)?.trim() || null;
+    const date = (data.get("date") as string)?.trim() || null;
+    const guestsRaw = (data.get("guests") as string)?.trim() ?? "";
+    const guests = guestsRaw ? Number(guestsRaw) : null;
+    const board = (data.get("board") as string)?.trim() || null;
+
+    setSubmitting(true);
+    try {
+      const { error } = await supabase.from("inquiries").insert({
+        name,
+        email,
+        phone,
+        event_date: date,
+        guest_count: Number.isFinite(guests) ? guests : null,
+        board_type: board,
         message,
-      ]
-        .filter(Boolean)
-        .join("\n");
-      const mailto = `mailto:grazingwithellie@gmail.com?subject=${encodeURIComponent(
-        subject,
-      )}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailto;
+      });
+      if (error) throw error;
       setSubmitted(true);
       form.reset();
+    } catch (err) {
+      console.error("Inquiry submission failed", err);
+      setSubmitError(
+        "Something went wrong sending your inquiry. Please email grazingwithellie@gmail.com directly.",
+      );
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -700,7 +710,12 @@ function Contact() {
         <form onSubmit={onSubmit} noValidate className="rounded-2xl bg-card p-8 shadow-sm ring-1 ring-border sm:p-10">
           {submitted && (
             <div className="mb-6 rounded-md border border-olive/40 bg-olive/10 px-4 py-3 text-sm text-charcoal">
-              Thank you — your inquiry is in. I'll be in touch soon.
+              Thank you — your inquiry is in. Ellie will be in touch within 48 hours.
+            </div>
+          )}
+          {submitError && (
+            <div className="mb-6 rounded-md border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+              {submitError}
             </div>
           )}
           <div className="grid gap-5 sm:grid-cols-2">
@@ -752,9 +767,10 @@ function Contact() {
 
           <button
             type="submit"
-            className="mt-8 w-full rounded-full bg-primary px-7 py-4 text-[0.72rem] font-medium uppercase tracking-[0.28em] text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
+            disabled={submitting}
+            className="mt-8 w-full rounded-full bg-primary px-7 py-4 text-[0.72rem] font-medium uppercase tracking-[0.28em] text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
           >
-            Send Inquiry
+            {submitting ? "Sending…" : "Send Inquiry"}
           </button>
         </form>
       </div>
@@ -858,7 +874,29 @@ function Testimonials() {
           accent="clients & guests"
           description="A few notes from the gatherings, weddings and celebrations I've had the joy of styling."
         />
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid items-center gap-10 lg:grid-cols-[1fr_1.2fr]">
+          <div className="relative">
+            <div className="absolute -inset-3 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
+            <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-xl ring-2 ring-gold/40">
+              <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
+                <img
+                  src={ellieEventAsset.url}
+                  alt="Ellie styling a grazing table at a Vierra Communities event"
+                  width={1200}
+                  height={1600}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+            <TagLine position="bottom-left" top="on-site styling" bottom="every detail considered" />
+          </div>
+          <p className="font-serif-display text-2xl italic leading-relaxed text-charcoal/80 sm:text-3xl">
+            "From hospital appreciation weeks to backyard birthdays — every board is built
+            with the same care, color and abundance."
+          </p>
+        </div>
+        <div className="mt-16 grid gap-6 md:grid-cols-3">
           {TESTIMONIALS.map((t) => (
             <figure
               key={t.name}
