@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type FormEvent, type ReactNode } from "react";
 import ellieAsset from "@/assets/uploads/ellie.jpeg.asset.json";
 import ellieDeliveryAsset from "@/assets/uploads/ellie-delivery.jpeg.asset.json";
 import ellieEventAsset from "@/assets/uploads/ellie-event.jpeg.asset.json";
@@ -117,7 +117,6 @@ const MENU = [
 ];
 
 const GALLERY = [
-  { src: uploaded8410, alt: "Generous grazing table spread with shrimp, cheeses, charcuterie and fresh fruit" },
   { src: gal9847.url, alt: "Gold-framed fruit platter with macarons and florals" },
   { src: gal9839.url, alt: "Crudité board with cabbage hummus bowl" },
   { src: gal9899.url, alt: "Rainbow carrot crudité board with herb dip" },
@@ -189,19 +188,21 @@ const FAQS = [
 
 function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Nav />
-      <Hero />
-      <About />
-      <Menu />
-      <Gallery />
-      <Testimonials />
-      <HowItWorks />
-      <FAQ />
-      <InstagramBanner />
-      <Contact />
-      <Footer />
-    </div>
+    <LightboxProvider>
+      <div className="min-h-screen bg-background text-foreground">
+        <Nav />
+        <Hero />
+        <About />
+        <Menu />
+        <Gallery />
+        <Testimonials />
+        <HowItWorks />
+        <FAQ />
+        <InstagramBanner />
+        <Contact />
+        <Footer />
+      </div>
+    </LightboxProvider>
   );
 }
 
