@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import ellieAsset from "@/assets/uploads/ellie.jpeg.asset.json";
+import logoAsset from "@/assets/uploads/ellie-logo.png.asset.json";
 import uploadedBafAsset from "@/assets/uploads/BAF6B960-EDAB-48AD-BE5D-5C9C1BBC8C71.jpeg.asset.json";
 import uploaded0601Asset from "@/assets/uploads/IMG_0601.jpeg.asset.json";
 import uploaded0603Asset from "@/assets/uploads/IMG_0603.jpeg.asset.json";
@@ -215,8 +216,15 @@ function Nav() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-        <a href="#top" className="font-script text-3xl leading-none text-primary">
-          Grazing with Ellie
+        <a href="#top" className="flex items-center gap-3">
+          <img
+            src={logoAsset.url}
+            alt="Grazing with Ellie logo"
+            className="h-12 w-12 rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
+          />
+          <span className="font-script text-2xl leading-none text-primary sm:text-3xl">
+            Grazing with Ellie
+          </span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           {NAV.map((item) => (
@@ -674,7 +682,14 @@ function Footer() {
     <footer className="border-t border-border bg-cream-dark/30 py-14">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-3">
         <div>
-          <p className="font-script text-4xl leading-none text-primary">Grazing with Ellie</p>
+          <div className="flex items-center gap-3">
+            <img
+              src={logoAsset.url}
+              alt="Grazing with Ellie logo"
+              className="h-14 w-14 rounded-full bg-white object-contain ring-1 ring-gold/40"
+            />
+            <p className="font-script text-4xl leading-none text-primary">Grazing with Ellie</p>
+          </div>
           <p className="mt-3 font-serif-display italic text-charcoal/70">One bite at a time.</p>
         </div>
         <div>
