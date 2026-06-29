@@ -319,13 +319,37 @@ function Hero() {
               />
             </div>
           </div>
-          <div className="absolute -bottom-6 -left-6 hidden rotate-[-4deg] rounded-2xl bg-background px-5 py-4 shadow-xl ring-1 ring-border sm:block">
-            <p className="font-script text-3xl leading-none text-primary">est. with love</p>
-            <p className="eyebrow mt-1 text-muted-foreground">handcrafted locally</p>
-          </div>
+          <TagLine top="est. with love" bottom="handcrafted locally" />
         </div>
       </div>
     </section>
+  );
+}
+
+function TagLine({
+  top,
+  bottom,
+  position = "bottom-left",
+  className = "",
+}: {
+  top: string;
+  bottom: string;
+  position?: "bottom-left" | "bottom-right" | "top-left" | "top-right";
+  className?: string;
+}) {
+  const posClasses = {
+    "bottom-left": "-bottom-5 -left-5 rotate-[-3deg]",
+    "bottom-right": "-bottom-5 -right-5 rotate-[3deg]",
+    "top-left": "-top-5 -left-5 rotate-[-3deg]",
+    "top-right": "-top-5 -right-5 rotate-[3deg]",
+  };
+  return (
+    <div
+      className={`absolute hidden rounded-2xl bg-background px-5 py-4 shadow-xl ring-1 ring-border sm:block ${posClasses[position]} ${className}`}
+    >
+      <p className="font-script text-2xl leading-none text-primary">{top}</p>
+      <p className="eyebrow mt-1 text-muted-foreground">{bottom}</p>
+    </div>
   );
 }
 
@@ -371,6 +395,7 @@ function About() {
               />
             </div>
           </div>
+          <TagLine position="bottom-right" top="teacher by day" bottom="grazer by heart" />
           <div className="absolute -right-4 -top-4 hidden h-24 w-24 rounded-full bg-gold/40 blur-2xl md:block" />
         </div>
         <div>
@@ -418,7 +443,7 @@ function Menu() {
               }`}
             >
               <div
-                className={`overflow-hidden ${idx < 3 ? "aspect-[4/5]" : "aspect-[5/4]"} ${
+                className={`relative overflow-hidden ${idx < 3 ? "aspect-[4/5]" : "aspect-[5/4]"} ${
                   item.imgFit === "contain" ? "bg-cream-dark/60" : ""
                 }`}
               >
@@ -430,6 +455,14 @@ function Menu() {
                   loading="lazy"
                   className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105`}
                 />
+                {idx === 4 && (
+                  <TagLine
+                    position="bottom-right"
+                    top="custom styled"
+                    bottom="at your venue"
+                    className="!bottom-3 !right-3"
+                  />
+                )}
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <p className="eyebrow text-gold">{item.serves}</p>
@@ -466,7 +499,7 @@ function Gallery() {
           {GALLERY.map((img, i) => (
             <div
               key={i}
-              className={`overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:shadow-lg hover:ring-gold/60 ${
+              className={`relative overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:shadow-lg hover:ring-gold/60 ${
                 i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-square"
               }`}
             >
@@ -476,6 +509,8 @@ function Gallery() {
                 loading="lazy"
                 className="h-full w-full rounded-md object-cover transition-transform duration-700 hover:scale-105"
               />
+              {i === 0 && <TagLine position="bottom-right" top="beautiful boards" bottom="unforgettable moments" />}
+              {i === 4 && <TagLine position="bottom-left" top="sweet moments" bottom="shared with joy" />}
             </div>
           ))}
         </div>
@@ -545,7 +580,7 @@ function Contact() {
   return (
     <section id="contact" className="py-24 sm:py-32">
       <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[1fr_1.2fr]">
-        <div>
+        <div className="relative">
           <SectionHeader
             align="left"
             eyebrow="Inquire"
@@ -575,6 +610,7 @@ function Contact() {
               <dd className="mt-1 font-serif-display text-xl text-charcoal">Local pickup & delivery</dd>
             </div>
           </dl>
+          <TagLine position="bottom-left" top="excited to hear" bottom="from you" className="!bottom-0 !left-0 lg:hidden" />
         </div>
 
         <form onSubmit={onSubmit} noValidate className="rounded-2xl bg-card p-8 shadow-sm ring-1 ring-border sm:p-10">
