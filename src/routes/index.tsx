@@ -9,6 +9,7 @@ import uploaded0601Asset from "@/assets/uploads/IMG_0601.jpeg.asset.json";
 import uploaded0603Asset from "@/assets/uploads/IMG_0603.jpeg.asset.json";
 import uploaded7228Asset from "@/assets/uploads/IMG_7228.jpeg.asset.json";
 import uploaded8214Asset from "@/assets/uploads/IMG_8214.jpeg.asset.json";
+import uploaded8417Asset from "@/assets/uploads/IMG_8417.jpeg.asset.json";
 import uploaded8410Asset from "@/assets/uploads/IMG_8410.jpeg.asset.json";
 import uploaded8884Asset from "@/assets/uploads/IMG_8884.jpeg.asset.json";
 import uploaded9867Asset from "@/assets/uploads/IMG_9867.jpeg.asset.json";
