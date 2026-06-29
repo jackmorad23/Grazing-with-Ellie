@@ -192,6 +192,7 @@ function Home() {
       <Testimonials />
       <HowItWorks />
       <FAQ />
+      <InstagramBanner />
       <Contact />
       <Footer />
     </div>
@@ -304,6 +305,7 @@ function Hero() {
             >
               View Offerings
             </a>
+            <InstagramButton variant="outline" />
           </div>
         </div>
         <div className="relative">
