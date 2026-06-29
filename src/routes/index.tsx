@@ -12,6 +12,16 @@ import uploaded9867Asset from "@/assets/uploads/IMG_9867.jpeg.asset.json";
 import uploaded9869Asset from "@/assets/uploads/IMG_9869.jpeg.asset.json";
 import uploaded9911Asset from "@/assets/uploads/IMG_9911.jpeg.asset.json";
 import largeBoardAsset from "@/assets/uploads/large-board.jpeg.asset.json";
+import gal9847 from "@/assets/gallery/IMG_9847.jpeg.asset.json";
+import gal9839 from "@/assets/gallery/IMG_9839.jpeg.asset.json";
+import gal9899 from "@/assets/gallery/IMG_9899.jpeg.asset.json";
+import gal9869b from "@/assets/gallery/IMG_9869-2.jpeg.asset.json";
+import gal9865 from "@/assets/gallery/IMG_9865.jpeg.asset.json";
+import gal8433 from "@/assets/gallery/IMG_8433.jpeg.asset.json";
+import gal8379 from "@/assets/gallery/IMG_8379.jpeg.asset.json";
+import gal8388 from "@/assets/gallery/IMG_8388.jpeg.asset.json";
+import gal6678 from "@/assets/gallery/IMG_6678.jpeg.asset.json";
+import gal0524 from "@/assets/gallery/IMG_0524.jpeg.asset.json";
 
 const uploadedBaf = uploadedBafAsset.url;
 const uploaded0601 = uploaded0601Asset.url;
@@ -101,11 +111,16 @@ const MENU = [
 ];
 
 const GALLERY = [
-  { src: uploadedBaf, alt: "Uploaded grazing board photo from Ellie" },
-  { src: uploaded0601, alt: "Uploaded vegetable platter photo from Ellie" },
-  { src: uploaded0603, alt: "Uploaded fruit platter photo from Ellie" },
-  { src: uploaded9867, alt: "Uploaded grazing table detail photo from Ellie" },
-  { src: uploaded9911, alt: "Uploaded celebration food spread photo from Ellie" },
+  { src: gal9847.url, alt: "Gold-framed fruit platter with macarons and florals" },
+  { src: gal9839.url, alt: "Crudité board with cabbage hummus bowl" },
+  { src: gal9899.url, alt: "Rainbow carrot crudité board with herb dip" },
+  { src: gal9869b.url, alt: "Full grazing table with tortellini skewers and charcuterie" },
+  { src: gal9865.url, alt: "Dessert spread with chocolate-dipped strawberries and macarons" },
+  { src: gal8433.url, alt: "Smoked salmon crostini with capers and microgreens" },
+  { src: gal8379.url, alt: "Mini croissant chicken-salad sliders with edible florals" },
+  { src: gal8388.url, alt: "Cucumber and dill cream cheese tea sandwiches" },
+  { src: gal6678.url, alt: "Abundant cheese and charcuterie spread with fruit and olives" },
+  { src: gal0524.url, alt: "Whimsical veggie crudité box with bell pepper character" },
 ];
 
 const STEPS = [
