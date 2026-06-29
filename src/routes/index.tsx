@@ -589,6 +589,32 @@ function Gallery() {
   );
 }
 
+function VideoShowcase() {
+  return (
+    <section className="py-20 sm:py-28">
+      <div className="mx-auto max-w-5xl px-6">
+        <SectionHeader
+          eyebrow="In motion"
+          title="See a board"
+          accent="come to life"
+          description="A behind-the-scenes look at the color, texture and care that goes into every Grazing With Ellie creation."
+        />
+        <div className="mt-12 overflow-hidden rounded-3xl bg-card p-2 shadow-xl ring-2 ring-gold/40">
+          <video
+            src={ellieVideoAsset.url}
+            className="h-full w-full rounded-2xl object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HowItWorks() {
   return (
     <section id="how" className="relative overflow-hidden py-24 sm:py-32">
