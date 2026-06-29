@@ -602,7 +602,15 @@ function Menu() {
                 <p className="eyebrow text-gold">{item.serves}</p>
                 <h3 className="mt-2 font-serif-display text-2xl text-charcoal">{item.name}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
-                <p className="mt-5 eyebrow text-primary">{item.price ? item.price : "Reach out for pricing"}</p>
+                <p className="mt-5 eyebrow text-primary">
+                  {item.price ? (
+                    item.price
+                  ) : (
+                    <a href="#contact" className="underline-offset-4 hover:underline">
+                      Reach out for pricing
+                    </a>
+                  )}
+                </p>
               </div>
             </article>
           ))}
