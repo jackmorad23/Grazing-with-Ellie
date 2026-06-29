@@ -65,7 +65,7 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const INSTAGRAM_URL = "https://instagram.com/grazingwithellie";
+const INSTAGRAM_URL = "https://www.instagram.com/grazingwithellie/";
 
 type LightboxImage = { src: string; alt: string };
 const LightboxContext = createContext<(img: LightboxImage) => void>(() => {});
