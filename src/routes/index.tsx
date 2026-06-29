@@ -593,7 +593,6 @@ function HowItWorks() {
   return (
     <section id="how" className="relative overflow-hidden py-24 sm:py-32">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-cream-dark/50 via-background to-cream-dark/30" />
-      {/* anchor */}
       <div className="absolute -left-20 top-20 -z-10 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
       <div className="absolute -right-20 bottom-10 -z-10 h-80 w-80 rounded-full bg-burgundy/10 blur-3xl" />
       <div className="mx-auto max-w-7xl px-6">
