@@ -861,7 +861,29 @@ function Testimonials() {
           accent="clients & guests"
           description="A few notes from the gatherings, weddings and celebrations I've had the joy of styling."
         />
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid items-center gap-10 lg:grid-cols-[1fr_1.2fr]">
+          <div className="relative">
+            <div className="absolute -inset-3 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
+            <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-xl ring-2 ring-gold/40">
+              <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
+                <img
+                  src={ellieEventAsset.url}
+                  alt="Ellie styling a grazing table at a Vierra Communities event"
+                  width={1200}
+                  height={1600}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+            <TagLine position="bottom-left" top="on-site styling" bottom="every detail considered" />
+          </div>
+          <p className="font-serif-display text-2xl italic leading-relaxed text-charcoal/80 sm:text-3xl">
+            "From hospital appreciation weeks to backyard birthdays — every board is built
+            with the same care, color and abundance."
+          </p>
+        </div>
+        <div className="mt-16 grid gap-6 md:grid-cols-3">
           {TESTIMONIALS.map((t) => (
             <figure
               key={t.name}
