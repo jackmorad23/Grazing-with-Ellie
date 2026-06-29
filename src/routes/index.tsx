@@ -478,8 +478,8 @@ function Contact() {
             <div>
               <dt className="eyebrow text-gold">Email</dt>
               <dd className="mt-1 font-serif-display text-xl text-charcoal">
-                <a href="mailto:hello@grazingwithellie.com" className="hover:text-primary">
-                  hello@grazingwithellie.com
+                <a href="mailto:grazingwithellie@gmail.com" className="hover:text-primary">
+                  grazingwithellie@gmail.com
                 </a>
               </dd>
             </div>
@@ -642,8 +642,8 @@ function Footer() {
           <p className="eyebrow text-gold">Stay in touch</p>
           <ul className="mt-3 space-y-2 text-sm text-charcoal/80">
             <li>
-              <a href="mailto:hello@grazingwithellie.com" className="hover:text-primary">
-                hello@grazingwithellie.com
+              <a href="mailto:grazingwithellie@gmail.com" className="hover:text-primary">
+                grazingwithellie@gmail.com
               </a>
             </li>
             <li>
