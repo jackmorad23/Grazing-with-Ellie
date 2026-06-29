@@ -277,8 +277,9 @@ function Home() {
 }
 
 function Nav() {
+  const openLightbox = useLightbox();
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -298,7 +299,12 @@ function Nav() {
           <img
             src={logoAsset.url}
             alt="Grazing with Ellie logo"
-            className="h-12 w-12 rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              openLightbox({ src: logoAsset.url, alt: "Grazing with Ellie logo" });
+            }}
+            className="h-12 w-12 cursor-zoom-in rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
           />
           <span className="font-script text-2xl leading-none text-primary sm:text-3xl">Grazing with Ellie</span>
         </a>
@@ -321,20 +327,20 @@ function Nav() {
         </a>
         <button
           aria-label="Toggle menu"
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => setMenuOpen((o) => !o)}
           className="grid h-10 w-10 place-items-center rounded-full border border-border text-foreground md:hidden"
         >
           <span className="block h-px w-5 bg-current relative before:absolute before:-top-1.5 before:left-0 before:h-px before:w-5 before:bg-current after:absolute after:top-1.5 after:left-0 after:h-px after:w-5 after:bg-current" />
         </button>
       </div>
-      {open && (
+      {menuOpen && (
         <div className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
             {NAV.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                onClick={() => setOpen(false)}
+                onClick={() => setMenuOpen(false)}
                 className="eyebrow border-b border-border/40 py-3 text-foreground/80"
               >
                 {item.label}
@@ -361,7 +367,7 @@ function Hero() {
             with Ellie
           </h1>
           <p className="mx-auto mt-6 max-w-md font-serif-display text-2xl italic text-charcoal/70 sm:text-3xl lg:mx-0">
-            One bite at a time.
+            ONE BITE AT A TIME.
           </p>
           <p className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-muted-foreground lg:mx-0">
             Boutique charcuterie and grazing boards, lovingly composed for your celebrations, intimate gatherings and
@@ -394,7 +400,7 @@ function Hero() {
               />
             </div>
           </div>
-          <TagLine top="one bite" bottom="at a time" />
+          <TagLine top="ONE BITE" bottom="AT A TIME" />
         </div>
       </div>
     </section>
@@ -481,7 +487,7 @@ function InstagramBanner() {
           <h2 className="font-serif-display text-3xl text-charcoal sm:text-4xl">
             See every board on <span className="font-script text-primary">Instagram</span>
           </h2>
-          <p className="font-serif-display text-lg italic text-charcoal/70">One bite at a time.</p>
+          <p className="font-serif-display text-lg italic text-charcoal/70">ONE BITE AT A TIME.</p>
           <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
             Fresh inspiration, behind-the-scenes styling and the latest grazing tables — straight from the prep board.
           </p>
@@ -551,7 +557,7 @@ function About() {
             <p>
               Seeing people smile and enjoy the experience is my favorite part, and that's what inspires every board I
               make. It's not just about the food — it's about creating a memorable centerpiece that brings people
-              together one bite at a time.
+              together ONE BITE AT A TIME.
             </p>
           </div>
         </div>
@@ -635,7 +641,7 @@ function Gallery() {
           eyebrow="Gallery"
           title="A taste of"
           accent="past boards"
-          description="A little peek at boards from recent gatherings, gifts and grazing tables — one bite at a time."
+          description="A little peek at boards from recent gatherings, gifts and grazing tables — ONE BITE AT A TIME."
         />
         <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
           {GALLERY.map((img, i) => (
@@ -674,7 +680,7 @@ function HowItWorks() {
           eyebrow="How it works"
           title="Three simple steps to your"
           accent="board"
-          description="From first message to the final bite — thoughtfully styled, one bite at a time."
+          description="From first message to the final bite — thoughtfully styled, ONE BITE AT A TIME."
         />
         <div className="mt-16 grid gap-8 md:grid-cols-3">
           {STEPS.map((s, i) => {
@@ -920,6 +926,7 @@ function Field({
 }
 
 function Footer() {
+  const openLightbox = useLightbox();
   return (
     <footer className="border-t border-border bg-cream-dark/30 py-14">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-3">
@@ -928,11 +935,16 @@ function Footer() {
             <img
               src={logoAsset.url}
               alt="Grazing with Ellie logo"
-              className="h-14 w-14 rounded-full bg-white object-contain ring-1 ring-gold/40"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openLightbox({ src: logoAsset.url, alt: "Grazing with Ellie logo" });
+              }}
+              className="h-14 w-14 cursor-zoom-in rounded-full bg-white object-contain ring-1 ring-gold/40"
             />
             <p className="font-script text-4xl leading-none text-primary">Grazing with Ellie</p>
           </a>
-          <p className="mt-3 font-serif-display italic text-charcoal/70">One bite at a time.</p>
+          <p className="mt-3 font-serif-display italic text-charcoal/70">ONE BITE AT A TIME.</p>
         </div>
         <div>
           <p className="eyebrow text-gold">Visit</p>
