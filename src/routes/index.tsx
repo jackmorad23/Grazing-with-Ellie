@@ -150,7 +150,13 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "The grazing table she styled for our engagement party was beyond what I imagined. So much care in every detail.",
+      "We ended CNA Week with a special surprise for our incredible CNAs!
+
+Our Administrator treated our incredible CNA team to a beautiful charcuterie spread from Grazing with Ellie as a thank you for their hard work, compassion, and dedication.
+
+To make the gesture even more meaningful, Ellie, who is also a school teacher, had her students create heartfelt thank-you cards for our CNAs. Their thoughtful messages brought smiles to our team and served as a wonderful reminder of the impact caregivers have every day.
+
+Thank you to our CNAs for the exceptional care, kindness, and support you provide to our residents. We appreciate all that you do!",
     name: "Jenna & Mike",
     event: "Engagement Party",
   },
