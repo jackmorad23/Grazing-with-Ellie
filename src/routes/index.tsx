@@ -455,6 +455,14 @@ function Menu() {
                   loading="lazy"
                   className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105`}
                 />
+                {idx === 4 && (
+                  <TagLine
+                    position="bottom-right"
+                    top="custom styled"
+                    bottom="at your venue"
+                    className="!bottom-3 !right-3"
+                  />
+                )}
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <p className="eyebrow text-gold">{item.serves}</p>
