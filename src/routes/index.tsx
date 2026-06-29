@@ -192,6 +192,7 @@ function Home() {
       <Testimonials />
       <HowItWorks />
       <FAQ />
+      <InstagramBanner />
       <Contact />
       <Footer />
     </div>
@@ -304,6 +305,7 @@ function Hero() {
             >
               View Offerings
             </a>
+            <InstagramButton variant="outline" />
           </div>
         </div>
         <div className="relative">
@@ -350,6 +352,60 @@ function TagLine({
       <p className="font-script text-2xl leading-none text-primary">{top}</p>
       <p className="eyebrow mt-1 text-muted-foreground">{bottom}</p>
     </div>
+  );
+}
+
+function InstagramIcon({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function InstagramButton({
+  variant = "solid",
+  label = "Follow on Instagram",
+  className = "",
+}: {
+  variant?: "solid" | "outline" | "ghost";
+  label?: string;
+  className?: string;
+}) {
+  const base =
+    "inline-flex items-center gap-2.5 rounded-full px-6 py-3.5 text-[0.72rem] font-medium uppercase tracking-[0.28em] transition-all";
+  const styles = {
+    solid: "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 hover:shadow-md",
+    outline: "border border-foreground/30 text-foreground hover:border-primary hover:text-primary",
+    ghost: "text-primary hover:text-primary/80",
+  }[variant];
+  return (
+    <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={`${base} ${styles} ${className}`}>
+      <InstagramIcon />
+      {label}
+    </a>
+  );
+}
+
+function InstagramBanner() {
+  return (
+    <section className="py-16 sm:py-20">
+      <div className="mx-auto max-w-5xl px-6">
+        <div className="flex flex-col items-center gap-6 rounded-3xl bg-gradient-to-br from-cream-dark/60 via-background to-gold/20 px-8 py-12 text-center shadow-sm ring-2 ring-gold/30 sm:py-14">
+          <InstagramIcon className="h-10 w-10 text-primary" />
+          <p className="eyebrow text-primary/80">@grazingwithellie</p>
+          <h2 className="font-serif-display text-3xl text-charcoal sm:text-4xl">
+            See every board on <span className="font-script text-primary">Instagram</span>
+          </h2>
+          <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+            Fresh inspiration, behind-the-scenes styling and the latest grazing tables — straight from the prep board.
+          </p>
+          <InstagramButton label="Follow @grazingwithellie" />
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -509,20 +565,12 @@ function Gallery() {
                 loading="lazy"
                 className="h-full w-full rounded-md object-cover transition-transform duration-700 hover:scale-105"
               />
-              {i === 0 && <TagLine position="bottom-right" top="beautiful boards" bottom="unforgettable moments" />}
-              {i === 4 && <TagLine position="bottom-left" top="sweet moments" bottom="shared with joy" />}
             </div>
           ))}
         </div>
-        <div className="mt-12 text-center">
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="eyebrow inline-flex items-center gap-2 text-primary hover:text-primary/80"
-          >
-            See more on Instagram <span aria-hidden>→</span>
-          </a>
+        <div className="mt-14 flex flex-col items-center gap-3 text-center">
+          <p className="font-serif-display text-lg italic text-charcoal/70">More moments, fresh weekly</p>
+          <InstagramButton label="See more on Instagram" />
         </div>
       </div>
     </section>
@@ -531,23 +579,38 @@ function Gallery() {
 
 function HowItWorks() {
   return (
-    <section id="how" className="relative bg-charcoal py-24 text-cream sm:py-32">
+    <section id="how" className="relative overflow-hidden py-24 sm:py-32">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-cream-dark/50 via-background to-cream-dark/30" />
+      <div className="absolute -left-20 top-20 -z-10 h-72 w-72 rounded-full bg-gold/15 blur-3xl" />
+      <div className="absolute -right-20 bottom-10 -z-10 h-80 w-80 rounded-full bg-burgundy/10 blur-3xl" />
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow text-gold">How it works</p>
-          <h2 className="mt-4 font-serif-display text-4xl text-cream sm:text-5xl">
-            Three simple steps to your
-            <span className="font-script text-gold"> board</span>
-          </h2>
-        </div>
-        <div className="mt-16 grid gap-10 md:grid-cols-3">
-          {STEPS.map((s) => (
-            <div key={s.n} className="text-center">
-              <p className="font-script text-6xl leading-none text-gold">{s.n}</p>
-              <h3 className="mt-4 font-serif-display text-2xl text-cream">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-cream/70">{s.text}</p>
-            </div>
-          ))}
+        <SectionHeader eyebrow="How it works" title="Three simple steps to your" accent="board" />
+        <div className="mt-16 grid gap-8 md:grid-cols-3">
+          {STEPS.map((s, i) => {
+            const imgs = [uploaded8884, uploaded0601, uploaded9911];
+            return (
+              <div
+                key={s.n}
+                className="group relative flex flex-col overflow-hidden rounded-3xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/10 hover:ring-gold/60"
+              >
+                <div className="relative aspect-[5/4] overflow-hidden">
+                  <img
+                    src={imgs[i]}
+                    alt={s.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute left-4 top-4 grid h-14 w-14 place-items-center rounded-full bg-background/95 font-script text-3xl text-primary shadow-md ring-1 ring-gold/40">
+                    {s.n}
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col p-7 text-center">
+                  <h3 className="font-serif-display text-2xl text-charcoal">{s.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -572,6 +635,28 @@ function Contact() {
     if (message.length < 5 || message.length > 1000) nextErrors.message = "Tell us a little about your event.";
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length === 0) {
+      const phone = (data.get("phone") as string)?.trim() ?? "";
+      const date = (data.get("date") as string)?.trim() ?? "";
+      const guests = (data.get("guests") as string)?.trim() ?? "";
+      const board = (data.get("board") as string)?.trim() ?? "";
+      const subject = `New inquiry from ${name}`;
+      const body = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        phone && `Phone: ${phone}`,
+        date && `Event Date: ${date}`,
+        guests && `Guest Count: ${guests}`,
+        board && `Board Type: ${board}`,
+        "",
+        "Message:",
+        message,
+      ]
+        .filter(Boolean)
+        .join("\n");
+      const mailto = `mailto:grazingwithellie@gmail.com?subject=${encodeURIComponent(
+        subject,
+      )}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
       setSubmitted(true);
       form.reset();
     }
