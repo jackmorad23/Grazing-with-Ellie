@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import ellieAsset from "@/assets/uploads/ellie.jpeg.asset.json";
 import ellieDeliveryAsset from "@/assets/uploads/ellie-delivery.jpeg.asset.json";
 import ellieEventAsset from "@/assets/uploads/ellie-event.jpeg.asset.json";
@@ -215,6 +215,7 @@ function Home() {
     <div className="min-h-screen bg-background text-foreground" onClick={onContainerClick}>
       <Nav />
       <Hero />
+      <TrustBadges />
       <About />
       <Menu />
       <Gallery />
@@ -323,6 +324,96 @@ function Nav() {
   );
 }
 
+function Reveal({
+  children,
+  delay = 0,
+  variant = "up",
+  className = "",
+  as: Tag = "div",
+}: {
+  children: ReactNode;
+  delay?: number;
+  variant?: "up" | "zoom";
+  className?: string;
+  as?: "div" | "section" | "li" | "figure" | "article";
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, []);
+  const anim = variant === "zoom" ? "reveal-in-zoom" : "reveal-in";
+  return (
+    <Tag
+      ref={ref as never}
+      style={visible ? { animationDelay: `${delay}ms` } : undefined}
+      className={`reveal ${visible ? anim : ""} ${className}`}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+const TRUST_BADGES = [
+  { icon: "🌿", title: "Dietary-friendly", sub: "Vegan, GF, nut-free options" },
+  { icon: "🚚", title: "DMV delivery", sub: "Other areas — additional fee" },
+  { icon: "🎨", title: "Hand-styled", sub: "Every board, made to order" },
+  { icon: "✨", title: "Fresh daily", sub: "Prepped the day of your event" },
+];
+
+function TrustBadges() {
+  return (
+    <section aria-label="What we offer" className="relative -mt-6 pb-16 sm:pb-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal>
+          <ul className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+            {TRUST_BADGES.map((b, i) => (
+              <li
+                key={b.title}
+                className="reveal reveal-in group flex items-center gap-3 rounded-2xl border border-gold/30 bg-card/70 px-4 py-4 shadow-sm backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg sm:px-5"
+                style={{ animationDelay: `${i * 110}ms` }}
+              >
+                <span className="text-2xl sm:text-3xl" aria-hidden>
+                  {b.icon}
+                </span>
+                <div className="min-w-0">
+                  <p className="font-serif-display text-base leading-tight text-charcoal sm:text-lg">
+                    {b.title}
+                  </p>
+                  <p className="mt-0.5 text-[0.72rem] leading-snug text-muted-foreground sm:text-xs">
+                    {b.sub}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-center text-xs text-muted-foreground">
+            Serving the DMV (DC · Maryland · Virginia) — happy to travel further for an additional fee.
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 function Hero() {
   return (
     <section id="top" className="relative isolate overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28">
@@ -359,22 +450,22 @@ function Hero() {
             <InstagramButton variant="outline" />
           </div>
         </div>
-        <div className="relative">
+        <Reveal variant="zoom" delay={150} className="relative">
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
-          <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-2xl shadow-burgundy/20 ring-2 ring-gold/40">
+          <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-2xl shadow-burgundy/20 ring-2 ring-gold/40 transition-transform duration-700 hover:scale-[1.015]">
             <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
               <img
                 src={heroBoard}
                 alt="A beautifully styled charcuterie board with cheeses, meats, figs and grapes"
                 width={1600}
                 height={1280}
-                className="h-full w-full object-cover cursor-zoom-in"
+                className="h-full w-full object-cover cursor-zoom-in transition-transform duration-[1200ms] hover:scale-[1.04]"
                data-zoomable
               />
             </div>
           </div>
           <TagLine top="est. with love" bottom="handcrafted locally" />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -554,8 +645,10 @@ function Menu() {
         />
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-6">
           {MENU.map((item, idx) => (
-            <article
+            <Reveal
               key={item.name}
+              as="article"
+              delay={idx * 90}
               className={`group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/15 hover:ring-gold/60 ${
                 idx < 3 ? "lg:col-span-2" : "lg:col-span-3"
               }`}
@@ -589,7 +682,7 @@ function Menu() {
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
                 <p className="mt-5 eyebrow text-primary">{item.price ? item.price : "Reach out for pricing"}</p>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
         <p className="mx-auto mt-12 max-w-xl text-center text-sm italic text-muted-foreground">
@@ -616,9 +709,12 @@ function Gallery() {
         />
         <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
           {GALLERY.map((img, i) => (
-            <div
+            <Reveal
               key={i}
-              className={`group relative cursor-zoom-in overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:shadow-lg hover:ring-gold/60 ${
+              as="div"
+              delay={(i % 6) * 80}
+              variant={i % 5 === 0 ? "zoom" : "up"}
+              className={`group relative cursor-zoom-in overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-lg hover:ring-gold/60 ${
                 i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-square"
               }`}
             >
@@ -629,7 +725,7 @@ function Gallery() {
                 data-zoomable
                 className="h-full w-full rounded-md object-cover transition-transform duration-700 group-hover:scale-105"
               />
-            </div>
+            </Reveal>
           ))}
         </div>
         <div className="mt-14 flex flex-col items-center gap-3 text-center">
