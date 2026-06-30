@@ -187,8 +187,32 @@ const FAQS = [
 ];
 
 function Home() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+    };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [lightbox]);
+
+  const onContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    const img = target.closest("img[data-zoomable]") as HTMLImageElement | null;
+    if (!img) return;
+    e.preventDefault();
+    setLightbox({ src: img.currentSrc || img.src, alt: img.alt });
+  };
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground" onClick={onContainerClick}>
       <Nav />
       <Hero />
       <About />
@@ -201,6 +225,29 @@ function Home() {
       <InstagramBanner />
       <Contact />
       <Footer />
+      {lightbox && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setLightbox(null)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal/85 p-4 backdrop-blur-sm animate-in fade-in"
+        >
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => setLightbox(null)}
+            className="absolute right-5 top-5 rounded-full bg-cream/90 px-4 py-2 text-sm font-medium text-charcoal shadow-lg hover:bg-cream"
+          >
+            Close ✕
+          </button>
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[90vh] max-w-[95vw] rounded-2xl object-contain shadow-2xl ring-2 ring-gold/40"
+          />
+        </div>
+      )}
     </div>
   );
 }
