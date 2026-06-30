@@ -602,7 +602,6 @@ function Menu() {
 }
 
 function Gallery() {
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   return (
     <section id="gallery" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
@@ -614,11 +613,9 @@ function Gallery() {
         />
         <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
           {GALLERY.map((img, i) => (
-            <button
-              type="button"
+            <div
               key={i}
-              onClick={() => setLightbox({ src: img.src, alt: img.alt })}
-              className={`group relative overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:shadow-lg hover:ring-gold/60 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold ${
+              className={`group relative cursor-zoom-in overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:shadow-lg hover:ring-gold/60 ${
                 i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-square"
               }`}
             >
@@ -626,9 +623,10 @@ function Gallery() {
                 src={img.src}
                 alt={img.alt}
                 loading="lazy"
+                data-zoomable
                 className="h-full w-full rounded-md object-cover transition-transform duration-700 group-hover:scale-105"
               />
-            </button>
+            </div>
           ))}
         </div>
         <div className="mt-14 flex flex-col items-center gap-3 text-center">
@@ -636,29 +634,6 @@ function Gallery() {
           <InstagramButton label="See more on Instagram" />
         </div>
       </div>
-      {lightbox && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setLightbox(null)}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal/85 p-4 backdrop-blur-sm animate-in fade-in"
-        >
-          <button
-            type="button"
-            aria-label="Close"
-            onClick={() => setLightbox(null)}
-            className="absolute right-5 top-5 rounded-full bg-cream/90 px-4 py-2 text-sm font-medium text-charcoal shadow-lg hover:bg-cream"
-          >
-            Close ✕
-          </button>
-          <img
-            src={lightbox.src}
-            alt={lightbox.alt}
-            onClick={(e) => e.stopPropagation()}
-            className="max-h-[90vh] max-w-[95vw] rounded-2xl object-contain shadow-2xl ring-2 ring-gold/40"
-          />
-        </div>
-      )}
     </section>
   );
 }
