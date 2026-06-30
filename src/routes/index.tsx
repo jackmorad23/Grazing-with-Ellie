@@ -478,13 +478,38 @@ function Hero() {
   );
 }
 
-function TagLine({
-  // placeholder anchor
-}: {
-  // unused
-}) {
-  return null;
+function HeroSlideshow() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setI((p) => (p + 1) % heroSlides.length), 4500);
+    return () => window.clearInterval(id);
+  }, []);
+  return (
+    <div className="relative aspect-[5/4] w-full overflow-hidden">
+      {heroSlides.map((s, idx) => (
+        <img
+          key={s.src}
+          src={s.src}
+          alt={s.alt}
+          width={1600}
+          height={1280}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-in-out ${idx === i ? "opacity-100" : "opacity-0"}`}
+          loading={idx === 0 ? "eager" : "lazy"}
+        />
+      ))}
+      <div className="pointer-events-none absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+        {heroSlides.map((_, idx) => (
+          <span
+            key={idx}
+            className={`h-1.5 rounded-full transition-all duration-500 ${idx === i ? "w-5 bg-white" : "w-1.5 bg-white/55"}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
+
+function TagLine({
   top,
   bottom,
   position = "bottom-left",
