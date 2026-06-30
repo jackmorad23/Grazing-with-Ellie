@@ -27,7 +27,7 @@ import gal6678 from "@/assets/gallery/IMG_6678.jpeg.asset.json";
 import gal0524 from "@/assets/gallery/IMG_0524.jpeg.asset.json";
 import ellieVideoAsset from "@/assets/ellie-grazing.mp4.asset.json";
 import ellieVideo2Asset from "@/assets/ellie-grazing-2.mp4.asset.json";
-import { supabase } from "@/integrations/supabase/client";
+
 
 const uploadedBaf = uploadedBafAsset.url;
 const uploaded0601 = uploaded0601Asset.url;
@@ -849,22 +849,8 @@ function Contact() {
 
     setSubmitting(true);
     try {
-      const { error } = await supabase.from("inquiries").insert({
-        name,
-        email,
-        phone,
-        event_date: date,
-        guest_count_range: guestRange,
-        board_type: board,
-        event_type: eventType,
-        budget_range: budget,
-        message,
-      });
-      if (error) throw error;
-      // Also open the user's email client with a pre-filled message so
-      // Ellie gets a real email immediately while the sender domain is
-      // being set up. Once a verified domain is wired in, this can be
-      // removed in favor of automatic background sends.
+      // Open the user's email client with a pre-filled draft. They press
+      // Send to deliver the inquiry to Ellie. No backend, no cost.
       const subject = `New inquiry from ${name}`;
       const bodyLines = [
         `Name: ${name}`,
@@ -882,12 +868,16 @@ function Contact() {
       const mailto = `mailto:grazingwithellie@gmail.com?subject=${encodeURIComponent(
         subject,
       )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
-      window.open(mailto, "_blank");
+      const opened = window.open(mailto, "_blank");
+      if (!opened) {
+        // Popup blocked — fall back to same-tab navigation.
+        window.location.href = mailto;
+      }
       setSubmitted(true);
       form.reset();
     } catch (err) {
-      console.error("Inquiry submission failed", err);
-      setSubmitError("Something went wrong sending your inquiry. Please email grazingwithellie@gmail.com directly.");
+      console.error("Inquiry mailto failed", err);
+      setSubmitError("We couldn't open your email app. Please email grazingwithellie@gmail.com directly.");
     } finally {
       setSubmitting(false);
     }
