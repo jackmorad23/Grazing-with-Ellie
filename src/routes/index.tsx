@@ -842,9 +842,10 @@ function Contact() {
 
     const phone = (data.get("phone") as string)?.trim() || null;
     const date = (data.get("date") as string)?.trim() || null;
-    const guestsRaw = (data.get("guests") as string)?.trim() ?? "";
-    const guests = guestsRaw ? Number(guestsRaw) : null;
+    const guestRange = (data.get("guests") as string)?.trim() || null;
     const board = (data.get("board") as string)?.trim() || null;
+    const eventType = (data.get("event_type") as string)?.trim() || null;
+    const budget = (data.get("budget") as string)?.trim() || null;
 
     setSubmitting(true);
     try {
@@ -853,8 +854,10 @@ function Contact() {
         email,
         phone,
         event_date: date,
-        guest_count: Number.isFinite(guests) ? guests : null,
+        guest_count_range: guestRange,
         board_type: board,
+        event_type: eventType,
+        budget_range: budget,
         message,
       });
       if (error) throw error;
@@ -868,7 +871,9 @@ function Contact() {
         `Email: ${email}`,
         phone ? `Phone: ${phone}` : null,
         date ? `Event date: ${date}` : null,
-        guests ? `Guests: ${guests}` : null,
+        eventType ? `Event type: ${eventType}` : null,
+        guestRange ? `Guests: ${guestRange}` : null,
+        budget ? `Budget: ${budget}` : null,
         board ? `Board type: ${board}` : null,
         "",
         "Message:",
