@@ -323,6 +323,96 @@ function Nav() {
   );
 }
 
+function Reveal({
+  children,
+  delay = 0,
+  variant = "up",
+  className = "",
+  as: Tag = "div",
+}: {
+  children: ReactNode;
+  delay?: number;
+  variant?: "up" | "zoom";
+  className?: string;
+  as?: "div" | "section" | "li" | "figure";
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, []);
+  const anim = variant === "zoom" ? "reveal-in-zoom" : "reveal-in";
+  return (
+    <Tag
+      ref={ref as never}
+      style={visible ? { animationDelay: `${delay}ms` } : undefined}
+      className={`reveal ${visible ? anim : ""} ${className}`}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+const TRUST_BADGES = [
+  { icon: "🌿", title: "Dietary-friendly", sub: "Vegan, GF, nut-free options" },
+  { icon: "🚚", title: "DMV delivery", sub: "Other areas — additional fee" },
+  { icon: "🎨", title: "Hand-styled", sub: "Every board, made to order" },
+  { icon: "✨", title: "Fresh daily", sub: "Prepped the day of your event" },
+];
+
+function TrustBadges() {
+  return (
+    <section aria-label="What we offer" className="relative -mt-6 pb-16 sm:pb-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal>
+          <ul className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+            {TRUST_BADGES.map((b, i) => (
+              <li
+                key={b.title}
+                className="reveal reveal-in group flex items-center gap-3 rounded-2xl border border-gold/30 bg-card/70 px-4 py-4 shadow-sm backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg sm:px-5"
+                style={{ animationDelay: `${i * 110}ms` }}
+              >
+                <span className="text-2xl sm:text-3xl" aria-hidden>
+                  {b.icon}
+                </span>
+                <div className="min-w-0">
+                  <p className="font-serif-display text-base leading-tight text-charcoal sm:text-lg">
+                    {b.title}
+                  </p>
+                  <p className="mt-0.5 text-[0.72rem] leading-snug text-muted-foreground sm:text-xs">
+                    {b.sub}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-center text-xs text-muted-foreground">
+            Serving the DMV (DC · Maryland · Virginia) — happy to travel further for an additional fee.
+          </p>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 function Hero() {
   return (
     <section id="top" className="relative isolate overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28">
