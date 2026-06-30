@@ -645,8 +645,10 @@ function Menu() {
         />
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-6">
           {MENU.map((item, idx) => (
-            <article
+            <Reveal
               key={item.name}
+              as="article"
+              delay={idx * 90}
               className={`group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/15 hover:ring-gold/60 ${
                 idx < 3 ? "lg:col-span-2" : "lg:col-span-3"
               }`}
@@ -680,7 +682,7 @@ function Menu() {
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
                 <p className="mt-5 eyebrow text-primary">{item.price ? item.price : "Reach out for pricing"}</p>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
         <p className="mx-auto mt-12 max-w-xl text-center text-sm italic text-muted-foreground">
