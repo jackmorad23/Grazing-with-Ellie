@@ -17,10 +17,13 @@ export type Database = {
       inquiries: {
         Row: {
           board_type: string | null
+          budget_range: string | null
           created_at: string
           email: string
           event_date: string | null
+          event_type: string | null
           guest_count: number | null
+          guest_count_range: string | null
           id: string
           message: string
           name: string
@@ -28,10 +31,13 @@ export type Database = {
         }
         Insert: {
           board_type?: string | null
+          budget_range?: string | null
           created_at?: string
           email: string
           event_date?: string | null
+          event_type?: string | null
           guest_count?: number | null
+          guest_count_range?: string | null
           id?: string
           message: string
           name: string
@@ -39,10 +45,13 @@ export type Database = {
         }
         Update: {
           board_type?: string | null
+          budget_range?: string | null
           created_at?: string
           email?: string
           event_date?: string | null
+          event_type?: string | null
           guest_count?: number | null
+          guest_count_range?: string | null
           id?: string
           message?: string
           name?: string
