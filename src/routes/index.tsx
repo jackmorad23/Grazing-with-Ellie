@@ -921,7 +921,7 @@ function Contact() {
         <form onSubmit={onSubmit} noValidate className="rounded-2xl bg-card p-8 shadow-sm ring-1 ring-border sm:p-10">
           {submitted && (
             <div className="mb-6 rounded-md border border-olive/40 bg-olive/10 px-4 py-3 text-sm text-charcoal">
-              Thank you — your inquiry is in. Ellie will be in touch within 48 hours.
+              Your email draft is open — press Send in your email app to deliver the inquiry to Ellie.
             </div>
           )}
           {submitError && (
