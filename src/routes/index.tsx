@@ -335,7 +335,7 @@ function Reveal({
   delay?: number;
   variant?: "up" | "zoom";
   className?: string;
-  as?: "div" | "section" | "li" | "figure";
+  as?: "div" | "section" | "li" | "figure" | "article";
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
