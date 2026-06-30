@@ -479,6 +479,12 @@ function Hero() {
 }
 
 function TagLine({
+  // placeholder anchor
+}: {
+  // unused
+}) {
+  return null;
+}
   top,
   bottom,
   position = "bottom-left",
