@@ -27,6 +27,11 @@ import gal6678 from "@/assets/gallery/IMG_6678.jpeg.asset.json";
 import gal0524 from "@/assets/gallery/IMG_0524.jpeg.asset.json";
 import ellieVideoAsset from "@/assets/ellie-grazing.mp4.asset.json";
 import ellieVideo2Asset from "@/assets/ellie-grazing-2.mp4.asset.json";
+import hero9825 from "@/assets/hero/IMG_9825.jpeg.asset.json";
+import hero9831 from "@/assets/hero/IMG_9831.jpeg.asset.json";
+import hero8417 from "@/assets/hero/IMG_8417-2.jpeg.asset.json";
+import hero9858 from "@/assets/hero/IMG_9858.jpeg.asset.json";
+import hero9855 from "@/assets/hero/IMG_9855.jpeg.asset.json";
 
 
 const uploadedBaf = uploadedBafAsset.url;
@@ -42,6 +47,14 @@ const uploaded9911 = uploaded9911Asset.url;
 const largeBoard = largeBoardAsset.url;
 
 const heroBoard = uploaded8410;
+const heroSlides = [
+  { src: uploaded8410, alt: "A beautifully styled charcuterie board with cheeses, meats, figs and grapes" },
+  { src: hero9825.url, alt: "Close-up of a lush charcuterie board with salami roses, cheeses and edible flowers" },
+  { src: hero9831.url, alt: "Artfully arranged meats, cheeses, fruits and pansy blossoms" },
+  { src: hero8417.url, alt: "Grand grazing table with cheeses, meats, fruits and chilled shrimp" },
+  { src: hero9858.url, alt: "Elegant grazing display with pesto tortellini cups, shrimp and croissants" },
+  { src: hero9855.url, alt: "Catering spread with tea sandwiches, pastrami bites and fresh florals" },
+];
 const menuCup = uploaded8214;
 const menuSmall = uploaded8884;
 const menuMedium = uploaded7228;
@@ -455,20 +468,44 @@ function Hero() {
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
           <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-2xl shadow-burgundy/20 ring-2 ring-gold/40 transition-transform duration-700 hover:scale-[1.015]">
             <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
-              <img
-                src={heroBoard}
-                alt="A beautifully styled charcuterie board with cheeses, meats, figs and grapes"
-                width={1600}
-                height={1280}
-                className="h-full w-full object-cover cursor-zoom-in transition-transform duration-[1200ms] hover:scale-[1.04]"
-               data-zoomable
-              />
+              <HeroSlideshow />
             </div>
           </div>
           <TagLine top="est. with love" bottom="handcrafted locally" />
         </Reveal>
       </div>
     </section>
+  );
+}
+
+function HeroSlideshow() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setI((p) => (p + 1) % heroSlides.length), 4500);
+    return () => window.clearInterval(id);
+  }, []);
+  return (
+    <div className="relative aspect-[5/4] w-full overflow-hidden">
+      {heroSlides.map((s, idx) => (
+        <img
+          key={s.src}
+          src={s.src}
+          alt={s.alt}
+          width={1600}
+          height={1280}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-in-out ${idx === i ? "opacity-100" : "opacity-0"}`}
+          loading={idx === 0 ? "eager" : "lazy"}
+        />
+      ))}
+      <div className="pointer-events-none absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+        {heroSlides.map((_, idx) => (
+          <span
+            key={idx}
+            className={`h-1.5 rounded-full transition-all duration-500 ${idx === i ? "w-5 bg-white" : "w-1.5 bg-white/55"}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
