@@ -842,9 +842,10 @@ function Contact() {
 
     const phone = (data.get("phone") as string)?.trim() || null;
     const date = (data.get("date") as string)?.trim() || null;
-    const guestsRaw = (data.get("guests") as string)?.trim() ?? "";
-    const guests = guestsRaw ? Number(guestsRaw) : null;
+    const guestRange = (data.get("guests") as string)?.trim() || null;
     const board = (data.get("board") as string)?.trim() || null;
+    const eventType = (data.get("event_type") as string)?.trim() || null;
+    const budget = (data.get("budget") as string)?.trim() || null;
 
     setSubmitting(true);
     try {
@@ -853,8 +854,10 @@ function Contact() {
         email,
         phone,
         event_date: date,
-        guest_count: Number.isFinite(guests) ? guests : null,
+        guest_count_range: guestRange,
         board_type: board,
+        event_type: eventType,
+        budget_range: budget,
         message,
       });
       if (error) throw error;
@@ -868,7 +871,9 @@ function Contact() {
         `Email: ${email}`,
         phone ? `Phone: ${phone}` : null,
         date ? `Event date: ${date}` : null,
-        guests ? `Guests: ${guests}` : null,
+        eventType ? `Event type: ${eventType}` : null,
+        guestRange ? `Guests: ${guestRange}` : null,
+        budget ? `Budget: ${budget}` : null,
         board ? `Board type: ${board}` : null,
         "",
         "Message:",
@@ -939,7 +944,38 @@ function Contact() {
             <Field label="Email" name="email" type="email" error={errors.email} required maxLength={255} />
             <Field label="Phone" name="phone" type="tel" maxLength={30} />
             <Field label="Event Date" name="date" type="date" />
-            <Field label="Guest Count" name="guests" type="number" />
+            <SelectField
+              label="Event Type"
+              name="event_type"
+              options={[
+                "Wedding",
+                "Corporate / Office",
+                "Birthday",
+                "Baby / Bridal Shower",
+                "Holiday Gathering",
+                "Intimate Dinner",
+                "Gift",
+                "Other",
+              ]}
+            />
+            <SelectField
+              label="Guest Count"
+              name="guests"
+              options={["1–5", "6–10", "11–20", "21–40", "41–75", "75+"]}
+            />
+            <SelectField
+              label="Budget Range"
+              name="budget"
+              options={[
+                "Under $100",
+                "$100 – $250",
+                "$250 – $500",
+                "$500 – $1,000",
+                "$1,000 – $2,500",
+                "$2,500+",
+                "Not sure yet",
+              ]}
+            />
             <div className="flex flex-col gap-2">
               <label className="eyebrow text-charcoal/70" htmlFor="board">
                 Board Type
@@ -1025,6 +1061,39 @@ function Field({
         }`}
       />
       {error && <p className="text-xs text-destructive">{error}</p>}
+    </div>
+  );
+}
+
+function SelectField({
+  label,
+  name,
+  options,
+}: {
+  label: string;
+  name: string;
+  options: string[];
+}) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label className="eyebrow text-charcoal/70" htmlFor={name}>
+        {label}
+      </label>
+      <select
+        id={name}
+        name={name}
+        defaultValue=""
+        className="rounded-md border border-input bg-background px-4 py-3 text-sm text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+      >
+        <option value="" disabled>
+          Select an option
+        </option>
+        {options.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }
