@@ -368,7 +368,8 @@ function Hero() {
                 alt="A beautifully styled charcuterie board with cheeses, meats, figs and grapes"
                 width={1600}
                 height={1280}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover cursor-zoom-in"
+               data-zoomable
               />
             </div>
           </div>
@@ -507,7 +508,8 @@ function About() {
                 width={1100}
                 height={1300}
                 loading="lazy"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover cursor-zoom-in"
+               data-zoomable
               />
             </div>
           </div>
@@ -570,7 +572,8 @@ function Menu() {
                   height={1100}
                   loading="lazy"
                   className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105`}
-                />
+                 data-zoomable
+              />
                 {idx === 4 && (
                   <TagLine
                     position="bottom-right"
@@ -698,8 +701,9 @@ function HowItWorks() {
                     src={imgs[i]}
                     alt={s.title}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 cursor-zoom-in"
+                   data-zoomable
+              />
                   <div className="absolute left-4 top-4 grid h-14 w-14 place-items-center rounded-full bg-background/95 font-script text-3xl text-primary shadow-md ring-1 ring-gold/40">
                     {s.n}
                   </div>
@@ -1000,8 +1004,9 @@ function Testimonials() {
                   width={1200}
                   height={1600}
                   loading="lazy"
-                  className="h-full w-full object-cover"
-                />
+                  className="h-full w-full object-cover cursor-zoom-in"
+                 data-zoomable
+              />
               </div>
             </div>
             <TagLine position="bottom-left" top="on-site styling" bottom="every detail considered" />
