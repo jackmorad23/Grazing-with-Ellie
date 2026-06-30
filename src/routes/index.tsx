@@ -709,9 +709,12 @@ function Gallery() {
         />
         <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
           {GALLERY.map((img, i) => (
-            <div
+            <Reveal
               key={i}
-              className={`group relative cursor-zoom-in overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:shadow-lg hover:ring-gold/60 ${
+              as="div"
+              delay={(i % 6) * 80}
+              variant={i % 5 === 0 ? "zoom" : "up"}
+              className={`group relative cursor-zoom-in overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-lg hover:ring-gold/60 ${
                 i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-square"
               }`}
             >
@@ -722,7 +725,7 @@ function Gallery() {
                 data-zoomable
                 className="h-full w-full rounded-md object-cover transition-transform duration-700 group-hover:scale-105"
               />
-            </div>
+            </Reveal>
           ))}
         </div>
         <div className="mt-14 flex flex-col items-center gap-3 text-center">
