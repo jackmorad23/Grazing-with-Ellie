@@ -1065,6 +1065,39 @@ function Field({
   );
 }
 
+function SelectField({
+  label,
+  name,
+  options,
+}: {
+  label: string;
+  name: string;
+  options: string[];
+}) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label className="eyebrow text-charcoal/70" htmlFor={name}>
+        {label}
+      </label>
+      <select
+        id={name}
+        name={name}
+        defaultValue=""
+        className="rounded-md border border-input bg-background px-4 py-3 text-sm text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
+      >
+        <option value="" disabled>
+          Select an option
+        </option>
+        {options.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
 function Footer() {
   return (
     <footer className="border-t border-border bg-cream-dark/30 py-14">
