@@ -944,7 +944,38 @@ function Contact() {
             <Field label="Email" name="email" type="email" error={errors.email} required maxLength={255} />
             <Field label="Phone" name="phone" type="tel" maxLength={30} />
             <Field label="Event Date" name="date" type="date" />
-            <Field label="Guest Count" name="guests" type="number" />
+            <SelectField
+              label="Event Type"
+              name="event_type"
+              options={[
+                "Wedding",
+                "Corporate / Office",
+                "Birthday",
+                "Baby / Bridal Shower",
+                "Holiday Gathering",
+                "Intimate Dinner",
+                "Gift",
+                "Other",
+              ]}
+            />
+            <SelectField
+              label="Guest Count"
+              name="guests"
+              options={["1–5", "6–10", "11–20", "21–40", "41–75", "75+"]}
+            />
+            <SelectField
+              label="Budget Range"
+              name="budget"
+              options={[
+                "Under $100",
+                "$100 – $250",
+                "$250 – $500",
+                "$500 – $1,000",
+                "$1,000 – $2,500",
+                "$2,500+",
+                "Not sure yet",
+              ]}
+            />
             <div className="flex flex-col gap-2">
               <label className="eyebrow text-charcoal/70" htmlFor="board">
                 Board Type
