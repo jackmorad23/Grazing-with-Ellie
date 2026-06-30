@@ -275,7 +275,8 @@ function Nav() {
           <img
             src={logoAsset.url}
             alt="Grazing with Ellie logo"
-            className="h-12 w-12 rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
+            data-zoomable
+            className="h-12 w-12 cursor-zoom-in rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
           />
           <span className="font-script text-2xl leading-none text-primary sm:text-3xl">Grazing with Ellie</span>
         </a>
