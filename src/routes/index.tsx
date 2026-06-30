@@ -450,22 +450,22 @@ function Hero() {
             <InstagramButton variant="outline" />
           </div>
         </div>
-        <div className="relative">
+        <Reveal variant="zoom" delay={150} className="relative">
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
-          <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-2xl shadow-burgundy/20 ring-2 ring-gold/40">
+          <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-2xl shadow-burgundy/20 ring-2 ring-gold/40 transition-transform duration-700 hover:scale-[1.015]">
             <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
               <img
                 src={heroBoard}
                 alt="A beautifully styled charcuterie board with cheeses, meats, figs and grapes"
                 width={1600}
                 height={1280}
-                className="h-full w-full object-cover cursor-zoom-in"
+                className="h-full w-full object-cover cursor-zoom-in transition-transform duration-[1200ms] hover:scale-[1.04]"
                data-zoomable
               />
             </div>
           </div>
           <TagLine top="est. with love" bottom="handcrafted locally" />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
