@@ -215,6 +215,7 @@ function Home() {
     <div className="min-h-screen bg-background text-foreground" onClick={onContainerClick}>
       <Nav />
       <Hero />
+      <TrustBadges />
       <About />
       <Menu />
       <Gallery />
