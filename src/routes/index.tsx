@@ -187,8 +187,32 @@ const FAQS = [
 ];
 
 function Home() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+    };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [lightbox]);
+
+  const onContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    const img = target.closest("img[data-zoomable]") as HTMLImageElement | null;
+    if (!img) return;
+    e.preventDefault();
+    setLightbox({ src: img.currentSrc || img.src, alt: img.alt });
+  };
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground" onClick={onContainerClick}>
       <Nav />
       <Hero />
       <About />
@@ -201,6 +225,29 @@ function Home() {
       <InstagramBanner />
       <Contact />
       <Footer />
+      {lightbox && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setLightbox(null)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal/85 p-4 backdrop-blur-sm animate-in fade-in"
+        >
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => setLightbox(null)}
+            className="absolute right-5 top-5 rounded-full bg-cream/90 px-4 py-2 text-sm font-medium text-charcoal shadow-lg hover:bg-cream"
+          >
+            Close ✕
+          </button>
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[90vh] max-w-[95vw] rounded-2xl object-contain shadow-2xl ring-2 ring-gold/40"
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -321,7 +368,8 @@ function Hero() {
                 alt="A beautifully styled charcuterie board with cheeses, meats, figs and grapes"
                 width={1600}
                 height={1280}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover cursor-zoom-in"
+               data-zoomable
               />
             </div>
           </div>
@@ -460,7 +508,8 @@ function About() {
                 width={1100}
                 height={1300}
                 loading="lazy"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover cursor-zoom-in"
+               data-zoomable
               />
             </div>
           </div>
@@ -523,7 +572,8 @@ function Menu() {
                   height={1100}
                   loading="lazy"
                   className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105`}
-                />
+                 data-zoomable
+              />
                 {idx === 4 && (
                   <TagLine
                     position="bottom-right"
@@ -555,7 +605,6 @@ function Menu() {
 }
 
 function Gallery() {
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   return (
     <section id="gallery" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
@@ -567,11 +616,9 @@ function Gallery() {
         />
         <div className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
           {GALLERY.map((img, i) => (
-            <button
-              type="button"
+            <div
               key={i}
-              onClick={() => setLightbox({ src: img.src, alt: img.alt })}
-              className={`group relative overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:shadow-lg hover:ring-gold/60 focus:outline-none focus-visible:ring-4 focus-visible:ring-gold ${
+              className={`group relative cursor-zoom-in overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:shadow-lg hover:ring-gold/60 ${
                 i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-square"
               }`}
             >
@@ -579,9 +626,10 @@ function Gallery() {
                 src={img.src}
                 alt={img.alt}
                 loading="lazy"
+                data-zoomable
                 className="h-full w-full rounded-md object-cover transition-transform duration-700 group-hover:scale-105"
               />
-            </button>
+            </div>
           ))}
         </div>
         <div className="mt-14 flex flex-col items-center gap-3 text-center">
@@ -589,29 +637,6 @@ function Gallery() {
           <InstagramButton label="See more on Instagram" />
         </div>
       </div>
-      {lightbox && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setLightbox(null)}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-charcoal/85 p-4 backdrop-blur-sm animate-in fade-in"
-        >
-          <button
-            type="button"
-            aria-label="Close"
-            onClick={() => setLightbox(null)}
-            className="absolute right-5 top-5 rounded-full bg-cream/90 px-4 py-2 text-sm font-medium text-charcoal shadow-lg hover:bg-cream"
-          >
-            Close ✕
-          </button>
-          <img
-            src={lightbox.src}
-            alt={lightbox.alt}
-            onClick={(e) => e.stopPropagation()}
-            className="max-h-[90vh] max-w-[95vw] rounded-2xl object-contain shadow-2xl ring-2 ring-gold/40"
-          />
-        </div>
-      )}
     </section>
   );
 }
@@ -676,8 +701,9 @@ function HowItWorks() {
                     src={imgs[i]}
                     alt={s.title}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 cursor-zoom-in"
+                   data-zoomable
+              />
                   <div className="absolute left-4 top-4 grid h-14 w-14 place-items-center rounded-full bg-background/95 font-script text-3xl text-primary shadow-md ring-1 ring-gold/40">
                     {s.n}
                   </div>
@@ -978,8 +1004,9 @@ function Testimonials() {
                   width={1200}
                   height={1600}
                   loading="lazy"
-                  className="h-full w-full object-cover"
-                />
+                  className="h-full w-full object-cover cursor-zoom-in"
+                 data-zoomable
+              />
               </div>
             </div>
             <TagLine position="bottom-left" top="on-site styling" bottom="every detail considered" />
