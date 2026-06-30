@@ -27,6 +27,11 @@ import gal6678 from "@/assets/gallery/IMG_6678.jpeg.asset.json";
 import gal0524 from "@/assets/gallery/IMG_0524.jpeg.asset.json";
 import ellieVideoAsset from "@/assets/ellie-grazing.mp4.asset.json";
 import ellieVideo2Asset from "@/assets/ellie-grazing-2.mp4.asset.json";
+import hero9825 from "@/assets/hero/IMG_9825.jpeg.asset.json";
+import hero9831 from "@/assets/hero/IMG_9831.jpeg.asset.json";
+import hero8417 from "@/assets/hero/IMG_8417-2.jpeg.asset.json";
+import hero9858 from "@/assets/hero/IMG_9858.jpeg.asset.json";
+import hero9855 from "@/assets/hero/IMG_9855.jpeg.asset.json";
 
 
 const uploadedBaf = uploadedBafAsset.url;
@@ -42,6 +47,14 @@ const uploaded9911 = uploaded9911Asset.url;
 const largeBoard = largeBoardAsset.url;
 
 const heroBoard = uploaded8410;
+const heroSlides = [
+  { src: uploaded8410, alt: "A beautifully styled charcuterie board with cheeses, meats, figs and grapes" },
+  { src: hero9825.url, alt: "Close-up of a lush charcuterie board with salami roses, cheeses and edible flowers" },
+  { src: hero9831.url, alt: "Artfully arranged meats, cheeses, fruits and pansy blossoms" },
+  { src: hero8417.url, alt: "Grand grazing table with cheeses, meats, fruits and chilled shrimp" },
+  { src: hero9858.url, alt: "Elegant grazing display with pesto tortellini cups, shrimp and croissants" },
+  { src: hero9855.url, alt: "Catering spread with tea sandwiches, pastrami bites and fresh florals" },
+];
 const menuCup = uploaded8214;
 const menuSmall = uploaded8884;
 const menuMedium = uploaded7228;
