@@ -179,11 +179,6 @@ const TESTIMONIALS = [
     name: "Caitlin Rector, loyal client",
     event: "Repeat Events",
   },
-  {
-    quote: "Beautiful, generous, and so thoughtfully composed. The individual cups were a hit at our birthday brunch.",
-    name: "Priya K.",
-    event: "Birthday Brunch",
-  },
 ];
 
 const FAQS = [
