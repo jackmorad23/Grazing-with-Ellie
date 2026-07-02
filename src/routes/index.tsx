@@ -824,7 +824,7 @@ function VideoShowcase() {
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-lg ring-1 ring-gold/40">
             <video
-              src={"/assets/ellie-grazing.mp4"}
+              src={"/__l5e/assets-v1/016e572c-6ab1-4d85-8723-81db9bad1761/ellie-grazing.mp4"}
               className="h-full w-full rounded-2xl object-cover"
               muted
               loop
@@ -835,7 +835,7 @@ function VideoShowcase() {
           </div>
           <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-lg ring-1 ring-gold/40">
             <video
-              src={"/assets/ellie-grazing-2.mp4"}
+              src={"/__l5e/assets-v1/b2d8950b-5fa1-4557-97cb-fec4be6734ef/ellie-grazing-2.mp4"}
               className="h-full w-full rounded-2xl object-cover"
               muted
               loop
