@@ -314,60 +314,52 @@ function Home() {
 }
 
 function Nav() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/90 backdrop-blur-md border-b border-border/60 py-3" : "bg-transparent py-5"
-      }`}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-        <a href="#top" className="flex items-center gap-3">
-          <img
-            src={"/assets/uploads__ellie-logo.png"}
-            alt="Grazing with Ellie logo"
-            data-zoomable
-            className="h-12 w-12 cursor-zoom-in rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
-          />
-          <span className="font-script text-2xl leading-none text-primary sm:text-3xl">Grazing with Ellie</span>
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+      <div className="mx-auto flex max-w-7xl items-center justify-between rounded-3xl border border-border/60 bg-background/95 px-5 py-3.5 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] backdrop-blur-md sm:px-6 sm:py-4">
+        <a href="#top" className="flex min-w-0 items-center gap-3 sm:gap-4">
+          <div className="relative group shrink-0">
+            <div className="absolute -inset-1 rounded-full bg-gold/20 blur-sm opacity-0 transition duration-500 group-hover:opacity-100" />
+            <img
+              src={"/assets/uploads__ellie-logo.png"}
+              alt="Grazing with Ellie logo"
+              data-zoomable
+              className="relative h-11 w-11 cursor-zoom-in rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
+            />
+          </div>
+          <span className="font-script truncate text-2xl leading-none text-primary sm:text-3xl">Grazing with Ellie</span>
         </a>
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 xl:gap-8 lg:flex">
           {NAV.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="eyebrow text-charcoal/80 transition-colors hover:text-primary"
+              className="group relative font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-primary"
             >
               {item.label}
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary/40 transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </nav>
         <a
           href="#contact"
-          className="hidden rounded-full bg-primary px-5 py-2.5 text-[0.7rem] font-medium uppercase tracking-[0.25em] text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex"
+          className="hidden rounded-full bg-primary px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-primary-foreground transition-all hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:scale-95 lg:inline-flex"
         >
           Get a Quote
         </a>
         <button
           aria-label="Toggle menu"
           onClick={() => setOpen((o) => !o)}
-          className="grid h-10 w-10 place-items-center rounded-full border border-border text-foreground md:hidden"
+          className="grid h-10 w-10 place-items-center rounded-full border border-border text-foreground lg:hidden"
         >
           <span className="block h-px w-5 bg-current relative before:absolute before:-top-1.5 before:left-0 before:h-px before:w-5 before:bg-current after:absolute after:top-1.5 after:left-0 after:h-px after:w-5 after:bg-current" />
         </button>
       </div>
       {open && (
-        <div className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
+        <div className="mt-2 rounded-2xl border border-border/60 bg-background/95 p-2 shadow-lg backdrop-blur lg:hidden">
+          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
             {NAV.map((item) => (
               <a
                 key={item.href}
@@ -378,6 +370,13 @@ function Nav() {
                 {item.label}
               </a>
             ))}
+            <a
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="mt-2 block rounded-full bg-primary px-6 py-3 text-center font-sans text-[0.7rem] font-bold uppercase tracking-[0.2em] text-primary-foreground"
+            >
+              Get a Quote
+            </a>
           </nav>
         </div>
       )}
