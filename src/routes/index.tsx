@@ -1,51 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Grape, Leaf, Sun, Truck } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
-import ellieAsset from "@/assets/uploads/ellie.jpeg.asset.json";
-import ellieDeliveryAsset from "@/assets/uploads/ellie-delivery.jpeg.asset.json";
-import ellieEventAsset from "@/assets/uploads/ellie-event.jpeg.asset.json";
-import logoAsset from "@/assets/uploads/ellie-logo.png.asset.json";
-import uploadedBafAsset from "@/assets/uploads/BAF6B960-EDAB-48AD-BE5D-5C9C1BBC8C71.jpeg.asset.json";
-import uploaded0601Asset from "@/assets/uploads/IMG_0601.jpeg.asset.json";
-import uploaded0603Asset from "@/assets/uploads/IMG_0603.jpeg.asset.json";
-import uploaded7228Asset from "@/assets/uploads/IMG_7228.jpeg.asset.json";
-import uploaded8214Asset from "@/assets/uploads/IMG_8214.jpeg.asset.json";
-import uploaded8410Asset from "@/assets/uploads/IMG_8410.jpeg.asset.json";
-import uploaded8884Asset from "@/assets/uploads/IMG_8884.jpeg.asset.json";
-import uploaded9867Asset from "@/assets/uploads/IMG_9867.jpeg.asset.json";
-import uploaded9869Asset from "@/assets/uploads/IMG_9869.jpeg.asset.json";
-import uploaded9911Asset from "@/assets/uploads/IMG_9911.jpeg.asset.json";
-import largeBoardAsset from "@/assets/uploads/large-board.jpeg.asset.json";
-import gal9847 from "@/assets/gallery/IMG_9847.jpeg.asset.json";
-import gal9839 from "@/assets/gallery/IMG_9839.jpeg.asset.json";
-import gal9899 from "@/assets/gallery/IMG_9899.jpeg.asset.json";
-import gal9869b from "@/assets/gallery/IMG_9869-2.jpeg.asset.json";
-import gal9865 from "@/assets/gallery/IMG_9865.jpeg.asset.json";
-import gal8433 from "@/assets/gallery/IMG_8433.jpeg.asset.json";
-import gal8379 from "@/assets/gallery/IMG_8379.jpeg.asset.json";
-import gal8388 from "@/assets/gallery/IMG_8388.jpeg.asset.json";
-import gal6678 from "@/assets/gallery/IMG_6678.jpeg.asset.json";
-import gal0524 from "@/assets/gallery/IMG_0524.jpeg.asset.json";
-import ellieVideoAsset from "@/assets/ellie-grazing.mp4.asset.json";
-import ellieVideo2Asset from "@/assets/ellie-grazing-2.mp4.asset.json";
-import hero9825 from "@/assets/hero/IMG_9825.jpeg.asset.json";
-import hero9831 from "@/assets/hero/IMG_9831.jpeg.asset.json";
-import hero8417 from "@/assets/hero/IMG_8417-2.jpeg.asset.json";
-import hero9858 from "@/assets/hero/IMG_9858.jpeg.asset.json";
-import hero9855 from "@/assets/hero/IMG_9855.jpeg.asset.json";
 
 
-const uploadedBaf = uploadedBafAsset.url;
-const uploaded0601 = uploaded0601Asset.url;
-const uploaded0603 = uploaded0603Asset.url;
-const uploaded7228 = uploaded7228Asset.url;
-const uploaded8214 = uploaded8214Asset.url;
-const uploaded8410 = uploaded8410Asset.url;
-const uploaded8884 = uploaded8884Asset.url;
-const uploaded9867 = uploaded9867Asset.url;
-const uploaded9869 = uploaded9869Asset.url;
-const uploaded9911 = uploaded9911Asset.url;
-const largeBoard = largeBoardAsset.url;
+const uploadedBaf = "/assets/uploads__BAF6B960-EDAB-48AD-BE5D-5C9C1BBC8C71.jpeg";
+const uploaded0601 = "/assets/uploads__IMG_0601.jpeg";
+const uploaded0603 = "/assets/uploads__IMG_0603.jpeg";
+const uploaded7228 = "/assets/uploads__IMG_7228.jpeg";
+const uploaded8214 = "/assets/uploads__IMG_8214.jpeg";
+const uploaded8410 = "/assets/uploads__IMG_8410.jpeg";
+const uploaded8884 = "/assets/uploads__IMG_8884.jpeg";
+const uploaded9867 = "/assets/uploads__IMG_9867.jpeg";
+const uploaded9869 = "/assets/uploads__IMG_9869.jpeg";
+const uploaded9911 = "/assets/uploads__IMG_9911.jpeg";
+const largeBoard = "/assets/uploads__large-board.jpeg";
 
 const heroBoard = uploaded8410;
 const heroSlides = [
@@ -54,11 +22,11 @@ const heroSlides = [
     alt: "Round charcuterie board with cheeses, salami, prosciutto, berries, dried apricots and purple pansy blossoms",
   },
   { src: uploaded8410, alt: "A beautifully styled charcuterie board with cheeses, meats, figs and grapes" },
-  { src: hero9825.url, alt: "Close-up of a lush charcuterie board with salami roses, cheeses and edible flowers" },
-  { src: hero9831.url, alt: "Artfully arranged meats, cheeses, fruits and pansy blossoms" },
-  { src: hero8417.url, alt: "Grand grazing table with cheeses, meats, fruits and chilled shrimp" },
-  { src: hero9858.url, alt: "Elegant grazing display with pesto tortellini cups, shrimp and croissants" },
-  { src: hero9855.url, alt: "Catering spread with tea sandwiches, pastrami bites and fresh florals" },
+  { src: "/assets/hero__IMG_9825.jpeg", alt: "Close-up of a lush charcuterie board with salami roses, cheeses and edible flowers" },
+  { src: "/assets/hero__IMG_9831.jpeg", alt: "Artfully arranged meats, cheeses, fruits and pansy blossoms" },
+  { src: "/assets/hero__IMG_8417-2.jpeg", alt: "Grand grazing table with cheeses, meats, fruits and chilled shrimp" },
+  { src: "/assets/hero__IMG_9858.jpeg", alt: "Elegant grazing display with pesto tortellini cups, shrimp and croissants" },
+  { src: "/assets/hero__IMG_9855.jpeg", alt: "Catering spread with tea sandwiches, pastrami bites and fresh florals" },
 ];
 const menuCup = uploaded8214;
 const menuSmall = uploaded8884;
@@ -136,16 +104,16 @@ const MENU = [
 ];
 
 const GALLERY = [
-  { src: gal9847.url, alt: "Gold-framed fruit platter with macarons and florals" },
-  { src: gal9839.url, alt: "Crudité board with cabbage hummus bowl" },
-  { src: gal9899.url, alt: "Rainbow carrot crudité board with herb dip" },
-  { src: gal9869b.url, alt: "Full grazing table with tortellini skewers and charcuterie" },
-  { src: gal9865.url, alt: "Dessert spread with chocolate-dipped strawberries and macarons" },
-  { src: gal8433.url, alt: "Smoked salmon crostini with capers and microgreens" },
-  { src: gal8379.url, alt: "Mini croissant chicken-salad sliders with edible florals" },
-  { src: gal8388.url, alt: "Cucumber and dill cream cheese tea sandwiches" },
-  { src: gal6678.url, alt: "Abundant cheese and charcuterie spread with fruit and olives" },
-  { src: gal0524.url, alt: "Whimsical veggie crudité box with bell pepper character" },
+  { src: "/assets/gallery__IMG_9847.jpeg", alt: "Gold-framed fruit platter with macarons and florals" },
+  { src: "/assets/gallery__IMG_9839.jpeg", alt: "Crudité board with cabbage hummus bowl" },
+  { src: "/assets/gallery__IMG_9899.jpeg", alt: "Rainbow carrot crudité board with herb dip" },
+  { src: "/assets/gallery__IMG_9869-2.jpeg", alt: "Full grazing table with tortellini skewers and charcuterie" },
+  { src: "/assets/gallery__IMG_9865.jpeg", alt: "Dessert spread with chocolate-dipped strawberries and macarons" },
+  { src: "/assets/gallery__IMG_8433.jpeg", alt: "Smoked salmon crostini with capers and microgreens" },
+  { src: "/assets/gallery__IMG_8379.jpeg", alt: "Mini croissant chicken-salad sliders with edible florals" },
+  { src: "/assets/gallery__IMG_8388.jpeg", alt: "Cucumber and dill cream cheese tea sandwiches" },
+  { src: "/assets/gallery__IMG_6678.jpeg", alt: "Abundant cheese and charcuterie spread with fruit and olives" },
+  { src: "/assets/gallery__IMG_0524.jpeg", alt: "Whimsical veggie crudité box with bell pepper character" },
 ];
 
 const STEPS = [
@@ -206,6 +174,77 @@ const FAQS = [
   },
 ];
 
+function StructuredData() {
+  const business = {
+    "@context": "https://schema.org",
+    "@type": "FoodEstablishment",
+    name: "Grazing with Ellie",
+    description:
+      "Handcrafted charcuterie boards, grazing tables and catering for events in Northern Virginia, DC and Maryland.",
+    servesCuisine: "Charcuterie",
+    email: "grazingwithellie@gmail.com",
+    areaServed: ["Northern Virginia", "Washington DC", "Maryland"],
+    sameAs: [INSTAGRAM_URL],
+    priceRange: "$$",
+  };
+  const faq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(business) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
+    </>
+  );
+}
+
+function StickyQuoteBar() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const contact = document.getElementById("contact");
+    let pastHero = false;
+    let contactInView = false;
+    const update = () => setVisible(pastHero && !contactInView);
+    const onScroll = () => {
+      pastHero = window.scrollY > 550;
+      update();
+    };
+    const io = contact
+      ? new IntersectionObserver((entries) => {
+          contactInView = entries[0]?.isIntersecting ?? false;
+          update();
+        })
+      : null;
+    if (contact && io) io.observe(contact);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      io?.disconnect();
+    };
+  }, []);
+  return (
+    <div
+      className={`fixed inset-x-0 bottom-0 z-40 border-t border-gold/30 bg-cream/95 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur transition-transform duration-300 md:hidden ${
+        visible ? "translate-y-0" : "translate-y-full"
+      }`}
+    >
+      <a
+        href="#contact"
+        className="block w-full rounded-full bg-primary px-6 py-3 text-center font-medium text-primary-foreground shadow-md"
+      >
+        Get a Quote
+      </a>
+    </div>
+  );
+}
+
 function Home() {
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
@@ -246,6 +285,8 @@ function Home() {
       <InstagramBanner />
       <Contact />
       <Footer />
+      <StickyQuoteBar />
+      <StructuredData />
       {lightbox && (
         <div
           role="dialog"
@@ -293,7 +334,7 @@ function Nav() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
         <a href="#top" className="flex items-center gap-3">
           <img
-            src={logoAsset.url}
+            src={"/assets/uploads__ellie-logo.png"}
             alt="Grazing with Ellie logo"
             data-zoomable
             className="h-12 w-12 cursor-zoom-in rounded-full bg-white object-contain ring-1 ring-gold/40 shadow-sm sm:h-14 sm:w-14"
@@ -636,7 +677,7 @@ function About() {
           <div className="overflow-hidden rounded-[1.5rem] bg-card p-2 shadow-lg ring-1 ring-gold/40">
             <div className="overflow-hidden rounded-[1.15rem] ring-1 ring-border">
               <img
-                src={ellieAsset.url}
+                src={"/assets/uploads__ellie.jpeg"}
                 alt="Ellie, founder of Grazing with Ellie, behind a grand grazing table"
                 width={1100}
                 height={1300}
@@ -783,7 +824,7 @@ function VideoShowcase() {
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-lg ring-1 ring-gold/40">
             <video
-              src={ellieVideoAsset.url}
+              src={"/__l5e/assets-v1/016e572c-6ab1-4d85-8723-81db9bad1761/ellie-grazing.mp4"}
               className="h-full w-full rounded-2xl object-cover"
               muted
               loop
@@ -794,7 +835,7 @@ function VideoShowcase() {
           </div>
           <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-lg ring-1 ring-gold/40">
             <video
-              src={ellieVideo2Asset.url}
+              src={"/__l5e/assets-v1/b2d8950b-5fa1-4557-97cb-fec4be6734ef/ellie-grazing-2.mp4"}
               className="h-full w-full rounded-2xl object-cover"
               muted
               loop
@@ -819,7 +860,7 @@ function HowItWorks() {
         <SectionHeader eyebrow="How it works" title="Three simple steps to your" accent="board" />
         <div className="mt-16 grid gap-8 md:grid-cols-3">
           {STEPS.map((s, i) => {
-            const imgs = [uploaded8884, uploaded0601, ellieDeliveryAsset.url];
+            const imgs = [uploaded8884, uploaded0601, "/assets/uploads__ellie-delivery.jpeg"];
             return (
               <div
                 key={s.n}
@@ -1146,7 +1187,7 @@ function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <img
-              src={logoAsset.url}
+              src={"/assets/uploads__ellie-logo.png"}
               alt="Grazing with Ellie logo"
               className="h-14 w-14 rounded-full bg-white object-contain ring-1 ring-gold/40"
             />
@@ -1206,7 +1247,7 @@ function Testimonials() {
             <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-lg ring-1 ring-gold/40">
               <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
                 <img
-                  src={ellieEventAsset.url}
+                  src={"/assets/uploads__ellie-event.jpeg"}
                   alt="Ellie styling a grazing table at a Vierra Communities event"
                   width={1200}
                   height={1600}
