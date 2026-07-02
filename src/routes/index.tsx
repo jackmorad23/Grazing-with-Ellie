@@ -49,6 +49,10 @@ const largeBoard = largeBoardAsset.url;
 
 const heroBoard = uploaded8410;
 const heroSlides = [
+  {
+    src: "/hero-board.jpg",
+    alt: "Round charcuterie board with cheeses, salami, prosciutto, berries, dried apricots and purple pansy blossoms",
+  },
   { src: uploaded8410, alt: "A beautifully styled charcuterie board with cheeses, meats, figs and grapes" },
   { src: hero9825.url, alt: "Close-up of a lush charcuterie board with salami roses, cheeses and edible flowers" },
   { src: hero9831.url, alt: "Artfully arranged meats, cheeses, fruits and pansy blossoms" },
@@ -89,6 +93,7 @@ const NAV = [
   { label: "Offerings", href: "#menu" },
   { label: "Gallery", href: "#gallery" },
   { label: "How It Works", href: "#how" },
+  { label: "Get a Quote", href: "#contact" },
 ];
 
 const MENU = [
@@ -308,7 +313,7 @@ function Nav() {
         </nav>
         <a
           href="#contact"
-          className="hidden rounded-full bg-primary px-7 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-primary-foreground shadow-md transition-colors hover:bg-primary/90 md:inline-flex"
+          className="hidden rounded-full bg-primary px-5 py-2.5 text-[0.7rem] font-medium uppercase tracking-[0.25em] text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex"
         >
           Get a Quote
         </a>
@@ -333,13 +338,6 @@ function Nav() {
                 {item.label}
               </a>
             ))}
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="mt-3 rounded-full bg-primary px-5 py-3 text-center text-xs font-medium uppercase tracking-[0.2em] text-primary-foreground"
-            >
-              Get a Quote
-            </a>
           </nav>
         </div>
       )}
@@ -787,22 +785,22 @@ function VideoShowcase() {
             <video
               src={ellieVideoAsset.url}
               className="h-full w-full rounded-2xl object-cover"
-              autoPlay
               muted
               loop
               playsInline
               controls
+              preload="metadata"
             />
           </div>
           <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-lg ring-1 ring-gold/40">
             <video
               src={ellieVideo2Asset.url}
               className="h-full w-full rounded-2xl object-cover"
-              autoPlay
               muted
               loop
               playsInline
               controls
+              preload="metadata"
             />
           </div>
         </div>
