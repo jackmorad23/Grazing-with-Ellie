@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { Grape, Leaf, Sun, Truck } from "lucide-react";
 import ellieAsset from "@/assets/uploads/ellie.jpeg.asset.json";
 import ellieDeliveryAsset from "@/assets/uploads/ellie-delivery.jpeg.asset.json";
 import ellieEventAsset from "@/assets/uploads/ellie-event.jpeg.asset.json";
@@ -388,41 +389,30 @@ function Reveal({
 }
 
 const TRUST_BADGES = [
-  { icon: "🌿", title: "Dietary-friendly", sub: "Vegan, GF, nut-free options" },
-  { icon: "🚚", title: "DMV delivery", sub: "Other areas — additional fee" },
-  { icon: "🎨", title: "Hand-styled", sub: "Every board, made to order" },
-  { icon: "✨", title: "Fresh daily", sub: "Prepped the day of your event" },
+  { icon: Leaf, title: "Every diet welcome", sub: "Vegan, gluten-free & nut-free on request" },
+  { icon: Truck, title: "Delivered to the DMV", sub: "DC, Maryland & Virginia, or further for a fee" },
+  { icon: Grape, title: "Styled by hand", sub: "No two boards alike" },
+  { icon: Sun, title: "Made the same day", sub: "Assembled fresh the morning of your event" },
 ];
 
 function TrustBadges() {
   return (
-    <section aria-label="What we offer" className="relative -mt-6 pb-16 sm:pb-20">
-      <div className="mx-auto max-w-6xl px-6">
+    <section aria-label="What we offer" className="relative -mt-2 pb-16 sm:pb-20">
+      <div className="mx-auto max-w-5xl px-6">
         <Reveal>
-          <ul className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
-            {TRUST_BADGES.map((b, i) => (
-              <li
-                key={b.title}
-                className="reveal reveal-in group flex items-center gap-3 rounded-2xl border border-gold/30 bg-card/70 px-4 py-4 shadow-sm backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg sm:px-5"
-                style={{ animationDelay: `${i * 110}ms` }}
-              >
-                <span className="text-2xl sm:text-3xl" aria-hidden>
-                  {b.icon}
-                </span>
-                <div className="min-w-0">
-                  <p className="font-serif-display text-base leading-tight text-charcoal sm:text-lg">
-                    {b.title}
-                  </p>
-                  <p className="mt-0.5 text-[0.72rem] leading-snug text-muted-foreground sm:text-xs">
-                    {b.sub}
-                  </p>
-                </div>
+          <ul className="grid grid-cols-2 gap-y-10 border-y border-gold/25 py-10 md:grid-cols-4 md:gap-y-0 md:divide-x md:divide-gold/25">
+            {TRUST_BADGES.map((b) => (
+              <li key={b.title} className="flex flex-col items-center px-4 text-center sm:px-6">
+                <b.icon className="h-5 w-5 text-gold" strokeWidth={1.5} aria-hidden />
+                <p className="mt-3 font-serif-display text-sm tracking-[0.08em] text-charcoal sm:text-base">
+                  {b.title}
+                </p>
+                <p className="mt-1.5 max-w-[16rem] text-xs leading-relaxed text-muted-foreground">
+                  {b.sub}
+                </p>
               </li>
             ))}
           </ul>
-          <p className="mt-5 text-center text-xs text-muted-foreground">
-            Serving the DMV (DC · Maryland · Virginia) — happy to travel further for an additional fee.
-          </p>
         </Reveal>
       </div>
     </section>
