@@ -178,7 +178,13 @@ const TESTIMONIALS = [
     name: "Priya K.",
     event: "Birthday Brunch",
   },
-];
+  {
+    quote:
+      "Grazing with Ellie brings pure elegance to any event I host! Ellie is so thoughtful, creative and brings top notch service to any event- big or small. Not only is her food delicious, but she also makes such a beautiful display! After using Grazing with Ellie several times now, I cannot imagine an event without her!",
+    name: "Caitlin Rector, loyal client",
+    event: "Repeat Events",
+  },
+]
 
 const FAQS = [
   {
