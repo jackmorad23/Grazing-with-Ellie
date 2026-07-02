@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Grape, Leaf, Sun, Truck } from "lucide-react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import ellieAsset from "@/assets/uploads/ellie.jpeg.asset.json";
 import ellieDeliveryAsset from "@/assets/uploads/ellie-delivery.jpeg.asset.json";
 import ellieEventAsset from "@/assets/uploads/ellie-event.jpeg.asset.json";
@@ -82,6 +82,7 @@ export const Route = createFileRoute("/")({
 });
 
 const INSTAGRAM_URL = "https://instagram.com/grazingwithellie";
+const WEB3FORMS_ACCESS_KEY = "0ff5012e-d9c5-410c-b65c-dce898e3cf46";
 
 const NAV = [
   { label: "About", href: "#about" },
@@ -877,35 +878,36 @@ function Contact() {
 
     setSubmitting(true);
     try {
-      // Open the user's email client with a pre-filled draft. They press
-      // Send to deliver the inquiry to Ellie. No backend, no cost.
-      const subject = `New inquiry from ${name}`;
-      const bodyLines = [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        phone ? `Phone: ${phone}` : null,
-        date ? `Event date: ${date}` : null,
-        eventType ? `Event type: ${eventType}` : null,
-        guestRange ? `Guests: ${guestRange}` : null,
-        budget ? `Budget: ${budget}` : null,
-        board ? `Board type: ${board}` : null,
-        "",
-        "Message:",
-        message,
-      ].filter(Boolean) as string[];
-      const mailto = `mailto:grazingwithellie@gmail.com?subject=${encodeURIComponent(
-        subject,
-      )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
-      const opened = window.open(mailto, "_blank");
-      if (!opened) {
-        // Popup blocked — fall back to same-tab navigation.
-        window.location.href = mailto;
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New inquiry from ${name} — Grazing with Ellie`,
+          from_name: "Grazing with Ellie website",
+          botcheck: (data.get("botcheck") as string) || "",
+          name,
+          email,
+          phone: phone ?? "",
+          event_date: date ?? "",
+          event_type: eventType ?? "",
+          guests: guestRange ?? "",
+          budget: budget ?? "",
+          board_type: board ?? "",
+          message,
+        }),
+      });
+      const result = (await res.json()) as { success?: boolean; message?: string };
+      if (!res.ok || !result.success) {
+        throw new Error(result.message || `Request failed (${res.status})`);
       }
       setSubmitted(true);
       form.reset();
     } catch (err) {
-      console.error("Inquiry mailto failed", err);
-      setSubmitError("We couldn't open your email app. Please email grazingwithellie@gmail.com directly.");
+      console.error("Inquiry submission failed", err);
+      setSubmitError(
+        "Something went wrong sending your inquiry. Please email grazingwithellie@gmail.com directly.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -949,7 +951,7 @@ function Contact() {
         <form onSubmit={onSubmit} noValidate className="rounded-2xl bg-card p-8 shadow-sm ring-1 ring-border sm:p-10">
           {submitted && (
             <div className="mb-6 rounded-md border border-olive/40 bg-olive/10 px-4 py-3 text-sm text-charcoal">
-              Your email draft is open — press Send in your email app to deliver the inquiry to Ellie.
+              Thank you! Your inquiry is on its way — I'll be in touch within 48 hours.
             </div>
           )}
           {submitError && (
@@ -957,6 +959,14 @@ function Contact() {
               {submitError}
             </div>
           )}
+          <input
+            type="checkbox"
+            name="botcheck"
+            tabIndex={-1}
+            aria-hidden="true"
+            className="hidden"
+            style={{ display: "none" }}
+          />
           <div className="grid gap-5 sm:grid-cols-2">
             <Field label="Name" name="name" error={errors.name} required maxLength={100} />
             <Field label="Email" name="email" type="email" error={errors.email} required maxLength={255} />
