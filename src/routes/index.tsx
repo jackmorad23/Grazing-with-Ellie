@@ -89,7 +89,7 @@ const NAV = [
   { label: "Offerings", href: "#menu" },
   { label: "Gallery", href: "#gallery" },
   { label: "How It Works", href: "#how" },
-  { label: "Inquire", href: "#contact" },
+  { label: "Get a Quote", href: "#contact" },
 ];
 
 const MENU = [
@@ -232,8 +232,8 @@ function Home() {
       <Nav />
       <Hero />
       <TrustBadges />
-      <About />
       <Menu />
+      <About />
       <Gallery />
       <VideoShowcase />
       <Testimonials />
@@ -311,7 +311,7 @@ function Nav() {
           href="#contact"
           className="hidden rounded-full bg-primary px-5 py-2.5 text-[0.7rem] font-medium uppercase tracking-[0.25em] text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex"
         >
-          Inquire
+          Get a Quote
         </a>
         <button
           aria-label="Toggle menu"
@@ -445,7 +445,7 @@ function Hero() {
               href="#contact"
               className="rounded-full bg-primary px-7 py-3.5 text-[0.72rem] font-medium uppercase tracking-[0.28em] text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md"
             >
-              Order Now
+              Get a Quote
             </a>
             <a
               href="#menu"
@@ -453,17 +453,14 @@ function Hero() {
             >
               View Offerings
             </a>
-            <InstagramButton variant="outline" />
           </div>
         </div>
         <Reveal variant="zoom" delay={150} className="relative">
-          <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
-          <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-2xl shadow-burgundy/20 ring-2 ring-gold/40 transition-transform duration-700 hover:scale-[1.015]">
+          <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-xl shadow-burgundy/10 ring-1 ring-gold/40 transition-transform duration-700 hover:scale-[1.015]">
             <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
               <HeroSlideshow />
             </div>
           </div>
-          <TagLine top="est. with love" bottom="handcrafted locally" />
         </Reveal>
       </div>
     </section>
@@ -472,12 +469,20 @@ function Hero() {
 
 function HeroSlideshow() {
   const [i, setI] = useState(0);
+  const [paused, setPaused] = useState(false);
   useEffect(() => {
+    if (paused) return;
     const id = window.setInterval(() => setI((p) => (p + 1) % heroSlides.length), 4500);
     return () => window.clearInterval(id);
-  }, []);
+  }, [paused]);
   return (
-    <div className="relative aspect-[5/4] w-full overflow-hidden">
+    <div
+      className="relative aspect-[5/4] w-full overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onTouchStart={() => setPaused(true)}
+      onTouchEnd={() => setPaused(false)}
+    >
       {heroSlides.map((s, idx) => (
         <img
           key={s.src}
@@ -489,11 +494,14 @@ function HeroSlideshow() {
           loading={idx === 0 ? "eager" : "lazy"}
         />
       ))}
-      <div className="pointer-events-none absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
-        {heroSlides.map((_, idx) => (
-          <span
+      <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+        {heroSlides.map((s, idx) => (
+          <button
             key={idx}
-            className={`h-1.5 rounded-full transition-all duration-500 ${idx === i ? "w-5 bg-white" : "w-1.5 bg-white/55"}`}
+            type="button"
+            aria-label={`Show slide ${idx + 1}`}
+            onClick={() => setI(idx)}
+            className={`h-1.5 rounded-full transition-all duration-500 ${idx === i ? "w-5 bg-white" : "w-1.5 bg-white/55 hover:bg-white/80"}`}
           />
         ))}
       </div>
@@ -575,7 +583,7 @@ function InstagramBanner() {
   return (
     <section className="py-16 sm:py-20">
       <div className="mx-auto max-w-5xl px-6">
-        <div className="flex flex-col items-center gap-6 rounded-3xl bg-gradient-to-br from-cream-dark/60 via-background to-gold/20 px-8 py-12 text-center shadow-sm ring-2 ring-gold/30 sm:py-14">
+        <div className="flex flex-col items-center gap-6 rounded-3xl bg-gradient-to-br from-cream-dark/60 via-background to-gold/20 px-8 py-12 text-center shadow-sm ring-1 ring-gold/30 sm:py-14">
           <InstagramIcon className="h-10 w-10 text-primary" />
           <p className="eyebrow text-primary/80">@grazingwithellie</p>
           <h2 className="font-serif-display text-3xl text-charcoal sm:text-4xl">
@@ -621,11 +629,11 @@ function About() {
     <section id="about" className="relative py-24 sm:py-32">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2">
         <div className="relative">
-          <div className="overflow-hidden rounded-[1.5rem] bg-card p-2 shadow-xl ring-2 ring-gold/40">
+          <div className="overflow-hidden rounded-[1.5rem] bg-card p-2 shadow-lg ring-1 ring-gold/40">
             <div className="overflow-hidden rounded-[1.15rem] ring-1 ring-border">
               <img
                 src={ellieAsset.url}
-                alt="Ellie, founder of Ellie's Eats, behind a grand grazing table"
+                alt="Ellie, founder of Grazing with Ellie, behind a grand grazing table"
                 width={1100}
                 height={1300}
                 loading="lazy"
@@ -635,7 +643,6 @@ function About() {
             </div>
           </div>
           <TagLine position="bottom-right" top="teacher by day" bottom="grazer by heart" />
-          <div className="absolute -right-4 -top-4 hidden h-24 w-24 rounded-full bg-gold/40 blur-2xl md:block" />
         </div>
         <div>
           <SectionHeader align="left" eyebrow="Meet Ellie" title="A little story" accent="behind the boards" />
@@ -679,7 +686,7 @@ function Menu() {
               key={item.name}
               as="article"
               delay={idx * 90}
-              className={`group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/15 hover:ring-gold/60 ${
+              className={`group flex flex-col overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-lg hover:ring-gold/60 ${
                 idx < 3 ? "lg:col-span-2" : "lg:col-span-3"
               }`}
             >
@@ -697,14 +704,6 @@ function Menu() {
                   className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105`}
                  data-zoomable
               />
-                {idx === 4 && (
-                  <TagLine
-                    position="bottom-right"
-                    top="custom styled"
-                    bottom="at your venue"
-                    className="!bottom-3 !right-3"
-                  />
-                )}
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <p className="eyebrow text-gold">{item.serves}</p>
@@ -744,7 +743,7 @@ function Gallery() {
               as="div"
               delay={(i % 6) * 80}
               variant={i % 5 === 0 ? "zoom" : "up"}
-              className={`group relative cursor-zoom-in overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-lg hover:ring-gold/60 ${
+              className={`group relative cursor-zoom-in overflow-hidden rounded-xl bg-card p-1.5 shadow-md ring-1 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-lg hover:ring-gold/60 ${
                 i % 5 === 0 ? "row-span-2 aspect-[3/5]" : "aspect-square"
               }`}
             >
@@ -778,7 +777,7 @@ function VideoShowcase() {
           description="A behind-the-scenes look at the color, texture and care that goes into every Grazing With Ellie creation."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-xl ring-2 ring-gold/40">
+          <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-lg ring-1 ring-gold/40">
             <video
               src={ellieVideoAsset.url}
               className="h-full w-full rounded-2xl object-cover"
@@ -789,7 +788,7 @@ function VideoShowcase() {
               controls
             />
           </div>
-          <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-xl ring-2 ring-gold/40">
+          <div className="overflow-hidden rounded-3xl bg-card p-2 shadow-lg ring-1 ring-gold/40">
             <video
               src={ellieVideo2Asset.url}
               className="h-full w-full rounded-2xl object-cover"
@@ -820,7 +819,7 @@ function HowItWorks() {
             return (
               <div
                 key={s.n}
-                className="group relative flex flex-col overflow-hidden rounded-3xl bg-card shadow-sm ring-2 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/10 hover:ring-gold/60"
+                className="group relative flex flex-col overflow-hidden rounded-3xl bg-card shadow-sm ring-1 ring-gold/30 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-burgundy/10 hover:ring-gold/60"
               >
                 <div className="relative aspect-[5/4] overflow-hidden">
                   <img
@@ -970,11 +969,12 @@ function Contact() {
           <div className="grid gap-5 sm:grid-cols-2">
             <Field label="Name" name="name" error={errors.name} required maxLength={100} />
             <Field label="Email" name="email" type="email" error={errors.email} required maxLength={255} />
-            <Field label="Phone" name="phone" type="tel" maxLength={30} />
-            <Field label="Event Date" name="date" type="date" />
+            <Field label="Phone" name="phone" type="tel" maxLength={30} optional />
+            <Field label="Event Date" name="date" type="date" optional />
             <SelectField
               label="Event Type"
               name="event_type"
+              optional
               options={[
                 "Wedding",
                 "Corporate / Office",
@@ -989,11 +989,13 @@ function Contact() {
             <SelectField
               label="Guest Count"
               name="guests"
+              optional
               options={["1–5", "6–10", "11–20", "21–40", "41–75", "75+"]}
             />
             <SelectField
               label="Budget Range"
               name="budget"
+              optional
               options={[
                 "Under $100",
                 "$100 – $250",
@@ -1007,6 +1009,7 @@ function Contact() {
             <div className="flex flex-col gap-2">
               <label className="eyebrow text-charcoal/70" htmlFor="board">
                 Board Type
+                <span className="ml-1.5 normal-case tracking-normal text-muted-foreground/70">(optional)</span>
               </label>
               <select
                 id="board"
@@ -1050,7 +1053,7 @@ function Contact() {
             disabled={submitting}
             className="mt-8 w-full rounded-full bg-primary px-7 py-4 text-[0.72rem] font-medium uppercase tracking-[0.28em] text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
           >
-            {submitting ? "Sending…" : "Send Inquiry"}
+            {submitting ? "Sending…" : "Request My Quote"}
           </button>
         </form>
       </div>
@@ -1065,6 +1068,7 @@ function Field({
   error,
   required,
   maxLength,
+  optional,
 }: {
   label: string;
   name: string;
@@ -1072,11 +1076,13 @@ function Field({
   error?: string;
   required?: boolean;
   maxLength?: number;
+  optional?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-2">
       <label className="eyebrow text-charcoal/70" htmlFor={name}>
         {label}
+        {optional && <span className="ml-1.5 normal-case tracking-normal text-muted-foreground/70">(optional)</span>}
       </label>
       <input
         id={name}
@@ -1097,15 +1103,18 @@ function SelectField({
   label,
   name,
   options,
+  optional,
 }: {
   label: string;
   name: string;
   options: string[];
+  optional?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-2">
       <label className="eyebrow text-charcoal/70" htmlFor={name}>
         {label}
+        {optional && <span className="ml-1.5 normal-case tracking-normal text-muted-foreground/70">(optional)</span>}
       </label>
       <select
         id={name}
@@ -1190,7 +1199,7 @@ function Testimonials() {
         <div className="mt-14 grid items-center gap-10 lg:grid-cols-[1fr_1.2fr]">
           <div className="relative">
             <div className="absolute -inset-3 -z-10 rounded-[2rem] bg-gold/20 blur-2xl" />
-            <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-xl ring-2 ring-gold/40">
+            <div className="overflow-hidden rounded-[2rem] bg-card p-2 shadow-lg ring-1 ring-gold/40">
               <div className="overflow-hidden rounded-[1.65rem] ring-1 ring-border">
                 <img
                   src={ellieEventAsset.url}
@@ -1219,7 +1228,7 @@ function Testimonials() {
           {TESTIMONIALS.map((t) => (
             <figure
               key={t.name}
-              className="flex h-full flex-col rounded-2xl bg-card p-8 shadow-sm ring-2 ring-gold/30 transition-shadow hover:shadow-lg"
+              className="flex h-full flex-col rounded-2xl bg-card p-8 shadow-sm ring-1 ring-gold/30 transition-shadow hover:shadow-lg"
             >
               <p className="font-script text-5xl leading-none text-gold">"</p>
               <blockquote className="mt-2 flex-1 font-serif-display text-lg italic leading-relaxed text-charcoal/85">
@@ -1242,7 +1251,7 @@ function FAQ() {
     <section className="py-24 sm:py-28">
       <div className="mx-auto max-w-4xl px-6">
         <SectionHeader eyebrow="Good to know" title="Frequently asked" accent="questions" />
-        <div className="mt-12 divide-y divide-border/70 rounded-2xl bg-card ring-2 ring-gold/30">
+        <div className="mt-12 divide-y divide-border/70 rounded-2xl bg-card ring-1 ring-gold/30">
           {FAQS.map((f) => (
             <details key={f.q} className="group px-6 py-5 sm:px-8">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-serif-display text-lg text-charcoal">
