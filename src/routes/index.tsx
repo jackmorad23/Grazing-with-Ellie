@@ -61,7 +61,6 @@ const NAV = [
   { label: "Offerings", href: "#menu" },
   { label: "Gallery", href: "#gallery" },
   { label: "How It Works", href: "#how" },
-  { label: "Get a Quote", href: "#contact" },
 ];
 
 const MENU = [
