@@ -72,19 +72,26 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+// TODO: replace with your custom domain once connected (e.g. "https://grazingwithellie.com")
+const SITE_URL = "https://grazing-with-ellie.lovable.app";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Grazing with Ellie — Handcrafted Charcuterie Boards" },
-      { name: "description", content: "Boutique charcuterie and grazing boards made to order for events, gifts and gatherings. One bite at a time." },
+      { name: "description", content: "Boutique charcuterie boards, grazing cups and grazing tables made to order in Northern Virginia — serving the DC, Maryland and Virginia area. One bite at a time." },
       { name: "author", content: "Grazing with Ellie" },
       { property: "og:title", content: "Grazing with Ellie — Handcrafted Charcuterie Boards" },
-      { property: "og:description", content: "Boutique charcuterie and grazing boards made to order. One bite at a time." },
+      { property: "og:description", content: "Boutique charcuterie boards and grazing tables made to order in the DMV. One bite at a time." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:image", content: `${SITE_URL}/og-image.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:url", content: SITE_URL },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.jpg` },
     ],
     links: [
       {
