@@ -184,7 +184,7 @@ const TESTIMONIALS = [
     name: "Caitlin Rector, loyal client",
     event: "Repeat Events",
   },
-]
+];
 
 const FAQS = [
   {
