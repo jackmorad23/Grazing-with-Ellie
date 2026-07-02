@@ -308,7 +308,7 @@ function Nav() {
         </nav>
         <a
           href="#contact"
-          className="hidden rounded-full bg-primary px-5 py-2.5 text-[0.7rem] font-medium uppercase tracking-[0.25em] text-primary-foreground transition-colors hover:bg-primary/90 md:inline-flex"
+          className="hidden rounded-full bg-primary px-7 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-primary-foreground shadow-md transition-colors hover:bg-primary/90 md:inline-flex"
         >
           Get a Quote
         </a>
@@ -333,6 +333,13 @@ function Nav() {
                 {item.label}
               </a>
             ))}
+            <a
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="mt-3 rounded-full bg-primary px-5 py-3 text-center text-xs font-medium uppercase tracking-[0.2em] text-primary-foreground"
+            >
+              Get a Quote
+            </a>
           </nav>
         </div>
       )}
