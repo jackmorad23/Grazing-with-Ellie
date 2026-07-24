@@ -76,6 +76,7 @@ const MENU = [
     serves: "Serves 6–8",
     img: menuSmall,
     price: "$160",
+    imgFit: "contain" as const,
     desc: "A thoughtfully composed round platter with assorted cheeses, cured meats, fresh and dried fruit, olives, nuts and crackers. Date nights, small gatherings, hostess gifts.",
   },
   {
@@ -744,7 +745,7 @@ function Menu() {
                   width={900}
                   height={1100}
                   loading="lazy"
-                  className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105`}
+                  className={`h-full w-full ${item.imgFit === "contain" ? "object-contain" : "object-cover object-center"} transition-transform duration-700 group-hover:scale-105`}
                  data-zoomable
               />
               </div>
